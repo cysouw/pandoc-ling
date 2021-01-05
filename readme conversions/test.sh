@@ -30,7 +30,7 @@ do
 	--metadata latexPackage="$package" --pdf-engine=xelatex
 done
 
-# special settings for expex, errors with unicode and with xelatex
+# special settings for expex, errors with xelatex and chapternumbers
 
 pandoc ../readme.md -t markdown -L processVerbatim.lua -s | \
 pandoc -t latex -o readme_expex.tex -L ../pandoc-ling.lua -s -N --toc \

@@ -62,6 +62,7 @@
 \usepackage{linguex}
 \renewcommand{\theExLBr}{}
 \renewcommand{\theExRBr}{}
+\newcommand{\jdg}[1]{\makebox[0.4em][r]{\normalfont#1\ignorespaces}}
 \usepackage{chngcntr}
 \counterwithin{ExNo}{section}
 \renewcommand{\Exarabic}{\thesection.\arabic}
@@ -139,6 +140,9 @@ extension mechanism of Pandoc, called a `Pandoc Lua Filter'. This
 extension will not magically allow you to write every linguistic example
 thinkable, but my guess is that in practice the present proposal covers
 the majority of situations in linguistic publications (think 90\%-plus).
+As an example (and test case) I have included automatic conversions into
+various formats in this repository (chech them out to get an idea of the
+strengths and weaknesses of this approach).
 
 \hypertarget{the-basic-structure-of-a-linguistic-example}{%
 \section{The basic structure of a linguistic
@@ -365,10 +369,10 @@ d. However, such long sequences sometimes lead to undesirable effects in the lay
 \end{verbatim}
 
 \ex. \label{ling-ex:4.6} Throwing in a preamble for good measure
-  \a. *This traditionally signals ungrammaticality.
-  \b. ?Question-marks indicate questionable grammaticality.
-  \b. \textsuperscript{whynot?}But in principle any sequence can be used
-(here even in superscript).
+  \a. \jdg{*}This traditionally signals ungrammaticality.
+  \b. \jdg{?}Question-marks indicate questionable grammaticality.
+  \b. \jdg{\textsuperscript{whynot?}}But in principle any sequence can
+be used (here even in superscript).
   \b. However, such long sequences sometimes lead to undesirable effects
 in the layout.
 
@@ -387,9 +391,9 @@ that should go over various lines in the output.
 \end{verbatim}
 
 \ex. \label{ling-ex:4.7} Here is a special case with a preamble\\
-  \textsuperscript{???}With a singly questionably example. Note the
-alignment! Especially with this very long example that should go over
-various lines in the output.
+  \jdg{\textsuperscript{???}}With a singly questionably example. Note
+the alignment! Especially with this very long example that should go
+over various lines in the output.
 
 \hypertarget{interlinear-examples}{%
 \subsection{Interlinear examples}\label{interlinear-examples}}
@@ -416,9 +420,9 @@ character \texttt{U+00A0}).
 \end{verbatim}
 
 \ex. \label{ling-ex:4.8} 
-    Dutch (Germanic)
-  \gll Deze zin is in het nederlands.\\
-       DEM sentence AUX in DET dutch.\\
+  Dutch (Germanic)
+  \gll Deze zin is in het nederlands. \\
+       DEM sentence AUX in DET dutch. \\
   \glt This sentence is dutch.
 
 An attempt is made to format interlinear examples when the option
@@ -454,11 +458,11 @@ An attempt is made to format interlinear examples when the option
 \end{verbatim}
 
 \ex. \label{ling-ex:4.9} 
-    Dutch (Germanic)
+  Dutch (Germanic)
   \gll \emph{Deze} \emph{zin} \emph{is} \emph{in} \emph{het}
-\emph{nederlands.}\\
-       \textsc{dem} sentence \textsc{aux} in \textsc{det} dutch.\\
-  \glt This sentence is dutch.
+\emph{nederlands.} \\
+       \textsc{dem} sentence \textsc{aux} in \textsc{det} dutch. \\
+  \glt `This sentence is dutch.'
 
 The results of such formatting will not always work, but it seems to be
 quite robust in my testing. The next example brings everything together:
@@ -491,7 +495,7 @@ Just for this example, let's add some extra material in this example.
 
 a.
 | Dutch (Germanic) Note the grammaticality judgement!
-| ^^:-)^ Deze zin is (deze\ woorden\ zijn een&nbsp;test) nederlands.
+| ^^:-)^ Deze zin is (dit\ is&nbsp;test) nederlands.
 | DEM sentence AUX ~ dutch.
 | This sentence is dutch.
 
@@ -508,16 +512,17 @@ b.
   \a. Mixing single line examples with interlinear examples.
   \b. This is of course highly unusal. Just for this example, let's add
 some extra material in this example.
-  \b.  Dutch (Germanic) Note the grammaticality judgement!
-  \gll \emph{:-)}\emph{Deze} \emph{zin} \emph{is}
-\emph{(deze~woorden~zijn~een~test)} \emph{nederlands.}\\
-       \textsc{dem} sentence \textsc{aux}  ~  dutch.\\
-  \glt This sentence is dutch.
-  \b.  
+  \b. Dutch (Germanic) Note the grammaticality judgement!
+  \gll \jdg{\textsuperscript{:-)}}\emph{Deze} \emph{zin} \emph{is}
+\emph{(dit~is~test)} \emph{nederlands.} \\
+       \textsc{dem} sentence \textsc{aux}  ~  dutch. \\
+  \glt `This sentence is dutch.'
+  \b. 
   \gll \emph{Deze} \emph{tweede} \emph{zin} \emph{heeft} \emph{geen}
-\emph{header.}\\
-       \textsc{dem} second sentence have.\textsc{3sg}.\textsc{pres} no header.\\
-  \glt This second sentence does not have a header.
+\emph{header.} \\
+       \textsc{dem} second sentence have.\textsc{3sg}.\textsc{pres} no
+header. \\
+  \glt `This second sentence does not have a header.'
 
 \hypertarget{cross-referencing-examples}{%
 \subsection{Cross-referencing
@@ -541,12 +546,12 @@ This is a test
 
 Inspired by the \texttt{linguex}-approach, you can also use the keywords
 \texttt{Next} or \texttt{Last} to refer to the next or the last example,
-e.g.~\texttt{{[}@Last{]}} will be formatted as ({\Last}). By doubling
+e.g.~\texttt{{[}@Last{]}} will be formatted as (\ref{test}). By doubling
 the capitals to \texttt{NNext} or \texttt{LLast} reference to the
 next/last-but-one can be made. Actually, the number of starting capitals
 can be repeated at will in \texttt{pandoc-ling}, so something like
 \texttt{{[}@LLLLLLLLast{]}} will also work. It will be formatted as
-{[}@LLLLLLLLast{]} after the processing of \texttt{pandoc-ling}.
+(\ref{ling-ex:4.4}) after the processing of \texttt{pandoc-ling}.
 Needless to say that in such a situation an explicit identifier would be
 a better choice.
 
@@ -554,11 +559,11 @@ Referring to sub-examples can be done by manually adding a suffix into
 the cross reference, simply separated from the identifier by a space.
 For example, \texttt{{[}@LLast~c{]}} will refer to the third sub-example
 of the last-but-one example. Formatted this will look like this:
-({\LLast}\,c), smile! However, note that the ``c'' has to be manually
-determined. It is simply a literal suffix that will be copied into the
-cross-reference. Something like \texttt{{[}@LLast\ Hall0{]}} will work
-also, leading to ({\LLast}\,Hall0) when formatted (which is of course
-nonsensical).
+(\ref{ling-ex:4.10}\,c), smile! However, note that the ``c'' has to be
+manually determined. It is simply a literal suffix that will be copied
+into the cross-reference. Something like \texttt{{[}@LLast\ Ha1l0{]}}
+will work also, leading to (\ref{ling-ex:4.10}\,Ha1l0) when formatted
+(which is of course nonsensical).
 
 \hypertarget{options-of-pandoc-ling}{%
 \subsection{\texorpdfstring{Options of
@@ -640,6 +645,12 @@ useful when the automatic formatting does not give the desired result.
   Because the cross-references use the same structure as citations in
   Pandoc, the processing of citations (by \texttt{citeproc}) should be
   performed \textbf{after} the processing by \texttt{pandoc-ling}.
+  Further,
+  \href{https://github.com/lierdakil/pandoc-crossref}{\texttt{pandoc-crossref}},
+  another Pandoc extension for numbering figures and other captions,
+  also uses the same system. From experience, it seems safer to put
+  \texttt{pandoc-crossref} \textbf{before} \texttt{pandoc-ling} in the
+  order of processing (though I have no idea why).
 \item
   Interlinear examples will will not wrap at the end of the page. There
   is no solution yet for longer examples that are longer than the size
@@ -653,8 +664,8 @@ useful when the automatic formatting does not give the desired result.
   paragraph inside MS Word.
 \item
   Multi-column cells are crucial for \texttt{pandoc-ling} to work
-  properly. These are only introduced in new table format with pandoc
-  2.10 (so older pandoc version are not supported). Also note that these
+  properly. These are only introduced in new table format with Pandoc
+  2.10 (so older Pandoc version are not supported). Also note that these
   structures are not yet exported to all formats, e.g.~it will not be
   displayed correctly in \texttt{docx}. However, this is currently an
   area of active development
@@ -678,12 +689,25 @@ such a mapping would be the easy part. However, it turned out that the
 mapping to latex was much more difficult that I anticipated. Basically,
 it turned out that the `common denominator' that I was aiming for was
 not necessarily the `common denominator' provided by the latex packages.
-I worked on mapping to various packages (linguex, gb4e, langsci-gb4s and
-expex) with growing dismay. This approach resulted in version 1.0, as
-made available here. However, after this version was (more or less)
-finished, I realised that it would be better to first define the `common
-denominator' more clearly (as done here), and then implement this purely
-in Pandoc. From that basis I will then make better mappings to Latex in
-future updates of this filter.
+I worked on mapping to various packages (linguex, gb4e, langsci-gb4e and
+expex) with growing dismay. This approach resulted in a first version.
+However, after this version was (more or less) finished, I realised that
+it would be better to first define the `common denominator' more clearly
+(as done here), and then implement this purely in Pandoc. From that
+basis I have then made attempts to map them to the various latex
+packages.
+
+\hypertarget{a-note-on-implementation}{%
+\subsection{A note on implementation}\label{a-note-on-implementation}}
+
+The basic structure of the examples are transformed into Pandoc tables.
+Tables are reasonably safe for converting in other formats. Care has
+been taken to add \texttt{classes} to all elements of the tables
+(e.g.~the preamble has the class \texttt{linguistic-example-preamble}).
+When exported formats are aware of these classes, they can be used to
+fine-tune the formatting. I have used a few such fine-tunings into the
+html output of this filter by adding a few CSS-style statements. The
+naming of the classes is quite transparent, using the form
+\texttt{linguistic-example-...}.
 
 \end{document}

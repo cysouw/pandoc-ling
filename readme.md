@@ -16,7 +16,7 @@ In the field of linguistics there is an outspoken tradition to format example se
 
 Any such conversion between text-formats naturally never works perfectly: every text-format has specific features that are not transferable to other formats. A central goal of Pandoc (at least in my interpretation) is to define a set of shared concepts for text-structure (a 'common denominator' if you will, but surely not 'least'!) that can then be mapped to other formats. In many ways, Pandoc tries (again) to define a set of logical concepts for text structure ('semantic markup'), which can then be formatted by your favorite typesetter. As long as you stay inside the realm of this 'common denominator' (in practice that means Pandoc's extended version of Markdown/CommonMark), conversion works reasonably well (think 90%-plus). 
 
-Building on John Gruber's [Markdown philosophy](https://daringfireball.net/projects/markdown/syntax), there is a strong urge here to learn to restrain oneself while writing, and try to restrict the number of layout-possibilities to a minimum. In this sense, with `pandoc-ling` I propose a Markdown-structure for linguistic examples that is simple, easy to type, easy to read, and portable through the Pandoc universe by way of an extension mechanism of Pandoc, called a 'Pandoc Lua Filter'. This extension will not magically allow you to write every linguistic example thinkable, but my guess is that in practice the present proposal covers the majority of situations in linguistic publications (think 90%-plus).
+Building on John Gruber's [Markdown philosophy](https://daringfireball.net/projects/markdown/syntax), there is a strong urge here to learn to restrain oneself while writing, and try to restrict the number of layout-possibilities to a minimum. In this sense, with `pandoc-ling` I propose a Markdown-structure for linguistic examples that is simple, easy to type, easy to read, and portable through the Pandoc universe by way of an extension mechanism of Pandoc, called a 'Pandoc Lua Filter'. This extension will not magically allow you to write every linguistic example thinkable, but my guess is that in practice the present proposal covers the majority of situations in linguistic publications (think 90%-plus). As an example (and test case) I have included automatic conversions into various formats in this repository (chech them out to get an idea of the strengths and weaknesses of this approach).
 
 # The basic structure of a linguistic example
 
@@ -174,7 +174,7 @@ Just for this example, let's add some extra material in this example.
 
 a.
 | Dutch (Germanic) Note the grammaticality judgement!
-| ^^:-)^ Deze zin is (deze\ woorden\ zijn een&nbsp;test) nederlands.
+| ^^:-)^ Deze zin is (dit\ is&nbsp;test) nederlands.
 | DEM sentence AUX ~ dutch.
 | This sentence is dutch.
 
@@ -198,7 +198,7 @@ This is a test
 
 Inspired by the `linguex`-approach, you can also use the keywords `Next` or `Last` to refer to the next or the last example, e.g. `[@Last]` will be formatted as [@Last]. By doubling the capitals to `NNext` or `LLast` reference to the next/last-but-one can be made. Actually, the number of starting capitals can be repeated at will in `pandoc-ling`, so something like `[@LLLLLLLLast]` will also work. It will be formatted as [@LLLLLLLLast] after the processing of `pandoc-ling`. Needless to say that in such a situation an explicit identifier would be a better choice.
 
-Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, `[@LLast c]` will refer to the third sub-example of the last-but-one example. Formatted this will look like this: [@LLast c], smile! However, note that the "c" has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like `[@LLast Hall0]` will work also, leading to [@LLast Hall0] when formatted (which is of course nonsensical).
+Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, `[@LLast c]` will refer to the third sub-example of the last-but-one example. Formatted this will look like this: [@LLast c], smile! However, note that the "c" has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like `[@LLast Ha1l0]` will work also, leading to [@LLast Ha1l0] when formatted (which is of course nonsensical).
 
 ## Options of `pandoc-ling`
 
@@ -219,15 +219,19 @@ Local options are options that can be set for each individual example. Currently
 ## Issues with `pandoc-ling`
 
 - Manually provided identifiers for examples should not be purely numerical (so do not use e.g. `#5789`). In some situation this interferes with the setting of the cross-references.
-- Because the cross-references use the same structure as citations in Pandoc, the processing of citations (by `citeproc`) should be performed **after** the processing by `pandoc-ling`.
+- Because the cross-references use the same structure as citations in Pandoc, the processing of citations (by `citeproc`) should be performed **after** the processing by `pandoc-ling`. Further, [`pandoc-crossref`](https://github.com/lierdakil/pandoc-crossref), another Pandoc extension for numbering figures and other captions, also uses the same system. From experience, it seems safer to put `pandoc-crossref` **before** `pandoc-ling` in the order of processing (though I have no idea why).
 - Interlinear examples will will not wrap at the end of the page. There is no solution yet for longer examples that are longer than the size of the page.
 - When exporting to `docx` there is a problem because there are paragraphs inserted after tables, which adds space in lists with multiple interlinear examples. This is [by design](https://answers.microsoft.com/en-us/msoffice/forum/msoffice_word-mso_windows8-mso_2013_release/how-to-remove-extra-paragraph-after-table/995b3811-9f55-4df1-bbbc-9f672b1ad262). The official solution is to set font-size to 1 for this paragraph inside MS Word.
-- Multi-column cells are crucial for `pandoc-ling` to work properly. These are only introduced in new table format with pandoc 2.10 (so older pandoc version are not supported). Also note that these structures are not yet exported to all formats, e.g. it will not be displayed correctly in `docx`. However, this is currently an area of active development
+- Multi-column cells are crucial for `pandoc-ling` to work properly. These are only introduced in new table format with Pandoc 2.10 (so older Pandoc version are not supported). Also note that these structures are not yet exported to all formats, e.g. it will not be displayed correctly in `docx`. However, this is currently an area of active development
 - `langsci-gb4e` is only available as part of the [`langsci` package](https://ctan.org/pkg/langsci?lang=en). You have to make it available to Pandoc, e.g. by adding it into the same directory as the pandoc-ling.lua filter. I have added a recent version of `langsci-gb4e`  here for convenience, but this one might be outdated at some time in the future.
 
 ## A note on Latex conversion
 
-Originally, I decided to write this filter as a two-pronged conversion, making a markdown version myself, but using a mapping to one of the many latex libraries for linguistics examples as a quick fix. I assumed that such a mapping would be the easy part. However, it turned out that the mapping to latex was much more difficult that I anticipated. Basically, it turned out that the 'common denominator' that I was aiming for was not necessarily the 'common denominator' provided by the latex packages. I worked on mapping to various packages (linguex, gb4e, langsci-gb4s and expex) with growing dismay. This approach resulted in version 1.0, as made available here. However, after this version was (more or less) finished, I realised that it would be better to first define the 'common denominator' more clearly (as done here), and then implement this purely in Pandoc. From that basis I will then make better mappings to Latex in future updates of this filter.
+Originally, I decided to write this filter as a two-pronged conversion, making a markdown version myself, but using a mapping to one of the many latex libraries for linguistics examples as a quick fix. I assumed that such a mapping would be the easy part. However, it turned out that the mapping to latex was much more difficult that I anticipated. Basically, it turned out that the 'common denominator' that I was aiming for was not necessarily the 'common denominator' provided by the latex packages. I worked on mapping to various packages (linguex, gb4e, langsci-gb4e and expex) with growing dismay. This approach resulted in a first version. However, after this version was (more or less) finished, I realised that it would be better to first define the 'common denominator' more clearly (as done here), and then implement this purely in Pandoc. From that basis I have then made attempts to map them to the various latex packages.
+
+## A note on implementation
+
+The basic structure of the examples are transformed into Pandoc tables. Tables are reasonably safe for converting in other formats. Care has been taken to add `classes` to all elements of the tables (e.g. the preamble has the class `linguistic-example-preamble`). When exported formats are aware of these classes, they can be used to fine-tune the formatting. I have used a few such fine-tunings into the html output of this filter by adding a few CSS-style statements. The naming of the classes is quite transparent, using the form `linguistic-example-...`.
 
 ---
 author: Michael Cysouw
