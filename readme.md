@@ -14,7 +14,7 @@ tl;dr
 
 In the field of linguistics there is an outspoken tradition to format example sentences in research papers in a very specific way. In the field, it is a perennial problem to get such example sentences to look just right. Within Latex, there are numerous packages to deal with this problem (e.g. covington, linguex, gb4e, expex, etc.). Depending on your needs, there is some Latex solution for almost everyone. However, these solutions in Latex are often cumbersome to type, and they are not portable to other formats. Specifically, transfer between Latex, html, docx, odt or epub would actually be highly desirable. Such transfer is the hallmark of [Pandoc](https://pandoc.org), a tool by John MacFarlane that provides conversion between these (and many more) formats. 
 
-Any such conversion between text-formats naturally never works perfectly: every text-format has specific features that are not transferable to other formats. A central goal of Pandoc (at least in my interpretation) is to define a set of shared concepts for text-structure (a 'common denominator' if you will, but surely not 'least'!) that can then be mapped to other formats. In many ways, Pandoc tries (again) to define a set of logical concepts for text structure ('semantic markup'), which can then be formatted by your favorite typesetter. As long as you stay inside the realm of this 'common denominator' (in practice that means Pandoc's extended version of Markdown/CommonMark), conversion works reasonably well (think 90%-plus). 
+Any such conversion between text-formats naturally never works perfectly: every text-format has specific features that are not transferable to other formats. A central goal of Pandoc (at least in my interpretation) is to define a set of shared concepts for text-structure (a 'common denominator' if you will, but surely not 'least'!) that can then be mapped to other formats. In many ways, Pandoc tries (again) to define a set of logical concepts for text structure ('semantic markup'), which can then be formatted by your favourite typesetter. As long as you stay inside the realm of this 'common denominator' (in practice that means Pandoc's extended version of Markdown/CommonMark), conversion works reasonably well (think 90%-plus). 
 
 Building on John Gruber's [Markdown philosophy](https://daringfireball.net/projects/markdown/syntax), there is a strong urge here to learn to restrain oneself while writing, and try to restrict the number of layout-possibilities to a minimum. In this sense, with `pandoc-ling` I propose a Markdown-structure for linguistic examples that is simple, easy to type, easy to read, and portable through the Pandoc universe by way of an extension mechanism of Pandoc, called a 'Pandoc Lua Filter'. This extension will not magically allow you to write every linguistic example thinkable, but my guess is that in practice the present proposal covers the majority of situations in linguistic publications (think 90%-plus). As an example (and test case) I have included automatic conversions into various formats in this repository (chech them out to get an idea of the strengths and weaknesses of this approach).
 
@@ -33,7 +33,7 @@ Basically, a linguistic examples consists of 6 possible building blocks, of whic
 	* **Gloss**: Explanation of the meaning of the source, often using abbreviations in small caps. This line is internally separated at spaces, and each block is left-aligned with the block from source.
 	* **Translation**: Free translation of the source, typically quoted. Not separated in blocks, but freely extending to the right. Left-aligned with the other lines from the interlinear example. 
 
-![The structure of a linguistic example.](ExampleStructure.png)
+![The structure of a linguistic example.](figure/ExampleStructure.png)
 
 There are of course much more possibilities to extend the structure of a linguistic examples, like third or fourth subdivisions of labels (often using small roman numerals as a third level) or multiple glossing lines in the interlinear example. Also, the content of the header is sometimes found right-aligned to the right of the interlinear example (language into to the top, reference to the bottom). All such options are currently not supported by `pandoc-ling`.
 
@@ -45,7 +45,7 @@ Under the hood, this structure is prepared by `pandoc-ling` as a table. Tables a
 
 To include a linguistic example in Markdown `pandoc-ling` uses the `div` structure, which is indicated in Pandoc-Markdown by typing three colons at the start and three colons at the end. To indicate the `class` of this `div` the letters 'ex' (for 'example') should be added after the top colons (with or without space in between). This 'ex'-class is the signal for `pandoc-ling` to start processing such a `div`. The numbering of these examples will be inserted by `pandoc-ling`.
 
-Empty lines can be added inside the `div` for visual pleasure, as they mostly do not have an influence on the output. Exception: do *not* use empty lines between unlabeled line examples. Multiple lines of text can be used (without empty lines in between), but they will simply be interpreted as one sequential paragraph.
+Empty lines can be added inside the `div` for visual pleasure, as they mostly do not have an influence on the output. Exception: do *not* use empty lines between unlabelled line examples. Multiple lines of text can be used (without empty lines in between), but they will simply be interpreted as one sequential paragraph.
 
 ```
 ::: ex
@@ -162,7 +162,7 @@ The results of such formatting will not always work, but it seems to be quite ro
 - interlinear examples start on a new line immediately after the letter-label,
 - grammaticality judgements with proper alignment,
 - when the header of an interlinear example is left out, everything is shifted up,
-- The formatting of the interlinear is harmonized.
+- The formatting of the interlinear is harmonised.
 
 ```
 ::: {.ex formatGloss=true}
