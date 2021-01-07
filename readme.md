@@ -214,7 +214,15 @@ The following global options are available with `pandoc-ling`. These can be adde
 
 ### Local options
 
-Local options are options that can be set for each individual example. Currently only the `formatGloss` option can be used to have an individual example be formatted differently from the global setting. For example, when the global setting is `formatGloss: true` in the metadata, then adding `formatGloss=false` in the curly brackets of a specific example will block the formatting. This is especially useful when the automatic formatting does not give the desired result.
+Local options are options that can be set for each individual example. The `formatGloss` option can be used to have an individual example be formatted differently from the global setting. For example, when the global setting is `formatGloss: true` in the metadata, then adding `formatGloss=false` in the curly brackets of a specific example will block the formatting. This is especially useful when the automatic formatting does not give the desired result.
+
+If you want to add something else (not a linguistic example) in a numbered example, then there is the local option `noFormat=true`. An attempt will be made to try and do a reasonable layout. Multiple paragraphs will simply we taken as is, and the number will be put in front. In HTML the number will be centred. It is usable for an incidental mathematical formula.
+
+```
+::: {.ex noFormat=true}
+$$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
+:::
+```
 
 ## Issues with `pandoc-ling`
 

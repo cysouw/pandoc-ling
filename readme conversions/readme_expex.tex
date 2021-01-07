@@ -61,12 +61,12 @@
 \setcounter{secnumdepth}{5}
 \usepackage{expex}
 \lingset{ 
-						belowglpreambleskip = -1.5ex, 
-						aboveglftskip = -1.5ex, 
-						exskip = 0ex, 
-						interpartskip = -0.5ex, 
-						belowpreambleskip = -2ex 
-					}
+            belowglpreambleskip = -1.5ex, 
+            aboveglftskip = -1.5ex, 
+            exskip = 0ex, 
+            interpartskip = -0.5ex, 
+            belowpreambleskip = -2ex 
+          }
 \ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -125,7 +125,7 @@ interpretation) is to define a set of shared concepts for text-structure
 (a `common denominator' if you will, but surely not `least'!) that can
 then be mapped to other formats. In many ways, Pandoc tries (again) to
 define a set of logical concepts for text structure (`semantic markup'),
-which can then be formatted by your favorite typesetter. As long as you
+which can then be formatted by your favourite typesetter. As long as you
 stay inside the realm of this `common denominator' (in practice that
 means Pandoc's extended version of Markdown/CommonMark), conversion
 works reasonably well (think 90\%-plus).
@@ -220,7 +220,7 @@ with the example, not with the judgement).
 
 \begin{figure}
 \centering
-\includegraphics{ExampleStructure.png}
+\includegraphics{figure/ExampleStructure.png}
 \caption{The structure of a linguistic example.}
 \end{figure}
 
@@ -258,7 +258,7 @@ will be inserted by \texttt{pandoc-ling}.
 
 Empty lines can be added inside the \texttt{div} for visual pleasure, as
 they mostly do not have an influence on the output. Exception: do
-\emph{not} use empty lines between unlabeled line examples. Multiple
+\emph{not} use empty lines between unlabelled line examples. Multiple
 lines of text can be used (without empty lines in between), but they
 will simply be interpreted as one sequential paragraph.
 
@@ -497,7 +497,7 @@ quite robust in my testing. The next example brings everything together:
   when the header of an interlinear example is left out, everything is
   shifted up,
 \item
-  The formatting of the interlinear is harmonized.
+  The formatting of the interlinear is harmonised.
 \end{itemize}
 
 \begin{verbatim}
@@ -647,12 +647,30 @@ methods to provide metadata (see the link above).
 \subsubsection{Local options}\label{local-options}}
 
 Local options are options that can be set for each individual example.
-Currently only the \texttt{formatGloss} option can be used to have an
-individual example be formatted differently from the global setting. For
-example, when the global setting is \texttt{formatGloss:\ true} in the
-metadata, then adding \texttt{formatGloss=false} in the curly brackets
-of a specific example will block the formatting. This is especially
-useful when the automatic formatting does not give the desired result.
+The \texttt{formatGloss} option can be used to have an individual
+example be formatted differently from the global setting. For example,
+when the global setting is \texttt{formatGloss:\ true} in the metadata,
+then adding \texttt{formatGloss=false} in the curly brackets of a
+specific example will block the formatting. This is especially useful
+when the automatic formatting does not give the desired result.
+
+If you want to add something else (not a linguistic example) in a
+numbered example, then there is the local option \texttt{noFormat=true}.
+An attempt will be made to try and do a reasonable layout. Multiple
+paragraphs will simply we taken as is, and the number will be put in
+front. In HTML the number will be centred. It is usable for an
+incidental mathematical formula.
+
+\begin{verbatim}
+::: {.ex noFormat=true}
+$$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
+:::
+\end{verbatim}
+
+\ex<ling-ex:4.12> 
+  \[\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}\]\\
+  
+\xe
 
 \hypertarget{issues-with-pandoc-ling}{%
 \subsection{\texorpdfstring{Issues with

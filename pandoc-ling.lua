@@ -29,7 +29,6 @@ local indexEx = {} -- global lookup for example IDs
 local orderInText = 0 -- order of references for resolving "Next"-style references
 local indexRef = {} -- key/value: order in text = refID/exID
 local rev_indexRef = {} -- "reversed" indexRef, i.e. key/value: refID/exID = order-number in text
-local formatOverride = false -- to override setting 'formatGloss'
 
 ------------------------------------
 -- User Settings with default values
@@ -39,12 +38,16 @@ local formatGloss = false -- format interlinear examples
 local xrefSuffixSep = " " -- &nbsp; separator to be inserted after number in example references
 local restartAtChapter = false -- restart numbering at highest header without adding local chapternumbers
 local addChapterNumber = false -- add chapternumbers to counting and restart at highest header
-local latexPackage = "expex"
+local latexPackage = "linguex"
 local topDivision = "section"
+local noFormat = false
 
 function getUserSettings (meta)
   if meta.formatGloss ~= nil then
     formatGloss = meta.formatGloss
+  end
+  if meta.noFormat ~= nil then
+    noFormat = meta.noFormat
   end
   if meta.xrefSuffixSep ~= nil then
     xrefSuffixSep = pandoc.utils.stringify(meta.xrefSuffixSep)
@@ -100,10 +103,12 @@ function addFormatting (meta)
       .linguistic-example-preamble {
         height: 1em;
       }
+      .linguistic-example-number {
+        vertical-align: middle
+      }
       </style>
       ]]
     tmp[#tmp+1] = pandoc.MetaBlocks(pandoc.RawBlock("html", css))
-    
     meta['header-includes'] = tmp
   end
   
@@ -190,6 +195,17 @@ function processDiv (div)
   -- only do formatting for divs with class "ex"
   if div.classes[1] == "ex" then
 
+    -- check format override per example
+    local saveGlobalformatGloss = formatGloss
+    if div.attributes.formatGloss ~= nil then
+      formatGloss = div.attributes.formatGloss
+    end
+
+    local saveGlobalnoFormat = noFormat
+    if div.attributes.noFormat ~= nil then
+      noFormat = div.attributes.noFormat
+    end
+
     -- parse!
     local parsedDiv = parseDiv(div)
 
@@ -207,6 +223,10 @@ function processDiv (div)
       example = pandocMakeExample(parsedDiv)
       example = pandoc.Div(example, pandoc.Attr(parsedDiv.exID) )
     end
+
+    -- return to global setting
+    formatGloss = saveGlobalformatGloss
+    noFormat = saveGlobalnoFormat
 
     return { tmpCite, example }
   end
@@ -249,16 +269,18 @@ function parseDiv (div)
     preamble = pandoc.Plain(div.content[1].content)
     data = div.content[2]
   end
-  
-  -- check format override per example
-  local saveGlobalsetting = formatGloss
-  formatGloss = div.attributes['formatGloss']
 
   -- extract judgements and content of examples
   local judgements = {}
   local examples = {}
   local kind = {}
-  if data.tag == "OrderedList" then
+
+  if noFormat then
+    preamble = nil
+    kind[1] = "single"
+    judgements[1] = nil
+    examples[1] = div
+  elseif data.tag == "OrderedList" then
     for i=1,#data.content do
       judgements[i], examples[i], kind[i] = parseExample(data.content[i][1])
     end
@@ -266,10 +288,7 @@ function parseDiv (div)
     judgements[1], examples[1], kind[1] = parseExample(data)
   end
 
-  -- return to global setting
-  formatGloss = saveGlobalsetting
-
-  return { 	kind = kind,
+  return { 	kind = kind, -- list of single/interlinear
             preamble = preamble,   -- preamble is Plain
             judgements = judgements, -- judgements is list of Str
             examples = examples,   -- examples is list of (list of) Plain
@@ -463,7 +482,9 @@ function pandocMakeExample (parsedDiv)
 
   -- prepare the examples for output as tables
   local example = {}
-  if #kind == 1 and kind[1] == "single" then
+  if noFormat then
+    example[1] = pandocNoFormat(parsedDiv)
+  elseif #kind == 1 and kind[1] == "single" then
     example[1] = pandocMakeSingle(parsedDiv)
   elseif #kind == 1 and kind[1] == "interlinear" then
     example[1] = pandocMakeInterlinear(parsedDiv)
@@ -476,8 +497,21 @@ function pandocMakeExample (parsedDiv)
   -- Add example number to top left of first table
   local numberParen = pandoc.Plain( "("..parsedDiv.number..")" )
   example[1].bodies[1].body[1][2][1].contents[1] = numberParen
-  -- set class for number
-  example[1].bodies[1].body[1][2][1].attr = pandoc.Attr(nil, {"linguistic-example-number"})
+  
+  -- set class 
+  example[1].bodies[1].body[1][2][1].attr = 
+      pandoc.Attr(nil, {"linguistic-example-number"}, mid)
+
+  return example
+end
+
+function pandocNoFormat (parsedDiv)
+
+  -- make a simple 1x2 table with the whole div in the second cell
+  local example = turnIntoTable({{ {}, {parsedDiv.examples[1]} } } , 2, 0)
+  -- set class of content
+  example.bodies[1].body[1][2][2].attr = 
+    pandoc.Attr(nil, {"linguistic-example-content"})
 
   return example
 end
@@ -854,6 +888,20 @@ function texCombine (separated)
   return(result)
 end
 
+function texSquashMulti (multi)
+  -- for 'noFormat' content
+  local result = pandoc.List()
+  if multi.tag == "Div" then
+    for i=1,#multi.content do
+      result:extend(multi.content[i].content)
+      texEnd("\\\\\n  ", result)
+    end
+  else
+    result = multi.content
+  end
+  return result
+end
+
 -- send request to different packages
 
 function texMakeExample (parsedDiv)
@@ -925,7 +973,7 @@ function texMakeExpex (parsedDiv)
   for i=1,#kind do
     if kind[i] == "single" then
 
-      line = parsedDiv.examples[i].content
+      line = texSquashMulti(parsedDiv.examples[i])
 
       if #kind > 1 then 
         texFront("\n  \\a ", judgements[i])
@@ -1013,7 +1061,7 @@ function texMakeLinguex (parsedDiv)
   for i=1,#kind do
     if kind[i] == "single" then
 
-      line = parsedDiv.examples[i].content
+      line = texSquashMulti(parsedDiv.examples[i])
 
       if #kind > 1 and i == 1 then 
         texFront("\n  \\a. ", judgements[i])
@@ -1107,7 +1155,7 @@ function texMakeGb4e (parsedDiv)
   for i=1,#kind do
     if kind[i] == "single" then
 
-      line = parsedDiv.examples[i].content
+      line = texSquashMulti(parsedDiv.examples[i])
       
       if #kind > 1 and i == 1 then 
         texFront("\n  \\begin{xlist}\n  \\ex ", judgements[i])
@@ -1223,7 +1271,7 @@ function texMakeLangsci (parsedDiv)
   for i=1,#kind do
     if kind[i] == "single" then
 
-      line = parsedDiv.examples[i].content
+      line = texSquashMulti(parsedDiv.examples[i])
       
       if #kind == 1 and nopreamble ~= true then
         texEnd("\\\\", preamble)
