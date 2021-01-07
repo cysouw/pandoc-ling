@@ -33,7 +33,7 @@ Basically, a linguistic examples consists of 6 possible building blocks, of whic
 	* **Gloss**: Explanation of the meaning of the source, often using abbreviations in small caps. This line is internally separated at spaces, and each block is left-aligned with the block from source.
 	* **Translation**: Free translation of the source, typically quoted. Not separated in blocks, but freely extending to the right. Left-aligned with the other lines from the interlinear example. 
 
-![The structure of a linguistic example.](figure/ExampleStructure.png)
+![The structure of a linguistic example.](ExampleStructure.png)
 
 There are of course much more possibilities to extend the structure of a linguistic examples, like third or fourth subdivisions of labels (often using small roman numerals as a third level) or multiple glossing lines in the interlinear example. Also, the content of the header is sometimes found right-aligned to the right of the interlinear example (language into to the top, reference to the bottom). All such options are currently not supported by `pandoc-ling`.
 
