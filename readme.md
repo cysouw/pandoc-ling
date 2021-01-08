@@ -38,7 +38,7 @@ Basically, a linguistic examples consists of 6 possible building blocks, of whic
 
 There are of course much more possibilities to extend the structure of a linguistic examples, like third or fourth subdivisions of labels (often using small roman numerals as a third level) or multiple glossing lines in the interlinear example. Also, the content of the header is sometimes found right-aligned to the right of the interlinear example (language into to the top, reference to the bottom). All such options are currently not supported by `pandoc-ling`.
 
-Under the hood, this structure is prepared by `pandoc-ling` as a table. Tables are reasonably well transcoded to different document formats. Specific layout considerations mostly have to be set manually. Alignment of the text should work in most exports. Some `CSS` styling is proposed by `pandoc-ling`, but can of course be overruled.
+Under the hood, this structure is prepared by `pandoc-ling` as a table. Tables are reasonably well transcoded to different document formats. Specific layout considerations mostly have to be set manually. Alignment of the text should work in most exports. Some `CSS` styling is proposed by `pandoc-ling`, but can of course be overruled. For latex (and beamer) special output is prepared using various available latex packages (see options, below).
 
 # Introducing `pandoc-ling`
 
@@ -211,7 +211,7 @@ The following global options are available with `pandoc-ling`. These can be adde
 - **`xrefSuffixSep`** (string, defaults to no-break-space): When cross references have a suffix, how should the separator be formatted? The defaults 'no-break-space' is a safe options, but I personally like a 'thin space' better (Unicode `U+2009`), but symbol does not work with many fonts, and might lead to errors. For Latex typesetting, all space-like symbols are converted to a Latex thin space `\,`. 
 - **`restartAtChapter`** (boolean, default `false`): should the counting restart for each chapter? Actually, when `true` this setting will restart the counting at the highest heading level, which for various output formats can be set by the Pandoc option `top-level-division`. Depending on your Latex setup, an explicit entry `top-level-division: chapter` might be necessary in your metadata.
 - **`addChapterNumber`** (boolean, default `false`): should the chapter (= highest heading level) number be added to the number of the example? In most formats this automatically implies `restartAtChapter: true`. In most Latex situations this only works in combination with a `documentclass: book`.
-- **`latexPackage`** (one of: `linguex`, `gb4e`, `langsci-gb4e`, `expex`, default `linguex`): Various options for converting examples to Latex packages that typeset linguistic examples. None of the conversions works perfectly, though in should work in most normal situations (think 90%-plus). It might be necessary to first convert to `Latex` and then typeset. Using the direct option insider Pandoc might also work in many situations.
+- **`latexPackage`** (one of: `linguex`, `gb4e`, `langsci-gb4e`, `expex`, default `linguex`): Various options for converting examples to Latex packages that typeset linguistic examples. None of the conversions works perfectly, though in should work in most normal situations (think 90%-plus). It might be necessary to first convert to `Latex`, correct the output, and then typeset separately with a latex compiler like `xelatex`. Using the direct option insider Pandoc might also work in many situations. Export to `beamer` seems to work reasonably well with the `gb4e` package. All others have artefacts or errors.
 
 ### Local options
 
@@ -233,6 +233,7 @@ $$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
 - When exporting to `docx` there is a problem because there are paragraphs inserted after tables, which adds space in lists with multiple interlinear examples. This is [by design](https://answers.microsoft.com/en-us/msoffice/forum/msoffice_word-mso_windows8-mso_2013_release/how-to-remove-extra-paragraph-after-table/995b3811-9f55-4df1-bbbc-9f672b1ad262). The official solution is to set font-size to 1 for this paragraph inside MS Word.
 - Multi-column cells are crucial for `pandoc-ling` to work properly. These are only introduced in new table format with Pandoc 2.10 (so older Pandoc version are not supported). Also note that these structures are not yet exported to all formats, e.g. it will not be displayed correctly in `docx`. However, this is currently an area of active development
 - `langsci-gb4e` is only available as part of the [`langsci` package](https://ctan.org/pkg/langsci?lang=en). You have to make it available to Pandoc, e.g. by adding it into the same directory as the pandoc-ling.lua filter. I have added a recent version of `langsci-gb4e`  here for convenience, but this one might be outdated at some time in the future.
+- `beamer` output seems to work best with `latexPackage: gb4e`.
 
 ## A note on Latex conversion
 

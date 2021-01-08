@@ -74,6 +74,10 @@ end
 function addFormatting (meta)
   local tmp = meta['header-includes'] or pandoc.MetaList{meta['header-includes']}
   
+  local function add (s)
+    tmp[#tmp+1] = pandoc.MetaBlocks(pandoc.RawBlock("tex", s))
+  end
+
   if FORMAT:match "html" then
     -- add specific CSS for layout of examples
     -- building on classes set in this filter
@@ -113,11 +117,7 @@ function addFormatting (meta)
     meta['header-includes'] = tmp
   end
   
-  if FORMAT:match "latex" then
-    
-    local function add (s)
-      tmp[#tmp+1] = pandoc.MetaBlocks(pandoc.RawBlock("tex", s))
-    end
+  if FORMAT:match "latex" or FORMAT:match "beamer" then
   
     if latexPackage == "linguex" then
       add("\\usepackage{linguex}")
@@ -167,6 +167,13 @@ function addFormatting (meta)
     end
     meta['header-includes'] = tmp
   end
+
+  --if FORMAT:match "beamer" then
+  --  add("\\setlength\\heavyrulewidth{0em}")
+  --  add("\\setlength\\lightrulewidth{0em}")
+  --  meta['header-includes'] = tmp
+  --end
+
   return meta
 end
 
@@ -218,7 +225,7 @@ function processDiv (div)
 
     -- reformat!
     local example
-    if FORMAT:match "latex" then
+    if FORMAT:match "latex" or FORMAT:match "beamer" then
       example = texMakeExample(parsedDiv)
     else
       example = pandocMakeExample(parsedDiv)
