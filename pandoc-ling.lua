@@ -91,20 +91,21 @@ function addFormatting (meta)
       .linguistic-example tbody { 
         border-top: none; 
         border-bottom: none; 
-        vertical-align: top; 
       }
-      .linguistic-example-content td { 
+      .linguistic-example-content { 
         padding-left: 2px;
-        padding-right: 4px; 
+        padding-right: 4px;
+        vertical-align: top;  
+      }
+      .linguistic-example-label {
+        vertical-align: top;
       }
       .linguistic-example-judgement { 
         padding-right: 0; 
       }
       .linguistic-example-preamble {
         height: 1em;
-      }
-      .linguistic-example-number {
-        vertical-align: middle
+        vertical-align: top; 
       }
       </style>
       ]]
@@ -498,9 +499,14 @@ function pandocMakeExample (parsedDiv)
   local numberParen = pandoc.Plain( "("..parsedDiv.number..")" )
   example[1].bodies[1].body[1][2][1].contents[1] = numberParen
   
-  -- set class 
-  example[1].bodies[1].body[1][2][1].attr = 
-      pandoc.Attr(nil, {"linguistic-example-number"}, mid)
+  -- set class and vertical align for noFormat
+  if noFormat then
+    example[1].bodies[1].body[1][2][1].attr = 
+      pandoc.Attr(nil, {"linguistic-example-number"}, {style = "vertical-align: middle;"})
+  else
+    example[1].bodies[1].body[1][2][1].attr = 
+      pandoc.Attr(nil, {"linguistic-example-number"}, {style = "vertical-align: top;"})
+  end
 
   return example
 end
@@ -838,6 +844,7 @@ function turnIntoTable (rowContent, nCols, judgeCol)
   local headers = {}
   local aligns = {}
     for i=1,nCols do aligns[i] = "AlignLeft" end
+    aligns[1] = "AlignDefault"
     if judgeCol > 1 then
       aligns[judgeCol] = "AlignRight" -- Column for grammaticality judgements
     end
