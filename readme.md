@@ -9,7 +9,11 @@ tl;dr
 - Easily write linguistic examples including basic interlinear glossing. 
 - Let numbering and cross-referencing be done for you. 
 - Export to (almost) any format of your wishes for final polishing.
+<<<<<<< HEAD
 - As an example, check out this readme in [HTML](https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme%20conversions/readme.html) or [Latex](https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme%20conversions/readme_linguex.pdf).
+=======
+- As an example, check out this readme in [HTML](https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme%20conversions/readme.html) or [Latex]((https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme%20conversions/readme_linguex.pdf)).
+>>>>>>> 8f06f2c8c065c9ccaa2173602bd9899ceaafc046
 
 # Rationale
 
