@@ -4,14 +4,13 @@
 %
 \documentclass[
 ]{article}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
-  \usepackage{amssymb}
 \else % if luatex or xetex
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
@@ -99,6 +98,11 @@ tl;dr
   Let numbering and cross-referencing be done for you.
 \item
   Export to (almost) any format of your wishes for final polishing.
+\item
+  As an example, check out this readme in
+  \href{https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme\%20conversions/readme2.html}{HTML}
+  or
+  \href{https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme\%20conversions/readme2_linguex.pdf}{Latex}.
 \end{itemize}
 
 \hypertarget{rationale}{%
@@ -236,7 +240,8 @@ table. Tables are reasonably well transcoded to different document
 formats. Specific layout considerations mostly have to be set manually.
 Alignment of the text should work in most exports. Some \texttt{CSS}
 styling is proposed by \texttt{pandoc-ling}, but can of course be
-overruled.
+overruled. For latex (and beamer) special output is prepared using
+various available latex packages (see options, below).
 
 \hypertarget{introducing-pandoc-ling}{%
 \section{\texorpdfstring{Introducing
@@ -616,8 +621,11 @@ methods to provide metadata (see the link above).
   packages that typeset linguistic examples. None of the conversions
   works perfectly, though in should work in most normal situations
   (think 90\%-plus). It might be necessary to first convert to
-  \texttt{Latex} and then typeset. Using the direct option insider
-  Pandoc might also work in many situations.
+  \texttt{Latex}, correct the output, and then typeset separately with a
+  latex compiler like \texttt{xelatex}. Using the direct option insider
+  Pandoc might also work in many situations. Export to
+  \textbf{\texttt{beamer}} seems to work reasonably well with the
+  \texttt{gb4e} package. All others have artefacts or errors.
 \end{itemize}
 
 \hypertarget{local-options}{%
@@ -693,6 +701,9 @@ $$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
   same directory as the pandoc-ling.lua filter. I have added a recent
   version of \texttt{langsci-gb4e} here for convenience, but this one
   might be outdated at some time in the future.
+\item
+  \texttt{beamer} output seems to work best with
+  \texttt{latexPackage:\ gb4e}.
 \end{itemize}
 
 \hypertarget{a-note-on-latex-conversion}{%
@@ -725,6 +736,6 @@ When exported formats are aware of these classes, they can be used to
 fine-tune the formatting. I have used a few such fine-tunings into the
 html output of this filter by adding a few CSS-style statements. The
 naming of the classes is quite transparent, using the form
-\texttt{linguistic-example-...}.
+\texttt{linguistic-example-STRUCTURE}.
 
 \end{document}

@@ -9,7 +9,7 @@ tl;dr
 - Easily write linguistic examples including basic interlinear glossing. 
 - Let numbering and cross-referencing be done for you. 
 - Export to (almost) any format of your wishes for final polishing.
-- As an example, check out this readme in [HTML](https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme%20conversions/readme.html) or [Latex](https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme%20conversions/readme_linguex.pdf).
+- As an example, check out this readme in [HTML](https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme%20conversions/readme2.html) or [Latex](https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme%20conversions/readme2_linguex.pdf).
 
 # Rationale
 
@@ -34,7 +34,7 @@ Basically, a linguistic examples consists of 6 possible building blocks, of whic
 	* **Gloss**: Explanation of the meaning of the source, often using abbreviations in small caps. This line is internally separated at spaces, and each block is left-aligned with the block from source.
 	* **Translation**: Free translation of the source, typically quoted. Not separated in blocks, but freely extending to the right. Left-aligned with the other lines from the interlinear example. 
 
-![The structure of a linguistic example.](ExampleStructure.png)
+![The structure of a linguistic example.](figure/ExampleStructure.png)
 
 There are of course much more possibilities to extend the structure of a linguistic examples, like third or fourth subdivisions of labels (often using small roman numerals as a third level) or multiple glossing lines in the interlinear example. Also, the content of the header is sometimes found right-aligned to the right of the interlinear example (language into to the top, reference to the bottom). All such options are currently not supported by `pandoc-ling`.
 
@@ -211,7 +211,7 @@ The following global options are available with `pandoc-ling`. These can be adde
 - **`xrefSuffixSep`** (string, defaults to no-break-space): When cross references have a suffix, how should the separator be formatted? The defaults 'no-break-space' is a safe options, but I personally like a 'thin space' better (Unicode `U+2009`), but symbol does not work with many fonts, and might lead to errors. For Latex typesetting, all space-like symbols are converted to a Latex thin space `\,`. 
 - **`restartAtChapter`** (boolean, default `false`): should the counting restart for each chapter? Actually, when `true` this setting will restart the counting at the highest heading level, which for various output formats can be set by the Pandoc option `top-level-division`. Depending on your Latex setup, an explicit entry `top-level-division: chapter` might be necessary in your metadata.
 - **`addChapterNumber`** (boolean, default `false`): should the chapter (= highest heading level) number be added to the number of the example? In most formats this automatically implies `restartAtChapter: true`. In most Latex situations this only works in combination with a `documentclass: book`.
-- **`latexPackage`** (one of: `linguex`, `gb4e`, `langsci-gb4e`, `expex`, default `linguex`): Various options for converting examples to Latex packages that typeset linguistic examples. None of the conversions works perfectly, though in should work in most normal situations (think 90%-plus). It might be necessary to first convert to `Latex`, correct the output, and then typeset separately with a latex compiler like `xelatex`. Using the direct option insider Pandoc might also work in many situations. Export to `beamer` seems to work reasonably well with the `gb4e` package. All others have artefacts or errors.
+- **`latexPackage`** (one of: `linguex`, `gb4e`, `langsci-gb4e`, `expex`, default `linguex`): Various options for converting examples to Latex packages that typeset linguistic examples. None of the conversions works perfectly, though in should work in most normal situations (think 90%-plus). It might be necessary to first convert to `Latex`, correct the output, and then typeset separately with a latex compiler like `xelatex`. Using the direct option insider Pandoc might also work in many situations. Export to **`beamer`** seems to work reasonably well with the `gb4e` package. All others have artefacts or errors.
 
 ### Local options
 
@@ -241,7 +241,7 @@ Originally, I decided to write this filter as a two-pronged conversion, making a
 
 ## A note on implementation
 
-The basic structure of the examples are transformed into Pandoc tables. Tables are reasonably safe for converting in other formats. Care has been taken to add `classes` to all elements of the tables (e.g. the preamble has the class `linguistic-example-preamble`). When exported formats are aware of these classes, they can be used to fine-tune the formatting. I have used a few such fine-tunings into the html output of this filter by adding a few CSS-style statements. The naming of the classes is quite transparent, using the form `linguistic-example-...`.
+The basic structure of the examples are transformed into Pandoc tables. Tables are reasonably safe for converting in other formats. Care has been taken to add `classes` to all elements of the tables (e.g. the preamble has the class `linguistic-example-preamble`). When exported formats are aware of these classes, they can be used to fine-tune the formatting. I have used a few such fine-tunings into the html output of this filter by adding a few CSS-style statements. The naming of the classes is quite transparent, using the form `linguistic-example-STRUCTURE`.
 
 ---
 author: Michael Cysouw
