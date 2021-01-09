@@ -1442,26 +1442,28 @@ end
 function makeCrossrefs (cite)
 
   local id = cite.citations[1].id
-  local suffix = ""
 
-  -- only make suffix if there is something there
-  if #cite.citations[1].suffix > 0 then
-    suffix = pandoc.utils.stringify(cite.citations[1].suffix[2])
-    suffix = xrefSuffixSep..suffix
-  end
-
-  -- prevent Latex error when user sets xrefSuffixSep to space or nothing
-  if FORMAT:match "latex" then
-    if xrefSuffixSep == ""  or -- empty
-       xrefSuffixSep == " " or -- space
-       xrefSuffixSep == " "    -- non-breaking space
-    then
-      xrefSuffixSep = "\\," -- set to thin space
+  -- ignore other "cite" elements
+  if indexEx[id] ~= nil then 
+    
+    -- only make suffix if there is something there
+    local suffix = ""
+    if #cite.citations[1].suffix > 0 then
+      suffix = pandoc.utils.stringify(cite.citations[1].suffix[2])
+      suffix = xrefSuffixSep..suffix
     end
-  end
 
-  -- make the cross-references
-  if indexEx[id] ~= nil then -- ignore other "cite" elements
+    -- prevent Latex error when user sets xrefSuffixSep to space or nothing
+    if FORMAT:match "latex" then
+      if xrefSuffixSep == ""  or -- empty
+        xrefSuffixSep == " " or -- space
+        xrefSuffixSep == " "    -- non-breaking space
+      then
+        xrefSuffixSep = "\\," -- set to thin space
+      end
+    end
+
+    -- make the cross-reference
     if FORMAT:match "latex" then
       if latexPackage == "expex" then
         return pandoc.RawInline("latex", "(\\getref{"..id.."}"..suffix..")")
@@ -1471,6 +1473,7 @@ function makeCrossrefs (cite)
     else	
       return pandoc.Link("("..indexEx[id]..suffix..")", "#"..id)
     end
+
   end
 end
 
