@@ -16,6 +16,7 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ]]
 
+-- because of new table structure:
 PANDOC_VERSION:must_be_at_least '2.10'
 
 ---------------------
@@ -23,7 +24,7 @@ PANDOC_VERSION:must_be_at_least '2.10'
 ---------------------
 
 local counter = 0 -- actual numbering of examples
-local chapter = 1 -- numbering of chapters (for unknown reasons this starts at 1, not 0)
+local chapter = 0 -- numbering of chapters
 local counterInChapter = 0 -- counter reset for each chapter
 local indexEx = {} -- global lookup for example IDs
 local orderInText = 0 -- order of references for resolving "Next"-style references
@@ -177,13 +178,15 @@ function addFormatting (meta)
   return meta
 end
 
-------------------------------------------
--- add invisible numbering to section
-------------------------------------------
+-------------------------------------------
+-- add temporary divs to first header level
+-------------------------------------------
 
-function addSectionNumbering (doc)
-  local sections = pandoc.utils.make_sections(true, nil, doc.blocks)
-  return pandoc.Pandoc(sections, doc.meta)
+-- will be removed again once the chapters are counted
+function addDivToHeader (head)
+  if head.tag == "Header" and head.level == 1 then
+    return pandoc.Div(head, pandoc.Attr(nil, {"restart"}))
+  end
 end
 
 ----------------------------
@@ -192,12 +195,13 @@ end
 
 function processDiv (div)
 
-  -- keep track of chapters (primary sections)
-  if div.classes[1] == "section" then
-    if div.attributes.number ~= nil and string.len(div.attributes.number) == 1 then
-      chapter = chapter + 1
-      counterInChapter = 0
-    end
+  -- keep track of chapters (header == 1)
+  -- included in this loop by trick "addDivToHeader"
+  if div.classes[1] == "restart" then
+    chapter = chapter + 1
+    counterInChapter = 0
+    -- remove div
+    return div.content
   end
 
   -- only do formatting for divs with class "ex"
@@ -229,7 +233,7 @@ function processDiv (div)
       example = texMakeExample(parsedDiv)
     else
       example = pandocMakeExample(parsedDiv)
-      example = pandoc.Div(example, pandoc.Attr(parsedDiv.exID) )
+      example = pandoc.Div(example, pandoc.Attr("ex:"..parsedDiv.number) )
     end
 
     -- return to global setting
@@ -259,11 +263,17 @@ function parseDiv (div)
   end
   
   -- make identifier for example
-  -- or keep user-provided identifier
   local exID = ""
   if div.identifier == "" then
-    exID = "ling-ex:"..chapter.."."..counterInChapter
+    if restartAtChapter then
+      -- to resolve clashes with same number used in different chapters
+      exID = "ex:"..chapter.."."..counterInChapter
+    else
+      -- use actual number
+      exID = "ex:"..number
+    end
   else
+      -- or keep user-provided identifier
     exID = div.identifier
   end
   
@@ -1442,9 +1452,10 @@ function makeCrossrefs (cite)
 
   -- prevent Latex error when user sets xrefSuffixSep to space or nothing
   if FORMAT:match "latex" then
-    if xrefSuffixSep == "" or -- empty
+    if xrefSuffixSep == ""  or -- empty
        xrefSuffixSep == " " or -- space
-       xrefSuffixSep == " " then -- non-breaking space
+       xrefSuffixSep == " "    -- non-breaking space
+    then
       xrefSuffixSep = "\\," -- set to thin space
     end
   end
@@ -1469,7 +1480,8 @@ end
 
 return {
   -- preparations
-  { Pandoc = addSectionNumbering },
+  --{ Pandoc = addSectionNumbering },
+  { Header = addDivToHeader },
   { Meta = getUserSettings },
   { Meta = addFormatting },
   -- parse examples and rewrite

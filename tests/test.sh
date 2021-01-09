@@ -14,7 +14,7 @@
 for format in html docx epub
 do
 	pandoc ../readme.md -t markdown -L processVerbatim.lua -s | \
-	pandoc -t $format -o readme.$format -L ../pandoc-ling.lua -s -N --toc --mathml
+	pandoc -t $format -o readme.$format -L ../pandoc-ling.lua -s -N --toc --mathml -F pandoc-crossref
 done
 
 # various latex variants, both tex and pdf

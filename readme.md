@@ -9,15 +9,15 @@ tl;dr
 - Easily write linguistic examples including basic interlinear glossing. 
 - Let numbering and cross-referencing be done for you. 
 - Export to (almost) any format of your wishes for final polishing.
-- As an example, check out this readme in [HTML](https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme%20conversions/readme.html) or [Latex](https://gitcdn.link/repo/cysouw/pandoc-ling/main/readme%20conversions/readme2_linguex.pdf).
+- As an example, check out this readme in [HTML](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html) or [Latex](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme2_linguex.pdf).
 
 # Rationale
 
-In the field of linguistics there is an outspoken tradition to format example sentences in research papers in a very specific way. In the field, it is a perennial problem to get such example sentences to look just right. Within Latex, there are numerous packages to deal with this problem (e.g. covington, linguex, gb4e, expex, etc.). Depending on your needs, there is some Latex solution for almost everyone. However, these solutions in Latex are often cumbersome to type, and they are not portable to other formats. Specifically, transfer between Latex, html, docx, odt or epub would actually be highly desirable. Such transfer is the hallmark of [Pandoc](https://pandoc.org), a tool by John MacFarlane that provides conversion between these (and many more) formats. 
+In the field of linguistics there is an outspoken tradition to format example sentences in research papers in a very specific way. In the field, it is a perennial problem to get such example sentences to look just right. Within Latex, there are numerous packages to deal with this problem (e.g. covington, linguex, gb4e, expex, etc.). Depending on your needs, there is some Latex solution for almost everyone. However, these solutions in Latex are often cumbersome to type, and they are not portable to other formats. Specifically, transfer between latex, html, docx, odt or epub would actually be highly desirable. Such transfer is the hallmark of [Pandoc](https://pandoc.org), a tool by John MacFarlane that provides conversion between these (and many more) formats. 
 
 Any such conversion between text-formats naturally never works perfectly: every text-format has specific features that are not transferable to other formats. A central goal of Pandoc (at least in my interpretation) is to define a set of shared concepts for text-structure (a 'common denominator' if you will, but surely not 'least'!) that can then be mapped to other formats. In many ways, Pandoc tries (again) to define a set of logical concepts for text structure ('semantic markup'), which can then be formatted by your favourite typesetter. As long as you stay inside the realm of this 'common denominator' (in practice that means Pandoc's extended version of Markdown/CommonMark), conversion works reasonably well (think 90%-plus). 
 
-Building on John Gruber's [Markdown philosophy](https://daringfireball.net/projects/markdown/syntax), there is a strong urge here to learn to restrain oneself while writing, and try to restrict the number of layout-possibilities to a minimum. In this sense, with `pandoc-ling` I propose a Markdown-structure for linguistic examples that is simple, easy to type, easy to read, and portable through the Pandoc universe by way of an extension mechanism of Pandoc, called a 'Pandoc Lua Filter'. This extension will not magically allow you to write every linguistic example thinkable, but my guess is that in practice the present proposal covers the majority of situations in linguistic publications (think 90%-plus). As an example (and test case) I have included automatic conversions into various formats in this repository (chech them out to get an idea of the strengths and weaknesses of this approach).
+Building on John Gruber's [Markdown philosophy](https://daringfireball.net/projects/markdown/syntax), there is a strong urge here to learn to restrain oneself while writing, and try to restrict the number of layout-possibilities to a minimum. In this sense, with `pandoc-ling` I propose a Markdown-structure for linguistic examples that is simple, easy to type, easy to read, and portable through the Pandoc universe by way of an extension mechanism of Pandoc, called a 'Pandoc Lua Filter'. This extension will not magically allow you to write every linguistic example thinkable, but my guess is that in practice the present proposal covers the majority of situations in linguistic publications (think 90%-plus). As an example (and test case) I have included automatic conversions into various formats in this repository (chech them in the directory `tests` out to get an idea of the strengths and weaknesses of the current implementation).
 
 # The basic structure of a linguistic example
 
@@ -189,7 +189,7 @@ b.
 
 ## Cross-referencing examples
 
-The examples are automatically numbered by `pandoc-ling`. Cross-references to examples can be made by using the `[@ID]` format (used by Pandoc for citations). When an example has an explicit identifier (like `#test` in the next example), then a reference can be made to this example with `[@test]`, leading to [@test] when formatted.
+The examples are automatically numbered by `pandoc-ling`. Cross-references to examples inside a document can be made by using the `[@ID]` format (used by Pandoc for citations). When an example has an explicit identifier (like `#test` in the next example), then a reference can be made to this example with `[@test]`, leading to [@test] when formatted.
 
 ```
 ::: {#test .ex}
@@ -201,6 +201,10 @@ Inspired by the `linguex`-approach, you can also use the keywords `Next` or `Las
 
 Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, `[@LLast c]` will refer to the third sub-example of the last-but-one example. Formatted this will look like this: [@LLast c], smile! However, note that the "c" has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like `[@LLast Ha1l0]` will work also, leading to [@LLast Ha1l0] when formatted (which is of course nonsensical).
 
+For exports that include attributes (like html), the examples have an explicit id of the form `ex:NUMBER` in which `NUMBER` is the actual number as given in the formatted output. This means that it is possible to refer to an example on any web-page by using the hash-mechanism to refer to a part of the web-page. For example `#ex:4.7` at can be used to refer to the seventh example in the html-output of this readme (try [this link](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html#ex:4.7)). The id in this example has a chapter number '4' because in the html conversion I have set the option `addChapterNumber` to `true`. (Note: when numbers restart the count in each chapter with the option `restartAtChapter`, then the id is of the form `ex:CHAPTER.NUMBER`. This is necessary to resolve clashing ids, as the same number might then be used in different chapters.)
+
+I propose to use these ids also to refer to examples in citations when writing scholarly papers, e.g. (Cysouw 2012: #ex:7), independent of whether the links actually resolve. In principle, such citations could easily be resolved when online publications are properly prepared. The same proposal could also work for other parts of research papers, for example using tags like `#sec, #fig, #tab, #eq`. To refer to paragraphs (which should replace page numbers in a future of adaptive design), I propose to use no tag, but directly add the number to the hash (see the Pandoc filter [`count-para`]([htt](https://github.com/cysouw/count-para) for a practical mechanism to add such numbering).
+
 ## Options of `pandoc-ling`
 
 ### Global options
@@ -208,9 +212,12 @@ Referring to sub-examples can be done by manually adding a suffix into the cross
 The following global options are available with `pandoc-ling`. These can be added to the [Pandoc metadata](https://pandoc.org/MANUAL.html#metadata-blocks). An example of such metadata can be found at the bottom of this `readme` in the form of a YAML-block. Pandoc allows for various methods to provide metadata (see the link above).
 
 - **`formatGloss`** (boolean, default `false`): should all interlinear examples be consistently formatted? If you use this option, you can simply use capital letters for abbreviations in the gloss, and they will be changed to small caps. The source line is set to italics, and the translations is put into single quotes.
-- **`xrefSuffixSep`** (string, defaults to no-break-space): When cross references have a suffix, how should the separator be formatted? The defaults 'no-break-space' is a safe options, but I personally like a 'thin space' better (Unicode `U+2009`), but symbol does not work with many fonts, and might lead to errors. For Latex typesetting, all space-like symbols are converted to a Latex thin space `\,`. 
-- **`restartAtChapter`** (boolean, default `false`): should the counting restart for each chapter? Actually, when `true` this setting will restart the counting at the highest heading level, which for various output formats can be set by the Pandoc option `top-level-division`. Depending on your Latex setup, an explicit entry `top-level-division: chapter` might be necessary in your metadata.
-- **`addChapterNumber`** (boolean, default `false`): should the chapter (= highest heading level) number be added to the number of the example? In most formats this automatically implies `restartAtChapter: true`. In most Latex situations this only works in combination with a `documentclass: book`.
+- **`xrefSuffixSep`** (string, defaults to no-break-space): When cross references have a suffix, how should the separator be formatted? The defaults 'no-break-space' is a safe options. I personally like a 'narrow no-break space' better (Unicode `U+202F`), but this symbol does not work with all fonts, and might thus lead to errors. For Latex typesetting, all space-like symbols are converted to a Latex thin space `\,`. 
+- **`restartAtChapter`** (boolean, default `false`): should the counting restart for each chapter? 
+  * Actually, when `true` this setting will restart the counting at the highest heading level, which for various output formats can be set by the Pandoc option `top-level-division`. 
+  * The id of each example will now be of the form `ex:CHAPTER.NUMBER` to resolve any clashes when the same number appears in different chapter.
+  * Depending on your Latex setup, an explicit entry `top-level-division: chapter` might be necessary in your metadata. 
+- **`addChapterNumber`** (boolean, default `false`): should the chapter (= highest heading level) number be added to the number of the example? When setting this to `true` any setting of `restartAtChapter` will be ignored. In most Latex situations this only works in combination with a `documentclass: book`.
 - **`latexPackage`** (one of: `linguex`, `gb4e`, `langsci-gb4e`, `expex`, default `linguex`): Various options for converting examples to Latex packages that typeset linguistic examples. None of the conversions works perfectly, though in should work in most normal situations (think 90%-plus). It might be necessary to first convert to `Latex`, correct the output, and then typeset separately with a latex compiler like `xelatex`. Using the direct option insider Pandoc might also work in many situations. Export to **`beamer`** seems to work reasonably well with the `gb4e` package. All others have artefacts or errors.
 
 ### Local options
@@ -228,9 +235,9 @@ $$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
 ## Issues with `pandoc-ling`
 
 - Manually provided identifiers for examples should not be purely numerical (so do not use e.g. `#5789`). In some situation this interferes with the setting of the cross-references.
-- Because the cross-references use the same structure as citations in Pandoc, the processing of citations (by `citeproc`) should be performed **after** the processing by `pandoc-ling`. Further, [`pandoc-crossref`](https://github.com/lierdakil/pandoc-crossref), another Pandoc extension for numbering figures and other captions, also uses the same system. From experience, it seems safer to put `pandoc-crossref` **before** `pandoc-ling` in the order of processing (though I have no idea why).
+- Because the cross-references use the same structure as citations in Pandoc, the processing of citations (by `citeproc`) should be performed **after** the processing by `pandoc-ling`. Another Pandoc filter, [`pandoc-crossref`](https://github.com/lierdakil/pandoc-crossref), for numbering figures and other captions, also uses the same system. There seems to be no conflict between `pandoc-ling` and `pandoc-crossref`.
 - Interlinear examples will will not wrap at the end of the page. There is no solution yet for longer examples that are longer than the size of the page.
-- When exporting to `docx` there is a problem because there are paragraphs inserted after tables, which adds space in lists with multiple interlinear examples. This is [by design](https://answers.microsoft.com/en-us/msoffice/forum/msoffice_word-mso_windows8-mso_2013_release/how-to-remove-extra-paragraph-after-table/995b3811-9f55-4df1-bbbc-9f672b1ad262). The official solution is to set font-size to 1 for this paragraph inside MS Word.
+- When exporting to `docx` there is a problem because there are paragraphs inserted after tables, which adds space in lists with multiple interlinear examples (except when they have exactly the same number of columns). This is [by design](https://answers.microsoft.com/en-us/msoffice/forum/msoffice_word-mso_windows8-mso_2013_release/how-to-remove-extra-paragraph-after-table/995b3811-9f55-4df1-bbbc-9f672b1ad262). The official solution is to set font-size to 1 for this paragraph inside MS Word.
 - Multi-column cells are crucial for `pandoc-ling` to work properly. These are only introduced in new table format with Pandoc 2.10 (so older Pandoc version are not supported). Also note that these structures are not yet exported to all formats, e.g. it will not be displayed correctly in `docx`. However, this is currently an area of active development
 - `langsci-gb4e` is only available as part of the [`langsci` package](https://ctan.org/pkg/langsci?lang=en). You have to make it available to Pandoc, e.g. by adding it into the same directory as the pandoc-ling.lua filter. I have added a recent version of `langsci-gb4e`  here for convenience, but this one might be outdated at some time in the future.
 - `beamer` output seems to work best with `latexPackage: gb4e`.
@@ -243,13 +250,18 @@ Originally, I decided to write this filter as a two-pronged conversion, making a
 
 The basic structure of the examples are transformed into Pandoc tables. Tables are reasonably safe for converting in other formats. Care has been taken to add `classes` to all elements of the tables (e.g. the preamble has the class `linguistic-example-preamble`). When exported formats are aware of these classes, they can be used to fine-tune the formatting. I have used a few such fine-tunings into the html output of this filter by adding a few CSS-style statements. The naming of the classes is quite transparent, using the form `linguistic-example-STRUCTURE`.
 
+The whole table is encapsulated in a `div` with class `ex` and an id of the form `ex:NUMBER`. This means that an example can be directly referred to in web-links by using the hash-mechanism. For example, adding `#ex:3` to the end of a link will immediately jump to this example in a browser.
+
+The current implementation is completely independent from the [Pandoc numbered examples implementation](https://pandoc.org/MANUAL.html#numbered-example-lists) and both can work side by side, like (@second):
+
+(@) These are native Pandoc numbered examples
+(@second) They are independent of `pandoc-ling` but use the same output formatting in many default exports, like latex.
+
+However, in practice various output-formats of Pandoc (e.g. latex) also use numbers in round brackets for these, so in practice it might be confusing to combine both.
+
 ---
 author: Michael Cysouw
 title: Using pandoc-ling
 
-formatGloss: false
-xrefSuffixSep: " "
-restartAtChapter: false
 addChapterNumber: true
-latexPackage: linguex
 ...
