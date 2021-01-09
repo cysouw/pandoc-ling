@@ -255,6 +255,7 @@ The whole table is encapsulated in a `div` with class `ex` and an id of the form
 The current implementation is completely independent from the [Pandoc numbered examples implementation](https://pandoc.org/MANUAL.html#numbered-example-lists) and both can work side by side, like (@second):
 
 (@) These are native Pandoc numbered examples
+
 (@second) They are independent of `pandoc-ling` but use the same output formatting in many default exports, like latex.
 
 However, in practice various output-formats of Pandoc (e.g. latex) also use numbers in round brackets for these, so in practice it might be confusing to combine both.
@@ -262,6 +263,5 @@ However, in practice various output-formats of Pandoc (e.g. latex) also use numb
 ---
 author: Michael Cysouw
 title: Using pandoc-ling
-
 addChapterNumber: true
 ...
