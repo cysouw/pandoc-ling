@@ -184,7 +184,10 @@ end
 
 -- will be removed again once the chapters are counted
 function addDivToHeader (head)
-  if head.tag == "Header" and head.level == 1 then
+  if  head.tag == "Header" 
+      and head.level == 1 
+      and head.classes[1] ~= "unnumbered"
+  then
     return pandoc.Div(head, pandoc.Attr(nil, {"restart"}))
   end
 end
@@ -1367,8 +1370,8 @@ function uniqueNextrefs (cite)
 
   -- to resolve "Next"-style references give them all an unique ID
   -- make indices to check in which order they occur
-  local nameN = string.match(cite.content[1].text, "([N]+)ext")
-  local nameL = string.match(cite.content[1].text, "([L]+)ast")
+  local nameN = string.match(cite.content[1].text, "([n]+)ext")
+  local nameL = string.match(cite.content[1].text, "([l]+)ast")
   local target = string.match(cite.content[1].text, "@Target")
 
   -- use random ID to make unique
@@ -1396,7 +1399,7 @@ function resolveNextrefs (cite)
   local order = rev_indexRef[id]
 
   local distN = 0
-  local sequenceN = string.match(cite.content[1].text, "([N]+)ext")
+  local sequenceN = string.match(cite.content[1].text, "([n]+)ext")
   if sequenceN ~= nil then distN = string.len(sequenceN) end
   
   if distN > 0 then
@@ -1411,7 +1414,7 @@ function resolveNextrefs (cite)
   end
 
   local distL = 0
-  local sequenceL = string.match(cite.content[1].text, "([L]+)ast")
+  local sequenceL = string.match(cite.content[1].text, "([l]+)ast")
   if sequenceL ~= nil then distL= string.len(sequenceL) end
   
   if distL > 0 then

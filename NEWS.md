@@ -2,11 +2,13 @@
 
 ## changes
 
-- changed the ID system for easier cross-document linking to examples
+- changed the ID system to "#ex:" for easier cross-document linking to examples
+- change @next and @last to lowercase for easier typing
 
 ## bugs
 
 - resolved clash with pandoc-crossref
+- corrected wrong counting with unnumbered headings
 
 # pandoc-ling 1.2
 
