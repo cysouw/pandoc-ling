@@ -95,22 +95,23 @@ function addFormatting (meta)
       }
       .linguistic-example tbody { 
         border-top: none; 
-        border-bottom: none; 
+        border-bottom: none;
+      }
+      .linguistic-example-preamble {
+        height: 1em;
+        vertical-align: top; 
+      }
+      .linguistic-example td {
+        padding-left: 0;
       }
       .linguistic-example-content { 
-        padding-left: 2px;
-        padding-right: 4px;
         vertical-align: top;  
       }
       .linguistic-example-label {
         vertical-align: top;
       }
       .linguistic-example-judgement { 
-        padding-right: 0; 
-      }
-      .linguistic-example-preamble {
-        height: 1em;
-        vertical-align: top; 
+        padding-right: 2px; 
       }
       </style>
       ]]
@@ -996,6 +997,7 @@ function texMakeExpex (parsedDiv)
   else
     texFront("\\pex"..judgeOffset.."<"..ID.."> ", preamble)
   end
+  texFront("\\begin{samepage}\n", preamble)
 
   for i=1,#kind do
     if kind[i] == "single" then
@@ -1048,7 +1050,7 @@ function texMakeExpex (parsedDiv)
 
     end
   end
-  texEnd("\n\\xe", preamble)
+  texEnd("\n\\xe\n\\end{samepage}", preamble)
   return pandoc.Plain(preamble)
 end
 
@@ -1077,13 +1079,13 @@ function texMakeLinguex (parsedDiv)
       judgements[i] = { pandoc.RawInline("tex","") }
     else
       judgements[i] = { judgements[i] }
-      texFront("\\jdg{", judgements[i])
-      texEnd("}", judgements[i])
+      --texFront("\\jdg{", judgements[i])
+      --texEnd("}", judgements[i])
     end
   end
 
   -- build Latex code starting with preamble and adding rest to it
-  texFront("\\ex. \\label{"..ID.."} ", preamble)
+  texFront("\\begin{samepage}\n\\ex. \\label{"..ID.."} ", preamble)
 
   for i=1,#kind do
     if kind[i] == "single" then
@@ -1136,6 +1138,7 @@ function texMakeLinguex (parsedDiv)
 
     end
   end
+  texEnd("\n\\end{samepage}", preamble)
   return pandoc.Plain(preamble)
 end
 
@@ -1177,7 +1180,7 @@ function texMakeGb4e (parsedDiv)
   end
 
   -- build Latex code starting with preamble and adding rest to it
-    texFront("\\begin{exe} "..judgeOffset.." \\label{"..ID.."} \n  \\ex ", preamble)
+    texFront("\\begin{samepage}\n\\begin{exe} "..judgeOffset.." \\label{"..ID.."} \n  \\ex ", preamble)
 
   for i=1,#kind do
     if kind[i] == "single" then
@@ -1236,7 +1239,7 @@ function texMakeGb4e (parsedDiv)
     end
   end
   if #kind > 1 then texEnd("\n  \\end{xlist}", preamble) end
-  texEnd("\n\\end{exe}", preamble)
+  texEnd("\n\\end{exe}\n\\end{samepage}", preamble)
   return pandoc.Plain(preamble)
 end
 
@@ -1294,6 +1297,7 @@ function texMakeLangsci (parsedDiv)
   else
     texFront("\\ea "..judgeOffset.." \\label{"..ID.."} ", preamble)
   end
+  texFront("\\begin{samepage}\n", preamble)
 
   for i=1,#kind do
     if kind[i] == "single" then
@@ -1358,7 +1362,7 @@ function texMakeLangsci (parsedDiv)
     end
   end
   if #kind > 1 then texEnd("\n  \\z", preamble) end
-  texEnd("\n\\z", preamble)
+  texEnd("\n\\z\n\\end{samepage}", preamble)
   return pandoc.Plain(preamble)
 end
 
