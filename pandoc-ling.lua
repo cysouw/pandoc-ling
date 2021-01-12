@@ -111,7 +111,8 @@ function addFormatting (meta)
         vertical-align: top;
       }
       .linguistic-example-judgement { 
-        padding-right: 2px; 
+        vertical-align: top; 
+        padding-right: 2px;
       }
       </style>
       ]]
