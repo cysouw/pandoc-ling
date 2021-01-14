@@ -9,6 +9,7 @@
 
 - resolved clash with pandoc-crossref
 - corrected wrong counting with unnumbered headings
+- fixed counter reset and \exewidth with gb4e
 
 # pandoc-ling 1.2
 

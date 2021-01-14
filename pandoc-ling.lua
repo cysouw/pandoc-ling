@@ -141,12 +141,14 @@ function addFormatting (meta)
     elseif latexPackage:match "gb4e" then
       add("\\usepackage{"..latexPackage.."}")
       -- nnext package does not work with added top level number
-      add("\\usepackage[noparens]{nnext}")
+      -- add("\\usepackage[noparens]{nnext}")
       add("\\usepackage{chngcntr}")
       if addChapterNumber then
         add("\\counterwithin{xnumi}{"..topDivision.."}")
+        add("\\counterwithin{exx}{"..topDivision.."}")
+        add("\\exewidth{(9.123)}")
       elseif restartAtChapter then
-        add("\\counterwithin*{xnumi}{"..topDivision.."}")
+        add("\\counterwithin*{exx}{"..topDivision.."}")
       end
 
     elseif latexPackage == "expex" then
@@ -170,12 +172,6 @@ function addFormatting (meta)
     end
     meta['header-includes'] = tmp
   end
-
-  --if FORMAT:match "beamer" then
-  --  add("\\setlength\\heavyrulewidth{0em}")
-  --  add("\\setlength\\lightrulewidth{0em}")
-  --  meta['header-includes'] = tmp
-  --end
 
   return meta
 end
