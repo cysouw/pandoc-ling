@@ -85,36 +85,37 @@ function addFormatting (meta)
     -- local f = io.open("pandoc-ling.css")
     -- local css = f:read("*a")
     -- f:close()
-    local css = [[ 
-      <style>
-      .linguistic-example { 
-        margin: 0; 
-      }
-      .linguistic-example caption { 
-        margin-bottom: 0; 
-      }
-      .linguistic-example tbody { 
-        border-top: none; 
-        border-bottom: none;
-      }
-      .linguistic-example-preamble {
-        height: 1em;
-        vertical-align: top; 
-      }
-      .linguistic-example td {
-        padding-left: 0;
-      }
-      .linguistic-example-content { 
-        vertical-align: top;  
-      }
-      .linguistic-example-label {
-        vertical-align: top;
-      }
-      .linguistic-example-judgement { 
-        vertical-align: top; 
-        padding-right: 2px;
-      }
-      </style>
+    local css = [[
+<!-- CSS added by lua-filter 'pandoc-ling' -->
+<style>
+.linguistic-example { 
+  margin: 0; 
+}
+.linguistic-example caption { 
+  margin-bottom: 0; 
+}
+.linguistic-example tbody { 
+  border-top: none; 
+  border-bottom: none;
+}
+.linguistic-example-preamble {
+  height: 1em;
+  vertical-align: top; 
+}
+.linguistic-example td {
+  padding-left: 0;
+}
+.linguistic-example-content { 
+  vertical-align: top;  
+}
+.linguistic-example-label {
+  vertical-align: top;
+}
+.linguistic-example-judgement { 
+  vertical-align: top; 
+  padding-right: 2px;
+}
+</style>
       ]]
     tmp[#tmp+1] = pandoc.MetaBlocks(pandoc.RawBlock("html", css))
     meta['header-includes'] = tmp
