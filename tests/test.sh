@@ -30,7 +30,7 @@ do
 	--metadata latexPackage="$package" --pdf-engine=xelatex
 done
 
-# special settings for expex, errors with xelatex and chapternumbers
+# special settings for expex, errors with chapternumbers
 
 pandoc ../readme.md -t markdown -L processVerbatim.lua -s | \
 pandoc -t latex -o readme_expex.tex -L ../pandoc-ling.lua -s -N --toc \
@@ -38,4 +38,4 @@ pandoc -t latex -o readme_expex.tex -L ../pandoc-ling.lua -s -N --toc \
 
 pandoc ../readme.md -t markdown -L processVerbatim.lua -s | \
 pandoc -o readme_expex.pdf -L ../pandoc-ling.lua -N --toc \
---metadata latexPackage="expex" --pdf-engine=pdflatex --metadata addChapterNumber="false"
+--metadata latexPackage="expex" --metadata addChapterNumber="false"

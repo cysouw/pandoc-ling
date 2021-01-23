@@ -1,15 +1,20 @@
+# pandoc-ling 1.4
+
+
 # pandoc-ling 1.3
 
 ## changes
 
 - changed the ID system to "#ex:" for easier cross-document linking to examples
 - change @next and @last to lowercase for easier typing
+- added 'samepage' enclosures in latex so that examples do not break across pages
 
 ## bugs
 
 - resolved clash with pandoc-crossref
 - corrected wrong counting with unnumbered headings
 - fixed counter reset and \exewidth with gb4e
+- fixed bugs with linguex export
 
 # pandoc-ling 1.2
 

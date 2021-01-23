@@ -274,9 +274,11 @@ This is the most basic structure of a linguistic example.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \ex<ex:1> 
   This is the most basic structure of a linguistic example.
 \xe
+\end{samepage}
 
 Alternatively, the \texttt{class} can be put in curled brackets (and
 then a leading full stop is necessary before \texttt{ex}). Inside these
@@ -297,11 +299,13 @@ They will become one example with one number.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \ex<id> 
   This is a multi-line example. But that does not mean anything for the
 result All these lines are simply treated as one paragraph. They will
 become one example with one number.
 \xe
+\end{samepage}
 
 A preamble can be added by inserting an empty line between preamble and
 example. The same considerations about multiple text-lines apply.
@@ -314,9 +318,11 @@ This is an example with a preamble.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \ex<ex:3> Preamble\\
   This is an example with a preamble.
 \xe
+\end{samepage}
 
 Sub-examples with labels are entered by starting each sub-example with a
 small latin letter and a full stop. Empty lines between labels are
@@ -335,6 +341,7 @@ Subsequent lines are again treated as one sequential paragraph.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \pex[*=]<ex:4> 
   \a This is the first example.
   \a This is the second.
@@ -343,6 +350,7 @@ them in order.
   \a Empty lines are allowed between labelled lines Subsequent lines are
 again treated as one sequential paragraph.
 \xe
+\end{samepage}
 
 A labelled list can be combined with a preamble.
 
@@ -356,11 +364,13 @@ c. three
 :::
 \end{verbatim}
 
+\begin{samepage}
 \pex[*=]<ex:5> Any nice description here\\
   \a one example sentence.
   \a two
   \a three
 \xe
+\end{samepage}
 
 Grammaticality judgements should be added before an example, and after
 an optional label, separated from both by spaces (though four spaces in
@@ -380,6 +390,7 @@ d. However, such long sequences sometimes lead to undesirable effects in the lay
 :::
 \end{verbatim}
 
+\begin{samepage}
 \pex[*=whynot?]<ex:6> Throwing in a preamble for good measure\\
   \a \ljudge{*}This traditionally signals ungrammaticality.
   \a \ljudge{?}Question-marks indicate questionable grammaticality.
@@ -388,6 +399,7 @@ be used (here even in superscript).
   \a However, such long sequences sometimes lead to undesirable effects
 in the layout.
 \xe
+\end{samepage}
 
 A minor detail is the alignment of a single example with a preamble and
 grammaticality judgements. In this case it looks better for the preamble
@@ -403,12 +415,14 @@ that should go over various lines in the output.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \ex<ex:7> Here is a special case with a preamble\\
   
   \judge{\textsuperscript{???}} With a singly questionably example. Note
 the alignment! Especially with this very long example that should go
 over various lines in the output.
 \xe
+\end{samepage}
 
 \hypertarget{interlinear-examples}{%
 \subsection{Interlinear examples}\label{interlinear-examples}}
@@ -434,6 +448,7 @@ character \texttt{U+00A0}).
 :::
 \end{verbatim}
 
+\begin{samepage}
 \ex[*=]<ex:8> 
   \begingl
   \glpreamble Dutch (Germanic)//
@@ -442,6 +457,7 @@ character \texttt{U+00A0}).
   \glft This sentence is dutch.//
   \endgl
 \xe
+\end{samepage}
 
 An attempt is made to format interlinear examples when the option
 \texttt{formatGloss=true} is added. This will:
@@ -475,6 +491,7 @@ An attempt is made to format interlinear examples when the option
 :::
 \end{verbatim}
 
+\begin{samepage}
 \ex[*=]<ex:9> 
   \begingl
   \glpreamble Dutch (Germanic)//
@@ -484,6 +501,7 @@ An attempt is made to format interlinear examples when the option
   \glft `This sentence is dutch.'//
   \endgl
 \xe
+\end{samepage}
 
 The results of such formatting will not always work, but it seems to be
 quite robust in my testing. The next example brings everything together:
@@ -528,6 +546,7 @@ b.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \pex[*=:-)]<ex:10> Completely superfluous preamble, but it works
 \ldots{}\\
   \a Mixing single line examples with interlinear examples.
@@ -550,6 +569,7 @@ header. //
   \glft `This second sentence does not have a header.'//
   \endgl
 \xe
+\end{samepage}
 
 \hypertarget{cross-referencing-examples}{%
 \subsection{Cross-referencing
@@ -568,29 +588,31 @@ This is a test
 :::
 \end{verbatim}
 
+\begin{samepage}
 \ex<test> 
   This is a test
 \xe
+\end{samepage}
 
 Inspired by the \texttt{linguex}-approach, you can also use the keywords
-\texttt{Next} or \texttt{Last} to refer to the next or the last example,
-e.g.~\texttt{{[}@Last{]}} will be formatted as (\getref{test}). By
+\texttt{next} or \texttt{last} to refer to the next or the last example,
+e.g.~\texttt{{[}@last{]}} will be formatted as (\getref{test}). By
 doubling the capitals to \texttt{NNext} or \texttt{LLast} reference to
 the next/last-but-one can be made. Actually, the number of starting
 capitals can be repeated at will in \texttt{pandoc-ling}, so something
-like \texttt{{[}@LLLLLLLLast{]}} will also work. It will be formatted as
+like \texttt{{[}@llllllllast{]}} will also work. It will be formatted as
 (\getref{ex:4}) after the processing of \texttt{pandoc-ling}. Needless
 to say that in such a situation an explicit identifier would be a better
 choice.
 
 Referring to sub-examples can be done by manually adding a suffix into
 the cross reference, simply separated from the identifier by a space.
-For example, \texttt{{[}@LLast~c{]}} will refer to the third sub-example
+For example, \texttt{{[}@llast~c{]}} will refer to the third sub-example
 of the last-but-one example. Formatted this will look like this:
 (\getref{ex:10}\,c), smile! However, note that the ``c'' has to be
 manually determined. It is simply a literal suffix that will be copied
-into the cross-reference. Something like \texttt{{[}@LLast\ Ha1l0{]}}
-will work also, leading to (\getref{ex:10}\,Ha1l0) when formatted (which
+into the cross-reference. Something like \texttt{{[}@llast\ hA1l0{]}}
+will work also, leading to (\getref{ex:10}\,haAl0) when formatted (which
 is of course nonsensical).
 
 For exports that include attributes (like html), the examples have an
@@ -713,10 +735,12 @@ $$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
 :::
 \end{verbatim}
 
+\begin{samepage}
 \ex<ex:12> 
   \[\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}\]\\
   
 \xe
+\end{samepage}
 
 \hypertarget{issues-with-pandoc-ling}{%
 \subsection{\texorpdfstring{Issues with
@@ -741,6 +765,8 @@ $$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
   Interlinear examples will will not wrap at the end of the page. There
   is no solution yet for longer examples that are longer than the size
   of the page.
+\item
+  It is not (yet) possible to have more than one glossing line.
 \item
   When exporting to \texttt{docx} there is a problem because there are
   paragraphs inserted after tables, which adds space in lists with
@@ -813,7 +839,6 @@ numbered examples implementation} and both can work side by side, like
 
 \begin{enumerate}
 \def\labelenumi{(\arabic{enumi})}
-\tightlist
 \item
   These are native Pandoc numbered examples
 \item

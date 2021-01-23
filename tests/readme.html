@@ -147,34 +147,36 @@
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
-   
-        <style>
-        .linguistic-example { 
-          margin: 0; 
-        }
-        .linguistic-example caption { 
-          margin-bottom: 0; 
-        }
-        .linguistic-example tbody { 
-          border-top: none; 
-          border-bottom: none; 
-        }
-        .linguistic-example-content { 
-          padding-left: 2px;
-          padding-right: 4px;
-          vertical-align: top;  
-        }
-        .linguistic-example-label {
-          vertical-align: top;
-        }
-        .linguistic-example-judgement { 
-          padding-right: 0; 
-        }
-        .linguistic-example-preamble {
-          height: 1em;
-          vertical-align: top; 
-        }
-        </style>
+  <!-- CSS added by lua-filter 'pandoc-ling' -->
+  <style>
+  .linguistic-example { 
+    margin: 0; 
+  }
+  .linguistic-example caption { 
+    margin-bottom: 0; 
+  }
+  .linguistic-example tbody { 
+    border-top: none; 
+    border-bottom: none;
+  }
+  .linguistic-example-preamble {
+    height: 1em;
+    vertical-align: top; 
+  }
+  .linguistic-example td {
+    padding-left: 0;
+  }
+  .linguistic-example-content { 
+    vertical-align: top;  
+  }
+  .linguistic-example-label {
+    vertical-align: top;
+  }
+  .linguistic-example-judgement { 
+    vertical-align: top; 
+    padding-right: 2px;
+  }
+  </style>
         
 </head>
 <body>
@@ -648,8 +650,8 @@ This is a test
 </tbody>
 </table>
 </div>
-<p>Inspired by the <code>linguex</code>-approach, you can also use the keywords <code>Next</code> or <code>Last</code> to refer to the next or the last example, e.g. <code>[@Last]</code> will be formatted as <a href="#test">(4.11)</a>. By doubling the capitals to <code>NNext</code> or <code>LLast</code> reference to the next/last-but-one can be made. Actually, the number of starting capitals can be repeated at will in <code>pandoc-ling</code>, so something like <code>[@LLLLLLLLast]</code> will also work. It will be formatted as <a href="#ex:4.4">(4.4)</a> after the processing of <code>pandoc-ling</code>. Needless to say that in such a situation an explicit identifier would be a better choice.</p>
-<p>Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, <code>[@LLast c]</code> will refer to the third sub-example of the last-but-one example. Formatted this will look like this: <a href="#ex:4.10">(4.10 c)</a>, smile! However, note that the “c” has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like <code>[@LLast Ha1l0]</code> will work also, leading to <a href="#ex:4.10">(4.10 Ha1l0)</a> when formatted (which is of course nonsensical).</p>
+<p>Inspired by the <code>linguex</code>-approach, you can also use the keywords <code>next</code> or <code>last</code> to refer to the next or the last example, e.g. <code>[@last]</code> will be formatted as <a href="#test">(4.11)</a>. By doubling the capitals to <code>NNext</code> or <code>LLast</code> reference to the next/last-but-one can be made. Actually, the number of starting capitals can be repeated at will in <code>pandoc-ling</code>, so something like <code>[@llllllllast]</code> will also work. It will be formatted as <a href="#ex:4.4">(4.4)</a> after the processing of <code>pandoc-ling</code>. Needless to say that in such a situation an explicit identifier would be a better choice.</p>
+<p>Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, <code>[@llast c]</code> will refer to the third sub-example of the last-but-one example. Formatted this will look like this: <a href="#ex:4.10">(4.10 c)</a>, smile! However, note that the “c” has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like <code>[@llast hA1l0]</code> will work also, leading to <a href="#ex:4.10">(4.10 haAl0)</a> when formatted (which is of course nonsensical).</p>
 <p>For exports that include attributes (like html), the examples have an explicit id of the form <code>ex:NUMBER</code> in which <code>NUMBER</code> is the actual number as given in the formatted output. This means that it is possible to refer to an example on any web-page by using the hash-mechanism to refer to a part of the web-page. For example <code>#ex:4.7</code> at can be used to refer to the seventh example in the html-output of this readme (try <a href="https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html#ex:4.7">this link</a>). The id in this example has a chapter number ‘4’ because in the html conversion I have set the option <code>addChapterNumber</code> to <code>true</code>. (Note: when numbers restart the count in each chapter with the option <code>restartAtChapter</code>, then the id is of the form <code>ex:CHAPTER.NUMBER</code>. This is necessary to resolve clashing ids, as the same number might then be used in different chapters.)</p>
 <p>I propose to use these ids also to refer to examples in citations when writing scholarly papers, e.g. (Cysouw 2012: #ex:7), independent of whether the links actually resolve. In principle, such citations could easily be resolved when online publications are properly prepared. The same proposal could also work for other parts of research papers, for example using tags like <code>#sec, #fig, #tab, #eq</code>. To refer to paragraphs (which should replace page numbers in a future of adaptive design), I propose to use no tag, but directly add the number to the hash (see the Pandoc filter <a href="%5Bhtt%5D(https://github.com/cysouw/count-para)%20for%20a%20practical%20mechanism%20to%20add%20such%20numbering"><code>count-para</code></a>.</p>
 <h2 data-number="4.4" id="options-of-pandoc-ling"><span class="header-section-number">4.4</span> Options of <code>pandoc-ling</code></h2>
@@ -691,6 +693,7 @@ $$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
 <li>Manually provided identifiers for examples should not be purely numerical (so do not use e.g. <code>#5789</code>). In some situation this interferes with the setting of the cross-references.</li>
 <li>Because the cross-references use the same structure as citations in Pandoc, the processing of citations (by <code>citeproc</code>) should be performed <strong>after</strong> the processing by <code>pandoc-ling</code>. Another Pandoc filter, <a href="https://github.com/lierdakil/pandoc-crossref"><code>pandoc-crossref</code></a>, for numbering figures and other captions, also uses the same system. There seems to be no conflict between <code>pandoc-ling</code> and <code>pandoc-crossref</code>.</li>
 <li>Interlinear examples will will not wrap at the end of the page. There is no solution yet for longer examples that are longer than the size of the page.</li>
+<li>It is not (yet) possible to have more than one glossing line.</li>
 <li>When exporting to <code>docx</code> there is a problem because there are paragraphs inserted after tables, which adds space in lists with multiple interlinear examples (except when they have exactly the same number of columns). This is <a href="https://answers.microsoft.com/en-us/msoffice/forum/msoffice_word-mso_windows8-mso_2013_release/how-to-remove-extra-paragraph-after-table/995b3811-9f55-4df1-bbbc-9f672b1ad262">by design</a>. The official solution is to set font-size to 1 for this paragraph inside MS Word.</li>
 <li>Multi-column cells are crucial for <code>pandoc-ling</code> to work properly. These are only introduced in new table format with Pandoc 2.10 (so older Pandoc version are not supported). Also note that these structures are not yet exported to all formats, e.g. it will not be displayed correctly in <code>docx</code>. However, this is currently an area of active development</li>
 <li><code>langsci-gb4e</code> is only available as part of the <a href="https://ctan.org/pkg/langsci?lang=en"><code>langsci</code> package</a>. You have to make it available to Pandoc, e.g. by adding it into the same directory as the pandoc-ling.lua filter. I have added a recent version of <code>langsci-gb4e</code> here for convenience, but this one might be outdated at some time in the future.</li>
@@ -703,8 +706,8 @@ $$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
 <p>The whole table is encapsulated in a <code>div</code> with class <code>ex</code> and an id of the form <code>ex:NUMBER</code>. This means that an example can be directly referred to in web-links by using the hash-mechanism. For example, adding <code>#ex:3</code> to the end of a link will immediately jump to this example in a browser.</p>
 <p>The current implementation is completely independent from the <a href="https://pandoc.org/MANUAL.html#numbered-example-lists">Pandoc numbered examples implementation</a> and both can work side by side, like (2):</p>
 <ol type="1">
-<li>These are native Pandoc numbered examples</li>
-<li>They are independent of <code>pandoc-ling</code> but use the same output formatting in many default exports, like latex.</li>
+<li><p>These are native Pandoc numbered examples</p></li>
+<li><p>They are independent of <code>pandoc-ling</code> but use the same output formatting in many default exports, like latex.</p></li>
 </ol>
 <p>However, in practice various output-formats of Pandoc (e.g. latex) also use numbers in round brackets for these, so in practice it might be confusing to combine both.</p>
 </body>

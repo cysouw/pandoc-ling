@@ -42,6 +42,7 @@ local addChapterNumber = false -- add chapternumbers to counting and restart at 
 local latexPackage = "linguex"
 local topDivision = "section"
 local noFormat = false
+local documentclass = "article"
 
 function getUserSettings (meta)
   if meta.formatGloss ~= nil then
@@ -64,6 +65,9 @@ function getUserSettings (meta)
   end
   if meta["top-level-division"] ~= nil then
     topDivision = pandoc.utils.stringify(meta["top-level-division"])
+  end
+  if meta.documentclass ~= nil then
+    documentclass = pandoc.utils.stringify(meta.documentclass)
   end
 end
 
@@ -139,7 +143,7 @@ function addFormatting (meta)
         add("\\counterwithin*{ExNo}{"..topDivision.."}")
       end
 
-    elseif latexPackage:match "gb4e" then
+    elseif latexPackage == "gb4e" then
       add("\\usepackage{"..latexPackage.."}")
       -- nnext package does not work with added top level number
       -- add("\\usepackage[noparens]{nnext}")
@@ -152,6 +156,19 @@ function addFormatting (meta)
         add("\\counterwithin*{exx}{"..topDivision.."}")
       end
 
+    elseif latexPackage == "langsci-gb4e" then
+      add("\\usepackage{"..latexPackage.."}")
+      -- nnext package does not work with added top level number
+      -- add("\\usepackage[noparens]{nnext}")
+      add("\\usepackage{chngcntr}")
+      if addChapterNumber then
+        add("\\counterwithin{xnumi}{"..topDivision.."}")
+        --add("\\counterwithin{exx}{"..topDivision.."}")
+        add("\\exewidth{(9.123)}")
+      elseif restartAtChapter then
+        add("\\counterwithin*{xnumi}{"..topDivision.."}")
+      end
+
     elseif latexPackage == "expex" then
       add("\\usepackage{expex}")
       add("\\lingset{ \
@@ -162,7 +179,9 @@ function addFormatting (meta)
             belowpreambleskip = -2ex \
           }")
       if addChapterNumber then
-        add("\\lingset{exnotype=chapter.arabic}")
+        if documentclass == "book" then
+          add("\\lingset{exnotype=chapter.arabic}")
+        end
       end
       if restartAtChapter then
         --add("\\usepackage{epltxchapno}")
@@ -1083,7 +1102,7 @@ function texMakeLinguex (parsedDiv)
   end
 
   -- build Latex code starting with preamble and adding rest to it
-  texFront("\\begin{samepage}\n\\ex. \\label{"..ID.."} ", preamble)
+  texFront("\\begin{samepage}\n\n\\ex. \\label{"..ID.."} ", preamble)
 
   for i=1,#kind do
     if kind[i] == "single" then
@@ -1136,7 +1155,7 @@ function texMakeLinguex (parsedDiv)
 
     end
   end
-  texEnd("\n\\end{samepage}", preamble)
+  texEnd("\n\n\\end{samepage}", preamble)
   return pandoc.Plain(preamble)
 end
 

@@ -59,9 +59,10 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 \usepackage{gb4e}
-\usepackage[noparens]{nnext}
 \usepackage{chngcntr}
 \counterwithin{xnumi}{section}
+\counterwithin{exx}{section}
+\exewidth{(9.123)}
 \ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -270,9 +271,11 @@ This is the most basic structure of a linguistic example.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{} \label{ex:4.1} 
   \ex [] { This is the most basic structure of a linguistic example. }
 \end{exe}
+\end{samepage}
 
 Alternatively, the \texttt{class} can be put in curled brackets (and
 then a leading full stop is necessary before \texttt{ex}). Inside these
@@ -293,11 +296,13 @@ They will become one example with one number.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{} \label{id} 
   \ex [] { This is a multi-line example. But that does not mean anything
 for the result All these lines are simply treated as one paragraph. They
 will become one example with one number. }
 \end{exe}
+\end{samepage}
 
 A preamble can be added by inserting an empty line between preamble and
 example. The same considerations about multiple text-lines apply.
@@ -310,10 +315,12 @@ This is an example with a preamble.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{} \label{ex:4.3} 
   \ex Preamble
   \sn [] { This is an example with a preamble. }
 \end{exe}
+\end{samepage}
 
 Sub-examples with labels are entered by starting each sub-example with a
 small latin letter and a full stop. Empty lines between labels are
@@ -332,6 +339,7 @@ Subsequent lines are again treated as one sequential paragraph.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{} \label{ex:4.4} 
   \ex 
   \begin{xlist}
@@ -343,6 +351,7 @@ will put them in order. }
 lines are again treated as one sequential paragraph. }
   \end{xlist}
 \end{exe}
+\end{samepage}
 
 A labelled list can be combined with a preamble.
 
@@ -356,6 +365,7 @@ c. three
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{} \label{ex:4.5} 
   \ex Any nice description here
   \begin{xlist}
@@ -364,6 +374,7 @@ c. three
   \ex [] { three }
   \end{xlist}
 \end{exe}
+\end{samepage}
 
 Grammaticality judgements should be added before an example, and after
 an optional label, separated from both by spaces (though four spaces in
@@ -383,6 +394,7 @@ d. However, such long sequences sometimes lead to undesirable effects in the lay
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{whynot?} \label{ex:4.6} 
   \ex Throwing in a preamble for good measure
   \begin{xlist}
@@ -394,6 +406,7 @@ used (here even in superscript). }
 effects in the layout. }
   \end{xlist}
 \end{exe}
+\end{samepage}
 
 A minor detail is the alignment of a single example with a preamble and
 grammaticality judgements. In this case it looks better for the preamble
@@ -409,12 +422,14 @@ that should go over various lines in the output.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{???} \label{ex:4.7} 
   \ex Here is a special case with a preamble
   \sn [\textsuperscript{???}] { With a singly questionably example. Note
 the alignment! Especially with this very long example that should go
 over various lines in the output. }
 \end{exe}
+\end{samepage}
 
 \hypertarget{interlinear-examples}{%
 \subsection{Interlinear examples}\label{interlinear-examples}}
@@ -440,6 +455,7 @@ character \texttt{U+00A0}).
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{} \label{ex:4.8} 
   \ex [] { 
        Dutch (Germanic)
@@ -447,6 +463,7 @@ character \texttt{U+00A0}).
        DEM sentence AUX in DET dutch. \\
   \glt This sentence is dutch. }
 \end{exe}
+\end{samepage}
 
 An attempt is made to format interlinear examples when the option
 \texttt{formatGloss=true} is added. This will:
@@ -480,6 +497,7 @@ An attempt is made to format interlinear examples when the option
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{} \label{ex:4.9} 
   \ex [] { 
        Dutch (Germanic)
@@ -488,6 +506,7 @@ An attempt is made to format interlinear examples when the option
        \textsc{dem} sentence \textsc{aux} in \textsc{det} dutch. \\
   \glt `This sentence is dutch.' }
 \end{exe}
+\end{samepage}
 
 The results of such formatting will not always work, but it seems to be
 quite robust in my testing. The next example brings everything together:
@@ -532,6 +551,7 @@ b.
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{:-)} \label{ex:4.10} 
   \ex Completely superfluous preamble, but it works \ldots{}
   \begin{xlist}
@@ -552,6 +572,7 @@ header. \\
   \glt `This second sentence does not have a header.' }
   \end{xlist}
 \end{exe}
+\end{samepage}
 
 \hypertarget{cross-referencing-examples}{%
 \subsection{Cross-referencing
@@ -570,29 +591,31 @@ This is a test
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{} \label{test} 
   \ex [] { This is a test }
 \end{exe}
+\end{samepage}
 
 Inspired by the \texttt{linguex}-approach, you can also use the keywords
-\texttt{Next} or \texttt{Last} to refer to the next or the last example,
-e.g.~\texttt{{[}@Last{]}} will be formatted as (\ref{test}). By doubling
+\texttt{next} or \texttt{last} to refer to the next or the last example,
+e.g.~\texttt{{[}@last{]}} will be formatted as (\ref{test}). By doubling
 the capitals to \texttt{NNext} or \texttt{LLast} reference to the
 next/last-but-one can be made. Actually, the number of starting capitals
 can be repeated at will in \texttt{pandoc-ling}, so something like
-\texttt{{[}@LLLLLLLLast{]}} will also work. It will be formatted as
+\texttt{{[}@llllllllast{]}} will also work. It will be formatted as
 (\ref{ex:4.4}) after the processing of \texttt{pandoc-ling}. Needless to
 say that in such a situation an explicit identifier would be a better
 choice.
 
 Referring to sub-examples can be done by manually adding a suffix into
 the cross reference, simply separated from the identifier by a space.
-For example, \texttt{{[}@LLast~c{]}} will refer to the third sub-example
+For example, \texttt{{[}@llast~c{]}} will refer to the third sub-example
 of the last-but-one example. Formatted this will look like this:
 (\ref{ex:4.10}\,c), smile! However, note that the ``c'' has to be
 manually determined. It is simply a literal suffix that will be copied
-into the cross-reference. Something like \texttt{{[}@LLast\ Ha1l0{]}}
-will work also, leading to (\ref{ex:4.10}\,Ha1l0) when formatted (which
+into the cross-reference. Something like \texttt{{[}@llast\ hA1l0{]}}
+will work also, leading to (\ref{ex:4.10}\,haAl0) when formatted (which
 is of course nonsensical).
 
 For exports that include attributes (like html), the examples have an
@@ -715,10 +738,12 @@ $$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
 :::
 \end{verbatim}
 
+\begin{samepage}
 \begin{exe} \judgewidth{} \label{ex:4.12} 
   \ex [] { \[\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}\]\\
    }
 \end{exe}
+\end{samepage}
 
 \hypertarget{issues-with-pandoc-ling}{%
 \subsection{\texorpdfstring{Issues with
@@ -743,6 +768,8 @@ $$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
   Interlinear examples will will not wrap at the end of the page. There
   is no solution yet for longer examples that are longer than the size
   of the page.
+\item
+  It is not (yet) possible to have more than one glossing line.
 \item
   When exporting to \texttt{docx} there is a problem because there are
   paragraphs inserted after tables, which adds space in lists with
@@ -815,7 +842,6 @@ numbered examples implementation} and both can work side by side, like
 
 \begin{enumerate}
 \def\labelenumi{(\arabic{enumi})}
-\tightlist
 \item
   These are native Pandoc numbered examples
 \item
