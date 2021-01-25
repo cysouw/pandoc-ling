@@ -54,7 +54,7 @@ This is the most basic structure of a linguistic example.
 :::
 ```
 
-Alternatively, the `class` can be put in curled brackets (and then a leading full stop is necessary before `ex`). Inside these brackets more attributes can be added (separated by space), for example an id, using a hash, or any attribute=value pairs that should apply to this example. Currently there is only one attribute implemented (`formatGloss`), but in principle it is possible to add more attributes that can be used to fine-tune the typesetting of the example.
+Alternatively, the `class` can be put in curled brackets (and then a leading full stop is necessary before `ex`). Inside these brackets more attributes can be added (separated by space), for example an id, using a hash, or any attribute=value pairs that should apply to this example. Currently there is only one real attribute implemented (`formatGloss`), but in principle it is possible to add more attributes that can be used to fine-tune the typesetting of the example (see below for a description of such `local options`).
 
 ```
 ::: {#id .ex formatGloss=false}
@@ -197,13 +197,13 @@ This is a test
 :::
 ```
 
-Inspired by the `linguex`-approach, you can also use the keywords `next` or `last` to refer to the next or the last example, e.g. `[@last]` will be formatted as [@last]. By doubling the capitals to `NNext` or `LLast` reference to the next/last-but-one can be made. Actually, the number of starting capitals can be repeated at will in `pandoc-ling`, so something like `[@llllllllast]` will also work. It will be formatted as [@llllllllast] after the processing of `pandoc-ling`. Needless to say that in such a situation an explicit identifier would be a better choice.
+Inspired by the `linguex`-approach, you can also use the keywords `next` or `last` to refer to the next or the last example, e.g. `[@last]` will be formatted as [@last]. By doubling the capitals to `nnext` or `llast` reference to the next/last-but-one can be made. Actually, the number of starting capitals can be repeated at will in `pandoc-ling`, so something like `[@llllllllast]` will also work. It will be formatted as [@llllllllast] after the processing of `pandoc-ling`. Needless to say that in such a situation an explicit identifier would be a better choice.
 
 Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, `[@llast c]` will refer to the third sub-example of the last-but-one example. Formatted this will look like this: [@llast c], smile! However, note that the "c" has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like `[@llast hA1l0]` will work also, leading to [@llast haAl0] when formatted (which is of course nonsensical).
 
 For exports that include attributes (like html), the examples have an explicit id of the form `ex:NUMBER` in which `NUMBER` is the actual number as given in the formatted output. This means that it is possible to refer to an example on any web-page by using the hash-mechanism to refer to a part of the web-page. For example `#ex:4.7` at can be used to refer to the seventh example in the html-output of this readme (try [this link](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html#ex:4.7)). The id in this example has a chapter number '4' because in the html conversion I have set the option `addChapterNumber` to `true`. (Note: when numbers restart the count in each chapter with the option `restartAtChapter`, then the id is of the form `ex:CHAPTER.NUMBER`. This is necessary to resolve clashing ids, as the same number might then be used in different chapters.)
 
-I propose to use these ids also to refer to examples in citations when writing scholarly papers, e.g. (Cysouw 2012: #ex:7), independent of whether the links actually resolve. In principle, such citations could easily be resolved when online publications are properly prepared. The same proposal could also work for other parts of research papers, for example using tags like `#sec, #fig, #tab, #eq`. To refer to paragraphs (which should replace page numbers in a future of adaptive design), I propose to use no tag, but directly add the number to the hash (see the Pandoc filter [`count-para`]([htt](https://github.com/cysouw/count-para) for a practical mechanism to add such numbering).
+I propose to use these ids also to refer to examples in citations when writing scholarly papers, e.g. (Cysouw 2012: #ex:7), independent of whether the links actually resolve. In principle, such citations could easily be resolved when online publications are properly prepared. The same proposal could also work for other parts of research papers, for example using tags like `#sec, #fig, #tab, #eq`. To refer to paragraphs (which should replace page numbers in a future of adaptive design), I propose to use no tag, but directly add the number to the hash (see the Pandoc filter [count-para](https://github.com/cysouw/count-para) for a practical mechanism to add such numbering).
 
 ## Options of `pandoc-ling`
 
@@ -228,7 +228,7 @@ If you want to add something else (not a linguistic example) in a numbered examp
 
 ```
 ::: {.ex noFormat=true}
-$$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
+$$\sum_{i=1}^{n}{x}=\frac{x^2-x}{2}$$
 :::
 ```
 
