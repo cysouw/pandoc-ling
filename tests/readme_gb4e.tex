@@ -281,9 +281,10 @@ Alternatively, the \texttt{class} can be put in curled brackets (and
 then a leading full stop is necessary before \texttt{ex}). Inside these
 brackets more attributes can be added (separated by space), for example
 an id, using a hash, or any attribute=value pairs that should apply to
-this example. Currently there is only one attribute implemented
+this example. Currently there is only one real attribute implemented
 (\texttt{formatGloss}), but in principle it is possible to add more
-attributes that can be used to fine-tune the typesetting of the example.
+attributes that can be used to fine-tune the typesetting of the example
+(see below for a description of such \texttt{local\ options}).
 
 \begin{verbatim}
 ::: {#id .ex formatGloss=false}
@@ -583,7 +584,9 @@ Cross-references to examples inside a document can be made by using the
 \texttt{{[}@ID{]}} format (used by Pandoc for citations). When an
 example has an explicit identifier (like \texttt{\#test} in the next
 example), then a reference can be made to this example with
-\texttt{{[}@test{]}}, leading to (\ref{test}) when formatted.
+\texttt{{[}@test{]}}, leading to (\ref{test}) when formatted (note that
+the formatting does not work on the github website. Please check the
+`tests' subdirectory).
 
 \begin{verbatim}
 ::: {#test .ex}
@@ -600,8 +603,8 @@ This is a test
 Inspired by the \texttt{linguex}-approach, you can also use the keywords
 \texttt{next} or \texttt{last} to refer to the next or the last example,
 e.g.~\texttt{{[}@last{]}} will be formatted as (\ref{test}). By doubling
-the capitals to \texttt{NNext} or \texttt{LLast} reference to the
-next/last-but-one can be made. Actually, the number of starting capitals
+the first letters to \texttt{nnext} or \texttt{llast} reference to the
+next/last-but-one can be made. Actually, the number of starting letters
 can be repeated at will in \texttt{pandoc-ling}, so something like
 \texttt{{[}@llllllllast{]}} will also work. It will be formatted as
 (\ref{ex:4.4}) after the processing of \texttt{pandoc-ling}. Needless to
@@ -642,7 +645,8 @@ example using tags like \texttt{\#sec,\ \#fig,\ \#tab,\ \#eq}. To refer
 to paragraphs (which should replace page numbers in a future of adaptive
 design), I propose to use no tag, but directly add the number to the
 hash (see the Pandoc filter
-\href{\%5Bhtt\%5D(https://github.com/cysouw/count-para)\%20for\%20a\%20practical\%20mechanism\%20to\%20add\%20such\%20numbering}{\texttt{count-para}}.
+\href{https://github.com/cysouw/count-para}{count-para} for a practical
+mechanism to add such numbering).
 
 \hypertarget{options-of-pandoc-ling}{%
 \subsection{\texorpdfstring{Options of
@@ -734,13 +738,13 @@ incidental mathematical formula.
 
 \begin{verbatim}
 ::: {.ex noFormat=true}
-$$\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}$$
+$$\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}$$
 :::
 \end{verbatim}
 
 \begin{samepage}
 \begin{exe} \judgewidth{} \label{ex:4.12} 
-  \ex [] { \[\sum_{x=1}^{n}{x}=\frac{x^2-x}{2}\]\\
+  \ex [] { \[\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}\]\\
    }
 \end{exe}
 \end{samepage}

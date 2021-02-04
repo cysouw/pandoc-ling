@@ -189,7 +189,7 @@ b.
 
 ## Cross-referencing examples
 
-The examples are automatically numbered by `pandoc-ling`. Cross-references to examples inside a document can be made by using the `[@ID]` format (used by Pandoc for citations). When an example has an explicit identifier (like `#test` in the next example), then a reference can be made to this example with `[@test]`, leading to [@test] when formatted.
+The examples are automatically numbered by `pandoc-ling`. Cross-references to examples inside a document can be made by using the `[@ID]` format (used by Pandoc for citations). When an example has an explicit identifier (like `#test` in the next example), then a reference can be made to this example with `[@test]`, leading to [@test] when formatted (note that the formatting does not work on the github website. Please check the 'tests' subdirectory).
 
 ```
 ::: {#test .ex}
@@ -197,7 +197,7 @@ This is a test
 :::
 ```
 
-Inspired by the `linguex`-approach, you can also use the keywords `next` or `last` to refer to the next or the last example, e.g. `[@last]` will be formatted as [@last]. By doubling the capitals to `nnext` or `llast` reference to the next/last-but-one can be made. Actually, the number of starting capitals can be repeated at will in `pandoc-ling`, so something like `[@llllllllast]` will also work. It will be formatted as [@llllllllast] after the processing of `pandoc-ling`. Needless to say that in such a situation an explicit identifier would be a better choice.
+Inspired by the `linguex`-approach, you can also use the keywords `next` or `last` to refer to the next or the last example, e.g. `[@last]` will be formatted as [@last]. By doubling the first letters to `nnext` or `llast` reference to the next/last-but-one can be made. Actually, the number of starting letters can be repeated at will in `pandoc-ling`, so something like `[@llllllllast]` will also work. It will be formatted as [@llllllllast] after the processing of `pandoc-ling`. Needless to say that in such a situation an explicit identifier would be a better choice.
 
 Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, `[@llast c]` will refer to the third sub-example of the last-but-one example. Formatted this will look like this: [@llast c], smile! However, note that the "c" has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like `[@llast hA1l0]` will work also, leading to [@llast haAl0] when formatted (which is of course nonsensical).
 
@@ -228,7 +228,7 @@ If you want to add something else (not a linguistic example) in a numbered examp
 
 ```
 ::: {.ex noFormat=true}
-$$\sum_{i=1}^{n}{x}=\frac{x^2-x}{2}$$
+$$\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}$$
 :::
 ```
 
