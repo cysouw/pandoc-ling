@@ -621,6 +621,7 @@ function pandocMakeInterlinear (parsedDiv, label, forceJudge)
   local interlinear = parsedDiv.examples[selection]
   
   local header = {{ interlinear.header }}
+  local headerPresent = interlinear.header.content[1] ~= nil
   local source = interlinear.source 
   for i=1,#source do source[i] = { source[i] } end
   local gloss =  interlinear.gloss 
@@ -630,10 +631,10 @@ function pandocMakeInterlinear (parsedDiv, label, forceJudge)
   local rowContent = { trans }
     table.insert(rowContent, 1, gloss )
     table.insert(rowContent, 1, source )
-  if header.content ~= nil then
+  if headerPresent then
     table.insert(rowContent, 1, header )
   end
-  -- set dimenstions
+  -- set dimensions
   local nCols = #source
   local nRows = #rowContent
   local judgeCol = 0
@@ -644,7 +645,7 @@ function pandocMakeInterlinear (parsedDiv, label, forceJudge)
       nCols =  nCols + 1
       judgeCol = judgeCol + 2
       if judgement == nil then judgement = "" end
-      if header.content ~= nil then
+      if headerPresent then
         rowContent[2][1][1] = pandoc.Plain(judgement)
       else
         rowContent[1][1][1] = pandoc.Plain(judgement)
@@ -691,7 +692,7 @@ function pandocMakeInterlinear (parsedDiv, label, forceJudge)
       pandoc.Attr(nil, {"linguistic-example-label"})
   end
   -- set class of header and extend cell
-  if header.content ~= nil then
+  if headerPresent then
     hs = 1
     example.bodies[1].body[1+ps][2][2+ls+js].attr = 
       pandoc.Attr(nil, {"linguistic-example-header", "linguistic-example-content"})
@@ -714,7 +715,7 @@ function pandocMakeInterlinear (parsedDiv, label, forceJudge)
       pandoc.Attr(nil, {"linguistic-example-source", "linguistic-example-content"})
     example.bodies[1].body[ssRow+1][2][i].attr = 
       pandoc.Attr(nil, {"linguistic-example-gloss", "linguistic-example-content"})
-    end
+  end
 
   return example
 end
@@ -835,7 +836,7 @@ function pandocMakeMixedList (parsedDiv)
   end
 
   -- rough approximations to align multiple tables
-  local spaceForNumber = string.rep(" ", 2*(string.len(parsedDiv.number)+2))
+  local spaceForNumber = string.rep(" ", 2*(string.len(parsedDiv.number)+1))
   local spaceForJudge = tostring(15 + 5*judgeSize)
   
   for i=1,#result do

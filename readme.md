@@ -9,7 +9,7 @@ tl;dr
 - Easily write linguistic examples including basic interlinear glossing. 
 - Let numbering and cross-referencing be done for you. 
 - Export to (almost) any format of your wishes for final polishing.
-- As an example, check out this readme in [HTML](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html) or [Latex](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme2_linguex.pdf).
+- As an example, check out this readme in [HTML](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html) or [Latex](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme_linguex.pdf).
 
 # Rationale
 
@@ -175,7 +175,7 @@ Just for this example, let's add some extra material in this example.
 
 a.
 | Dutch (Germanic) Note the grammaticality judgement!
-| ^^:-)^ Deze zin is (dit\ is&nbsp;test) nederlands.
+| ^^:–)^ Deze zin is (dit\ is&nbsp;test) nederlands.
 | DEM sentence AUX ~ dutch.
 | This sentence is dutch.
 

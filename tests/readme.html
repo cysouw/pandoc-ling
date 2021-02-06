@@ -213,7 +213,7 @@
 <li>Easily write linguistic examples including basic interlinear glossing.</li>
 <li>Let numbering and cross-referencing be done for you.</li>
 <li>Export to (almost) any format of your wishes for final polishing.</li>
-<li>As an example, check out this readme in <a href="https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html">HTML</a> or <a href="https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme2_linguex.pdf">Latex</a>.</li>
+<li>As an example, check out this readme in <a href="https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html">HTML</a> or <a href="https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme_linguex.pdf">Latex</a>.</li>
 </ul>
 <h1 data-number="2" id="rationale"><span class="header-section-number">2</span> Rationale</h1>
 <p>In the field of linguistics there is an outspoken tradition to format example sentences in research papers in a very specific way. In the field, it is a perennial problem to get such example sentences to look just right. Within Latex, there are numerous packages to deal with this problem (e.g. covington, linguex, gb4e, expex, etc.). Depending on your needs, there is some Latex solution for almost everyone. However, these solutions in Latex are often cumbersome to type, and they are not portable to other formats. Specifically, transfer between latex, html, docx, odt or epub would actually be highly desirable. Such transfer is the hallmark of <a href="https://pandoc.org">Pandoc</a>, a tool by John MacFarlane that provides conversion between these (and many more) formats.</p>
@@ -452,6 +452,10 @@ that should go over various lines in the output.
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.8)</td>
+<td style="text-align: left;" colspan="6" class="linguistic-example-header linguistic-example-content">Dutch (Germanic)</td>
+</tr>
+<tr class="even">
+<td></td>
 <td style="text-align: left;">Deze</td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content">zin</td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content">is</td>
@@ -459,7 +463,7 @@ that should go over various lines in the output.
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content">het</td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content">nederlands.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td style="text-align: left;">DEM</td>
 <td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">sentence</td>
@@ -468,7 +472,7 @@ that should go over various lines in the output.
 <td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">DET</td>
 <td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">dutch.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td style="text-align: left;" colspan="6" class="linguistic-example-translation linguistic-example-content">This sentence is dutch.</td>
 </tr>
@@ -495,6 +499,10 @@ that should go over various lines in the output.
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.9)</td>
+<td style="text-align: left;" colspan="6" class="linguistic-example-header linguistic-example-content">Dutch (Germanic)</td>
+</tr>
+<tr class="even">
+<td></td>
 <td style="text-align: left;"><em>Deze</em></td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>zin</em></td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>is</em></td>
@@ -502,7 +510,7 @@ that should go over various lines in the output.
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>het</em></td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>nederlands.</em></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td style="text-align: left;"><span class="smallcaps">dem</span></td>
 <td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">sentence</td>
@@ -511,7 +519,7 @@ that should go over various lines in the output.
 <td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content"><span class="smallcaps">det</span></td>
 <td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">dutch.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td style="text-align: left;" colspan="6" class="linguistic-example-translation linguistic-example-content">‘This sentence is dutch.’</td>
 </tr>
@@ -537,7 +545,7 @@ Just for this example, let&#39;s add some extra material in this example.
 
 a.
 | Dutch (Germanic) Note the grammaticality judgement!
-| ^^:-)^ Deze zin is (dit\ is&amp;nbsp;test) nederlands.
+| ^^:–)^ Deze zin is (dit\ is&amp;nbsp;test) nederlands.
 | DEM sentence AUX ~ dutch.
 | This sentence is dutch.
 
@@ -573,26 +581,32 @@ b.
 <caption></caption>
 <tbody>
 <tr class="odd">
-<td>            </td>
+<td>          </td>
 <td style="text-align: left;" class="linguistic-example-label">c.</td>
-<td style="text-align: right;" class="linguistic-example-judgement"><sup>:-)</sup></td>
+<td style="text-align: right;"></td>
+<td style="text-align: left;" colspan="5" class="linguistic-example-header linguistic-example-content">Dutch (Germanic) Note the grammaticality judgement!</td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;" class="linguistic-judgement" width="15px"><sup>:–)</sup></td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>Deze</em></td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>zin</em></td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>is</em></td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>(dit is test)</em></td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>nederlands.</em></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td style="text-align: left;"></td>
-<td style="text-align: right;" class="linguistic-judgement" width="15px"></td>
+<td style="text-align: right;"></td>
 <td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content"><span class="smallcaps">dem</span></td>
 <td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">sentence</td>
 <td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content"><span class="smallcaps">aux</span></td>
 <td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">   </td>
 <td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">dutch.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td style="text-align: left;"></td>
 <td style="text-align: right;"></td>
@@ -604,7 +618,7 @@ b.
 <caption></caption>
 <tbody>
 <tr class="odd">
-<td>            </td>
+<td>          </td>
 <td style="text-align: left;" class="linguistic-example-label">d.</td>
 <td style="text-align: right;" class="linguistic-example-judgement"></td>
 <td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>Deze</em></td>
