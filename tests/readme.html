@@ -438,6 +438,19 @@ that should go over various lines in the output.
 </tbody>
 </table>
 </div>
+<p>Just for testing: a simple example with a judgement</p>
+<div id="ex:4.8">
+<table class="linguistic-example">
+<caption></caption>
+<tbody>
+<tr class="odd">
+<td class="linguistic-example-number" style="vertical-align: top;">(4.8)</td>
+<td style="text-align: right;" class="linguistic-example-judgement">*</td>
+<td style="text-align: left;" class="linguistic-example-content">This traditionally signals ungrammaticality.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 data-number="4.2" id="interlinear-examples"><span class="header-section-number">4.2</span> Interlinear examples</h2>
 <p>For interlinear examples with aligned source and gloss, the structure of a <code>lineblock</code> is used, starting the lines with a vertical line <code>|</code>. There should always be four vertical lines (for header, source, gloss and translation, respectively), although the content after the first vertical line can be empty. The source and gloss lines are separated at spaces, and all parts are right-aligned. If you want to have a space that is not separated, you will have to ‘protect’ the space, either by putting a backslash before the space, or by inserting a non-breaking space instead of a normal space (either type <code>&amp;nbsp;</code> or insert an actual non-breaking space, i.e. unicode character <code>U+00A0</code>).</p>
 <pre><code>:::ex
@@ -446,12 +459,12 @@ that should go over various lines in the output.
 | DEM sentence AUX in DET dutch.
 | This sentence is dutch.
 :::</code></pre>
-<div id="ex:4.8">
+<div id="ex:4.9">
 <table class="linguistic-example">
 <caption></caption>
 <tbody>
 <tr class="odd">
-<td class="linguistic-example-number" style="vertical-align: top;">(4.8)</td>
+<td class="linguistic-example-number" style="vertical-align: top;">(4.9)</td>
 <td style="text-align: left;" colspan="6" class="linguistic-example-header linguistic-example-content">Dutch (Germanic)</td>
 </tr>
 <tr class="even">
@@ -493,12 +506,12 @@ that should go over various lines in the output.
 | DEM sentence AUX in DET dutch.
 | This sentence is dutch.
 :::</code></pre>
-<div id="ex:4.9">
+<div id="ex:4.10">
 <table class="linguistic-example">
 <caption></caption>
 <tbody>
 <tr class="odd">
-<td class="linguistic-example-number" style="vertical-align: top;">(4.9)</td>
+<td class="linguistic-example-number" style="vertical-align: top;">(4.10)</td>
 <td style="text-align: left;" colspan="6" class="linguistic-example-header linguistic-example-content">Dutch (Germanic)</td>
 </tr>
 <tr class="even">
@@ -555,12 +568,12 @@ b.
 | DEM second sentence have.3SG.PRES no header.
 | This second sentence does not have a header.
 :::</code></pre>
-<div id="ex:4.10">
+<div id="ex:4.11">
 <table class="linguistic-example">
 <caption></caption>
 <tbody>
 <tr class="odd">
-<td class="linguistic-example-number" style="vertical-align: top;">(4.10)</td>
+<td class="linguistic-example-number" style="vertical-align: top;">(4.11)</td>
 <td style="text-align: left;" colspan="3" class="linguistic-example-preamble">Completely superfluous preamble, but it works …</td>
 </tr>
 <tr class="even">
@@ -649,23 +662,23 @@ b.
 </table>
 </div>
 <h2 data-number="4.3" id="cross-referencing-examples"><span class="header-section-number">4.3</span> Cross-referencing examples</h2>
-<p>The examples are automatically numbered by <code>pandoc-ling</code>. Cross-references to examples inside a document can be made by using the <code>[@ID]</code> format (used by Pandoc for citations). When an example has an explicit identifier (like <code>#test</code> in the next example), then a reference can be made to this example with <code>[@test]</code>, leading to <a href="#test">(4.11)</a> when formatted (note that the formatting does not work on the github website. Please check the ‘tests’ subdirectory).</p>
+<p>The examples are automatically numbered by <code>pandoc-ling</code>. Cross-references to examples inside a document can be made by using the <code>[@ID]</code> format (used by Pandoc for citations). When an example has an explicit identifier (like <code>#test</code> in the next example), then a reference can be made to this example with <code>[@test]</code>, leading to <a href="#test">(4.12)</a> when formatted (note that the formatting does not work on the github website. Please check the ‘tests’ subdirectory).</p>
 <pre><code>::: {#test .ex}
 This is a test
 :::</code></pre>
-<div id="ex:4.11">
+<div id="ex:4.12">
 <table class="linguistic-example">
 <caption></caption>
 <tbody>
 <tr class="odd">
-<td class="linguistic-example-number" style="vertical-align: top;">(4.11)</td>
+<td class="linguistic-example-number" style="vertical-align: top;">(4.12)</td>
 <td style="text-align: left;" class="linguistic-example-content">This is a test</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Inspired by the <code>linguex</code>-approach, you can also use the keywords <code>next</code> or <code>last</code> to refer to the next or the last example, e.g. <code>[@last]</code> will be formatted as <a href="#test">(4.11)</a>. By doubling the first letters to <code>nnext</code> or <code>llast</code> reference to the next/last-but-one can be made. Actually, the number of starting letters can be repeated at will in <code>pandoc-ling</code>, so something like <code>[@llllllllast]</code> will also work. It will be formatted as <a href="#ex:4.4">(4.4)</a> after the processing of <code>pandoc-ling</code>. Needless to say that in such a situation an explicit identifier would be a better choice.</p>
-<p>Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, <code>[@llast c]</code> will refer to the third sub-example of the last-but-one example. Formatted this will look like this: <a href="#ex:4.10">(4.10 c)</a>, smile! However, note that the “c” has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like <code>[@llast hA1l0]</code> will work also, leading to <a href="#ex:4.10">(4.10 haAl0)</a> when formatted (which is of course nonsensical).</p>
+<p>Inspired by the <code>linguex</code>-approach, you can also use the keywords <code>next</code> or <code>last</code> to refer to the next or the last example, e.g. <code>[@last]</code> will be formatted as <a href="#test">(4.12)</a>. By doubling the first letters to <code>nnext</code> or <code>llast</code> reference to the next/last-but-one can be made. Actually, the number of starting letters can be repeated at will in <code>pandoc-ling</code>, so something like <code>[@llllllllast]</code> will also work. It will be formatted as <a href="#ex:4.5">(4.5)</a> after the processing of <code>pandoc-ling</code>. Needless to say that in such a situation an explicit identifier would be a better choice.</p>
+<p>Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, <code>[@llast c]</code> will refer to the third sub-example of the last-but-one example. Formatted this will look like this: <a href="#ex:4.11">(4.11 c)</a>, smile! However, note that the “c” has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like <code>[@llast hA1l0]</code> will work also, leading to <a href="#ex:4.11">(4.11 haAl0)</a> when formatted (which is of course nonsensical).</p>
 <p>For exports that include attributes (like html), the examples have an explicit id of the form <code>ex:NUMBER</code> in which <code>NUMBER</code> is the actual number as given in the formatted output. This means that it is possible to refer to an example on any web-page by using the hash-mechanism to refer to a part of the web-page. For example <code>#ex:4.7</code> at can be used to refer to the seventh example in the html-output of this readme (try <a href="https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html#ex:4.7">this link</a>). The id in this example has a chapter number ‘4’ because in the html conversion I have set the option <code>addChapterNumber</code> to <code>true</code>. (Note: when numbers restart the count in each chapter with the option <code>restartAtChapter</code>, then the id is of the form <code>ex:CHAPTER.NUMBER</code>. This is necessary to resolve clashing ids, as the same number might then be used in different chapters.)</p>
 <p>I propose to use these ids also to refer to examples in citations when writing scholarly papers, e.g. (Cysouw 2012: #ex:7), independent of whether the links actually resolve. In principle, such citations could easily be resolved when online publications are properly prepared. The same proposal could also work for other parts of research papers, for example using tags like <code>#sec, #fig, #tab, #eq</code>. To refer to paragraphs (which should replace page numbers in a future of adaptive design), I propose to use no tag, but directly add the number to the hash (see the Pandoc filter <a href="https://github.com/cysouw/count-para">count-para</a> for a practical mechanism to add such numbering).</p>
 <h2 data-number="4.4" id="options-of-pandoc-ling"><span class="header-section-number">4.4</span> Options of <code>pandoc-ling</code></h2>
@@ -689,12 +702,12 @@ This is a test
 <pre><code>::: {.ex noFormat=true}
 $$\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}$$
 :::</code></pre>
-<div id="ex:4.12">
+<div id="ex:4.13">
 <table class="linguistic-example">
 <caption></caption>
 <tbody>
 <tr class="odd">
-<td class="linguistic-example-number" style="vertical-align: middle;">(4.12)</td>
+<td class="linguistic-example-number" style="vertical-align: middle;">(4.13)</td>
 <td style="text-align: left;" class="linguistic-example-content"><div class="ex" data-noFormat="true">
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mo>=</mo><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>−</mo><mi>n</mi></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}</annotation></semantics></math></p>
 </div></td>

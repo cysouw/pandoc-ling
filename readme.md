@@ -127,6 +127,12 @@ that should go over various lines in the output.
 :::
 ```
 
+Just for testing: a simple example with a judgement
+
+::: ex
+^* This traditionally signals ungrammaticality.
+:::
+
 ## Interlinear examples
 
 For interlinear examples with aligned source and gloss, the structure of a `lineblock` is used, starting the lines with a vertical line `|`. There should always be four vertical lines (for header, source, gloss and translation, respectively), although the content after the first vertical line can be empty. The source and gloss lines are separated at spaces, and all parts are right-aligned. If you want to have a space that is not separated, you will have to 'protect' the space, either by putting a backslash before the space, or by inserting a non-breaking space instead of a normal space (either type `&nbsp;` or insert an actual non-breaking space, i.e. unicode character `U+00A0`).

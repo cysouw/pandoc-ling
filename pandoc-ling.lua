@@ -604,7 +604,7 @@ function pandocMakeSingle (parsedDiv)
   end
   -- set class of judgment
     if judgeCol > 1 then
-    example.bodies[1].body[2][2][judgeCol].attr = 
+    example.bodies[1].body[nRows][2][judgeCol].attr = 
       pandoc.Attr(nil, {"linguistic-example-judgement"})
     end
 

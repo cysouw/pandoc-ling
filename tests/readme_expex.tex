@@ -425,6 +425,15 @@ over various lines in the output.
 \xe
 \end{samepage}
 
+Just for testing: a simple example with a judgement
+
+\begin{samepage}
+\ex<ex:8> 
+  
+  \judge{*} This traditionally signals ungrammaticality.
+\xe
+\end{samepage}
+
 \hypertarget{interlinear-examples}{%
 \subsection{Interlinear examples}\label{interlinear-examples}}
 
@@ -450,7 +459,7 @@ character \texttt{U+00A0}).
 \end{verbatim}
 
 \begin{samepage}
-\ex[*=]<ex:8> 
+\ex[*=]<ex:9> 
   \begingl
   \glpreamble Dutch (Germanic)//
   \gla Deze zin is in het nederlands. //
@@ -493,7 +502,7 @@ An attempt is made to format interlinear examples when the option
 \end{verbatim}
 
 \begin{samepage}
-\ex[*=]<ex:9> 
+\ex[*=]<ex:10> 
   \begingl
   \glpreamble Dutch (Germanic)//
   \gla \emph{Deze} \emph{zin} \emph{is} \emph{in} \emph{het}
@@ -548,7 +557,7 @@ b.
 \end{verbatim}
 
 \begin{samepage}
-\pex[*=:–)]<ex:10> Completely superfluous preamble, but it works
+\pex[*=:–)]<ex:11> Completely superfluous preamble, but it works
 \ldots{}\\
   \a Mixing single line examples with interlinear examples.
   \a This is of course highly unusal. Just for this example, let's add
@@ -604,7 +613,7 @@ doubling the first letters to \texttt{nnext} or \texttt{llast} reference
 to the next/last-but-one can be made. Actually, the number of starting
 letters can be repeated at will in \texttt{pandoc-ling}, so something
 like \texttt{{[}@llllllllast{]}} will also work. It will be formatted as
-(\getref{ex:4}) after the processing of \texttt{pandoc-ling}. Needless
+(\getref{ex:5}) after the processing of \texttt{pandoc-ling}. Needless
 to say that in such a situation an explicit identifier would be a better
 choice.
 
@@ -612,10 +621,10 @@ Referring to sub-examples can be done by manually adding a suffix into
 the cross reference, simply separated from the identifier by a space.
 For example, \texttt{{[}@llast~c{]}} will refer to the third sub-example
 of the last-but-one example. Formatted this will look like this:
-(\getref{ex:10}\,c), smile! However, note that the ``c'' has to be
+(\getref{ex:11}\,c), smile! However, note that the ``c'' has to be
 manually determined. It is simply a literal suffix that will be copied
 into the cross-reference. Something like \texttt{{[}@llast\ hA1l0{]}}
-will work also, leading to (\getref{ex:10}\,haAl0) when formatted (which
+will work also, leading to (\getref{ex:11}\,haAl0) when formatted (which
 is of course nonsensical).
 
 For exports that include attributes (like html), the examples have an
@@ -740,7 +749,7 @@ $$\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}$$
 \end{verbatim}
 
 \begin{samepage}
-\ex<ex:12> 
+\ex<ex:13> 
   \[\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}\]\\
   
 \xe

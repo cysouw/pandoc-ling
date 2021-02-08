@@ -3,6 +3,7 @@
 ## bugs
 
 - fixed bug with not-appearing header of interlinear in HTML output
+- fixed bug with judgements in single-line examples
 
 # pandoc-ling 1.3
 
