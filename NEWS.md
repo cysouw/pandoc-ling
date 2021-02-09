@@ -1,5 +1,7 @@
 # pandoc-ling 1.4
 
+# pandoc-ling 1.3.1
+
 ## bugs
 
 - fixed bug with not-appearing header of interlinear in HTML output

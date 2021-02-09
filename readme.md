@@ -129,9 +129,11 @@ that should go over various lines in the output.
 
 Just for testing: a simple example with a judgement
 
+```
 ::: ex
 ^* This traditionally signals ungrammaticality.
 :::
+```
 
 ## Interlinear examples
 
