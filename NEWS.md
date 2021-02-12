@@ -1,5 +1,9 @@
 # pandoc-ling 1.4
 
+## bugs
+
+- gb4e error prevented by adding `\noautomath` to preamble
+
 # pandoc-ling 1.3.1
 
 ## bugs

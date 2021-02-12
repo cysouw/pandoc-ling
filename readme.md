@@ -9,7 +9,7 @@ tl;dr
 - Easily write linguistic examples including basic interlinear glossing. 
 - Let numbering and cross-referencing be done for you. 
 - Export to (almost) any format of your wishes for final polishing.
-- As an example, check out this readme in [HTML](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html) or [Latex](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme_linguex.pdf).
+- As an example, check out this readme in [HTML](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html) or [Latex](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme_gb4e.pdf).
 
 # Rationale
 

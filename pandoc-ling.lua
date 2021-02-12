@@ -145,6 +145,7 @@ function addFormatting (meta)
 
     elseif latexPackage == "gb4e" then
       add("\\usepackage{"..latexPackage.."}")
+      add("\\noautomath")
       -- nnext package does not work with added top level number
       -- add("\\usepackage[noparens]{nnext}")
       add("\\usepackage{chngcntr}")
