@@ -99,7 +99,7 @@ tl;dr
   As an example, check out this readme in
   \href{https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html}{HTML}
   or
-  \href{https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme_linguex.pdf}{Latex}.
+  \href{https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme_gb4e.pdf}{Latex}.
 \end{itemize}
 
 \hypertarget{rationale}{%
@@ -579,6 +579,25 @@ header. \\
 \z
 \end{samepage}
 
+For the lazy writers among us, it is also possible to use a simple
+bullet list instead of a labelled list. Note that the listed elements
+will still be formatted as a labelled list.
+
+\begin{verbatim}
+:::ex
+- This is a lazy example.
+- ^* It should return letters at the start just as before.
+:::
+\end{verbatim}
+
+\begin{samepage}
+\ea \judgewidth{*} \label{ex:4.12} 
+  \ea [] { This is a lazy example. }
+  \ex [*] { It should return letters at the start just as before. }
+  \z
+\z
+\end{samepage}
+
 \hypertarget{cross-referencing-examples}{%
 \subsection{Cross-referencing
 examples}\label{cross-referencing-examples}}
@@ -611,19 +630,19 @@ the first letters to \texttt{nnext} or \texttt{llast} reference to the
 next/last-but-one can be made. Actually, the number of starting letters
 can be repeated at will in \texttt{pandoc-ling}, so something like
 \texttt{{[}@llllllllast{]}} will also work. It will be formatted as
-(\ref{ex:4.5}) after the processing of \texttt{pandoc-ling}. Needless to
+(\ref{ex:4.6}) after the processing of \texttt{pandoc-ling}. Needless to
 say that in such a situation an explicit identifier would be a better
 choice.
 
 Referring to sub-examples can be done by manually adding a suffix into
 the cross reference, simply separated from the identifier by a space.
-For example, \texttt{{[}@llast~c{]}} will refer to the third sub-example
-of the last-but-one example. Formatted this will look like this:
-(\ref{ex:4.11}\,c), smile! However, note that the ``c'' has to be
+For example, \texttt{{[}@lllast~c{]}} will refer to the third
+sub-example of the last-but-two example. Formatted this will look like
+this: (\ref{ex:4.11}\,c), smile! However, note that the ``c'' has to be
 manually determined. It is simply a literal suffix that will be copied
-into the cross-reference. Something like \texttt{{[}@llast\ hA1l0{]}}
-will work also, leading to (\ref{ex:4.11}\,haAl0) when formatted (which
-is of course nonsensical).
+into the cross-reference. Something like \texttt{{[}@last\ hA1l0{]}}
+will work also, leading to (\ref{test}\,hA1l0) when formatted (which is
+of course nonsensical).
 
 For exports that include attributes (like html), the examples have an
 explicit id of the form \texttt{ex:NUMBER} in which \texttt{NUMBER} is
@@ -747,7 +766,7 @@ $$\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}$$
 \end{verbatim}
 
 \begin{samepage}
-\ea \judgewidth{} \label{ex:4.13} 
+\ea \judgewidth{} \label{ex:4.14} 
   \[\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}\]\\
   
 \z

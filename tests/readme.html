@@ -213,7 +213,7 @@
 <li>Easily write linguistic examples including basic interlinear glossing.</li>
 <li>Let numbering and cross-referencing be done for you.</li>
 <li>Export to (almost) any format of your wishes for final polishing.</li>
-<li>As an example, check out this readme in <a href="https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html">HTML</a> or <a href="https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme_linguex.pdf">Latex</a>.</li>
+<li>As an example, check out this readme in <a href="https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html">HTML</a> or <a href="https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme_gb4e.pdf">Latex</a>.</li>
 </ul>
 <h1 data-number="2" id="rationale"><span class="header-section-number">2</span> Rationale</h1>
 <p>In the field of linguistics there is an outspoken tradition to format example sentences in research papers in a very specific way. In the field, it is a perennial problem to get such example sentences to look just right. Within Latex, there are numerous packages to deal with this problem (e.g. covington, linguex, gb4e, expex, etc.). Depending on your needs, there is some Latex solution for almost everyone. However, these solutions in Latex are often cumbersome to type, and they are not portable to other formats. Specifically, transfer between latex, html, docx, odt or epub would actually be highly desirable. Such transfer is the hallmark of <a href="https://pandoc.org">Pandoc</a>, a tool by John MacFarlane that provides conversion between these (and many more) formats.</p>
@@ -664,10 +664,10 @@ b.
 </tbody>
 </table>
 </div>
-<h2 data-number="4.3" id="cross-referencing-examples"><span class="header-section-number">4.3</span> Cross-referencing examples</h2>
-<p>The examples are automatically numbered by <code>pandoc-ling</code>. Cross-references to examples inside a document can be made by using the <code>[@ID]</code> format (used by Pandoc for citations). When an example has an explicit identifier (like <code>#test</code> in the next example), then a reference can be made to this example with <code>[@test]</code>, leading to <a href="#test">(4.12)</a> when formatted (note that the formatting does not work on the github website. Please check the ‘tests’ subdirectory).</p>
-<pre><code>::: {#test .ex}
-This is a test
+<p>For the lazy writers among us, it is also possible to use a simple bullet list instead of a labelled list. Note that the listed elements will still be formatted as a labelled list.</p>
+<pre><code>:::ex
+- This is a lazy example.
+- ^* It should return letters at the start just as before.
 :::</code></pre>
 <div id="ex:4.12">
 <table class="linguistic-example">
@@ -675,13 +675,37 @@ This is a test
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.12)</td>
+<td style="text-align: left;" class="linguistic-example-label">a.</td>
+<td style="text-align: right;" class="linguistic-example-judgement"></td>
+<td style="text-align: left;" class="linguistic-example-content">This is a lazy example.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: left;" class="linguistic-example-label">b.</td>
+<td style="text-align: right;" class="linguistic-example-judgement">*</td>
+<td style="text-align: left;" class="linguistic-example-content">It should return letters at the start just as before.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 data-number="4.3" id="cross-referencing-examples"><span class="header-section-number">4.3</span> Cross-referencing examples</h2>
+<p>The examples are automatically numbered by <code>pandoc-ling</code>. Cross-references to examples inside a document can be made by using the <code>[@ID]</code> format (used by Pandoc for citations). When an example has an explicit identifier (like <code>#test</code> in the next example), then a reference can be made to this example with <code>[@test]</code>, leading to <a href="#test">(4.13)</a> when formatted (note that the formatting does not work on the github website. Please check the ‘tests’ subdirectory).</p>
+<pre><code>::: {#test .ex}
+This is a test
+:::</code></pre>
+<div id="ex:4.13">
+<table class="linguistic-example">
+<caption></caption>
+<tbody>
+<tr class="odd">
+<td class="linguistic-example-number" style="vertical-align: top;">(4.13)</td>
 <td style="text-align: left;" class="linguistic-example-content">This is a test</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Inspired by the <code>linguex</code>-approach, you can also use the keywords <code>next</code> or <code>last</code> to refer to the next or the last example, e.g. <code>[@last]</code> will be formatted as <a href="#test">(4.12)</a>. By doubling the first letters to <code>nnext</code> or <code>llast</code> reference to the next/last-but-one can be made. Actually, the number of starting letters can be repeated at will in <code>pandoc-ling</code>, so something like <code>[@llllllllast]</code> will also work. It will be formatted as <a href="#ex:4.5">(4.5)</a> after the processing of <code>pandoc-ling</code>. Needless to say that in such a situation an explicit identifier would be a better choice.</p>
-<p>Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, <code>[@llast c]</code> will refer to the third sub-example of the last-but-one example. Formatted this will look like this: <a href="#ex:4.11">(4.11 c)</a>, smile! However, note that the “c” has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like <code>[@llast hA1l0]</code> will work also, leading to <a href="#ex:4.11">(4.11 haAl0)</a> when formatted (which is of course nonsensical).</p>
+<p>Inspired by the <code>linguex</code>-approach, you can also use the keywords <code>next</code> or <code>last</code> to refer to the next or the last example, e.g. <code>[@last]</code> will be formatted as <a href="#test">(4.13)</a>. By doubling the first letters to <code>nnext</code> or <code>llast</code> reference to the next/last-but-one can be made. Actually, the number of starting letters can be repeated at will in <code>pandoc-ling</code>, so something like <code>[@llllllllast]</code> will also work. It will be formatted as <a href="#ex:4.6">(4.6)</a> after the processing of <code>pandoc-ling</code>. Needless to say that in such a situation an explicit identifier would be a better choice.</p>
+<p>Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, <code>[@lllast c]</code> will refer to the third sub-example of the last-but-two example. Formatted this will look like this: <a href="#ex:4.11">(4.11 c)</a>, smile! However, note that the “c” has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like <code>[@last hA1l0]</code> will work also, leading to <a href="#test">(4.13 hA1l0)</a> when formatted (which is of course nonsensical).</p>
 <p>For exports that include attributes (like html), the examples have an explicit id of the form <code>ex:NUMBER</code> in which <code>NUMBER</code> is the actual number as given in the formatted output. This means that it is possible to refer to an example on any web-page by using the hash-mechanism to refer to a part of the web-page. For example <code>#ex:4.7</code> at can be used to refer to the seventh example in the html-output of this readme (try <a href="https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html#ex:4.7">this link</a>). The id in this example has a chapter number ‘4’ because in the html conversion I have set the option <code>addChapterNumber</code> to <code>true</code>. (Note: when numbers restart the count in each chapter with the option <code>restartAtChapter</code>, then the id is of the form <code>ex:CHAPTER.NUMBER</code>. This is necessary to resolve clashing ids, as the same number might then be used in different chapters.)</p>
 <p>I propose to use these ids also to refer to examples in citations when writing scholarly papers, e.g. (Cysouw 2012: #ex:7), independent of whether the links actually resolve. In principle, such citations could easily be resolved when online publications are properly prepared. The same proposal could also work for other parts of research papers, for example using tags like <code>#sec, #fig, #tab, #eq</code>. To refer to paragraphs (which should replace page numbers in a future of adaptive design), I propose to use no tag, but directly add the number to the hash (see the Pandoc filter <a href="https://github.com/cysouw/count-para">count-para</a> for a practical mechanism to add such numbering).</p>
 <h2 data-number="4.4" id="options-of-pandoc-ling"><span class="header-section-number">4.4</span> Options of <code>pandoc-ling</code></h2>
@@ -705,12 +729,12 @@ This is a test
 <pre><code>::: {.ex noFormat=true}
 $$\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}$$
 :::</code></pre>
-<div id="ex:4.13">
+<div id="ex:4.14">
 <table class="linguistic-example">
 <caption></caption>
 <tbody>
 <tr class="odd">
-<td class="linguistic-example-number" style="vertical-align: middle;">(4.13)</td>
+<td class="linguistic-example-number" style="vertical-align: middle;">(4.14)</td>
 <td style="text-align: left;" class="linguistic-example-content"><div class="ex" data-noFormat="true">
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mo>=</mo><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>−</mo><mi>n</mi></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}</annotation></semantics></math></p>
 </div></td>

@@ -320,7 +320,7 @@ function parseDiv (div)
     kind[1] = "single"
     judgements[1] = nil
     examples[1] = div
-  elseif data.tag == "OrderedList" then
+  elseif data.tag == "OrderedList" or data.tag == "BulletList" then
     for i=1,#data.content do
       judgements[i], examples[i], kind[i] = parseExample(data.content[i][1])
     end

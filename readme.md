@@ -195,6 +195,15 @@ b.
 :::
 ```
 
+For the lazy writers among us, it is also possible to use a simple bullet list instead of a labelled list. Note that the listed elements will still be formatted as a labelled list.
+
+```
+:::ex
+- This is a lazy example.
+- ^* It should return letters at the start just as before.
+:::
+```
+
 ## Cross-referencing examples
 
 The examples are automatically numbered by `pandoc-ling`. Cross-references to examples inside a document can be made by using the `[@ID]` format (used by Pandoc for citations). When an example has an explicit identifier (like `#test` in the next example), then a reference can be made to this example with `[@test]`, leading to [@test] when formatted (note that the formatting does not work on the github website. Please check the 'tests' subdirectory).
@@ -207,7 +216,7 @@ This is a test
 
 Inspired by the `linguex`-approach, you can also use the keywords `next` or `last` to refer to the next or the last example, e.g. `[@last]` will be formatted as [@last]. By doubling the first letters to `nnext` or `llast` reference to the next/last-but-one can be made. Actually, the number of starting letters can be repeated at will in `pandoc-ling`, so something like `[@llllllllast]` will also work. It will be formatted as [@llllllllast] after the processing of `pandoc-ling`. Needless to say that in such a situation an explicit identifier would be a better choice.
 
-Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, `[@llast c]` will refer to the third sub-example of the last-but-one example. Formatted this will look like this: [@llast c], smile! However, note that the "c" has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like `[@llast hA1l0]` will work also, leading to [@llast haAl0] when formatted (which is of course nonsensical).
+Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, `[@lllast c]` will refer to the third sub-example of the last-but-two example. Formatted this will look like this: [@lllast c], smile! However, note that the "c" has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like `[@last hA1l0]` will work also, leading to [@last hA1l0] when formatted (which is of course nonsensical).
 
 For exports that include attributes (like html), the examples have an explicit id of the form `ex:NUMBER` in which `NUMBER` is the actual number as given in the formatted output. This means that it is possible to refer to an example on any web-page by using the hash-mechanism to refer to a part of the web-page. For example `#ex:4.7` at can be used to refer to the seventh example in the html-output of this readme (try [this link](https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html#ex:4.7)). The id in this example has a chapter number '4' because in the html conversion I have set the option `addChapterNumber` to `true`. (Note: when numbers restart the count in each chapter with the option `restartAtChapter`, then the id is of the form `ex:CHAPTER.NUMBER`. This is necessary to resolve clashing ids, as the same number might then be used in different chapters.)
 

@@ -1,5 +1,7 @@
 # pandoc-ling 1.4
 
+- adding option to use bullet lists for example entry. Will still be transformed into labelled list.
+
 ## bugs
 
 - gb4e error prevented by adding `\noautomath` to preamble
