@@ -4,7 +4,8 @@
 
 ## bugs
 
-- gb4e error prevented by adding `\noautomath` to preamble
+- fixed gb4e error prevented by adding `\noautomath` to preamble
+- fixed gb4e error with cross-referencing because of wrong placement of `\label` statement
 
 # pandoc-ling 1.3.1
 

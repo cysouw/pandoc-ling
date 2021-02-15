@@ -1199,7 +1199,7 @@ function texMakeGb4e (parsedDiv)
   end
 
   -- build Latex code starting with preamble and adding rest to it
-    texFront("\\begin{samepage}\n\\begin{exe} "..judgeOffset.." \\label{"..ID.."} \n  \\ex ", preamble)
+    texFront("\\begin{samepage}\n\\begin{exe} "..judgeOffset.."\n  \\ex ", preamble)
 
   for i=1,#kind do
     if kind[i] == "single" then
@@ -1258,7 +1258,7 @@ function texMakeGb4e (parsedDiv)
     end
   end
   if #kind > 1 then texEnd("\n  \\end{xlist}", preamble) end
-  texEnd("\n\\end{exe}\n\\end{samepage}", preamble)
+  texEnd("\n  \\label{"..ID.."}\n\\end{exe}\n\\end{samepage}", preamble)
   return pandoc.Plain(preamble)
 end
 
