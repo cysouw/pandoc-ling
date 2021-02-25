@@ -1,3 +1,5 @@
+# pandoc-ling 1.5
+
 # pandoc-ling 1.4
 
 - adding option to use bullet lists for example entry. Will still be transformed into labelled list.
@@ -6,13 +8,14 @@
 
 - fixed gb4e error prevented by adding `\noautomath` to preamble
 - fixed gb4e error with cross-referencing because of wrong placement of `\label` statement
+- fixed latex error when using special symbols in judgements (closes #4, thx @CLRafaelR)
 
 # pandoc-ling 1.3.1
 
 ## bugs
 
 - fixed bug with not-appearing header of interlinear in HTML output
-- fixed bug with judgements in single-line examples
+- fixed bug with judgements in single-line examples (closes #3, thx @CLRafaelR)
 
 # pandoc-ling 1.3
 

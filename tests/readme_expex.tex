@@ -594,14 +594,16 @@ will still be formatted as a labelled list.
 \begin{verbatim}
 :::ex
 - This is a lazy example.
-- ^* It should return letters at the start just as before.
+- ^# It should return letters at the start just as before.
+- ^% Also testing some unusual judgements.
 :::
 \end{verbatim}
 
 \begin{samepage}
-\pex[*=*]<ex:12> 
+\pex[*=\#]<ex:12> 
   \a This is a lazy example.
-  \a \ljudge{*}It should return letters at the start just as before.
+  \a \ljudge{\#}It should return letters at the start just as before.
+  \a \ljudge{\%}Also testing some unusual judgements.
 \xe
 \end{samepage}
 

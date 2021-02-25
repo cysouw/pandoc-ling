@@ -608,16 +608,18 @@ will still be formatted as a labelled list.
 \begin{verbatim}
 :::ex
 - This is a lazy example.
-- ^* It should return letters at the start just as before.
+- ^# It should return letters at the start just as before.
+- ^% Also testing some unusual judgements.
 :::
 \end{verbatim}
 
 \begin{samepage}
-\begin{exe} \judgewidth{*}
+\begin{exe} \judgewidth{\#}
   \ex 
   \begin{xlist}
   \ex [] { This is a lazy example. }
-  \ex [*] { It should return letters at the start just as before. }
+  \ex [\#] { It should return letters at the start just as before. }
+  \ex [\%] { Also testing some unusual judgements. }
   \end{xlist}
   \label{ex:4.12}
 \end{exe}

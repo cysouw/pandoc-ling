@@ -200,7 +200,8 @@ For the lazy writers among us, it is also possible to use a simple bullet list i
 ```
 :::ex
 - This is a lazy example.
-- ^* It should return letters at the start just as before.
+- ^# It should return letters at the start just as before.
+- ^% Also testing some unusual judgements.
 :::
 ```
 

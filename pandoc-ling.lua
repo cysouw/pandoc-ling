@@ -910,7 +910,6 @@ end
 
 --------------------------
 -- make markup in Latex
--- using langsci-gb4e
 --------------------------
 
 -- convenience functions for Latex
@@ -991,7 +990,7 @@ function texMakeExpex (parsedDiv)
       judgeMax = judgements[i]
     end
   end
-  local judgeOffset = "[*="..pandoc.utils.stringify(judgeMax).."]"
+  local judgeOffset = "[*="..string.gsub(pandoc.utils.stringify(judgeMax), "([#$%&_{}~^])", "\\%1").."]"
 
   for i=1,#kind do
     if judgements[i] == nil then 
@@ -1186,7 +1185,7 @@ function texMakeGb4e (parsedDiv)
       judgeMax = judgements[i]
     end
   end
-  local judgeOffset = "\\judgewidth{"..pandoc.utils.stringify(judgeMax).."}"
+  local judgeOffset = "\\judgewidth{"..string.gsub(pandoc.utils.stringify(judgeMax), "([#$%&_{}~^])", "\\%1").."}"
 
   for i=1,#kind do
     if judgements[i] == nil then 
@@ -1287,7 +1286,7 @@ function texMakeLangsci (parsedDiv)
       judgeMax = judgements[i]
     end
   end
-  local judgeOffset = "\\judgewidth{"..pandoc.utils.stringify(judgeMax).."}"
+  local judgeOffset = "\\judgewidth{"..string.gsub(pandoc.utils.stringify(judgeMax), "([#$%&_{}~^])", "\\%1").."}"
 
   for i=1,#kind do
     if judgements[i] == nil then
