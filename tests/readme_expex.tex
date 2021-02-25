@@ -146,15 +146,15 @@ extension will not magically allow you to write every linguistic example
 thinkable, but my guess is that in practice the present proposal covers
 the majority of situations in linguistic publications (think 90\%-plus).
 As an example (and test case) I have included automatic conversions into
-various formats in this repository (chech them in the directory
-\texttt{tests} out to get an idea of the strengths and weaknesses of the
+various formats in this repository (chech them out in the directory
+\texttt{tests} to get an idea of the strengths and weaknesses of the
 current implementation).
 
 \hypertarget{the-basic-structure-of-a-linguistic-example}{%
 \section{The basic structure of a linguistic
 example}\label{the-basic-structure-of-a-linguistic-example}}
 
-Basically, a linguistic examples consists of 6 possible building blocks,
+Basically, a linguistic example consists of 6 possible building blocks,
 of which only the number and at least one example line are necessary.
 The space between the building blocks is kept as minimal as possible
 without becoming cramped. When (optional) building blocks are not
@@ -425,7 +425,28 @@ over various lines in the output.
 \xe
 \end{samepage}
 
-Just for testing: a simple example with a judgement
+For the lazy writers among us, it is also possible to use a simple
+bullet list instead of a labelled list. Note that the listed elements
+will still be formatted as a labelled list.
+
+\begin{verbatim}
+:::ex
+- This is a lazy example.
+- ^# It should return letters at the start just as before.
+- ^% Also testing some unusual judgements.
+:::
+\end{verbatim}
+
+\begin{samepage}
+\pex[*=\#]<ex:8> 
+  \a This is a lazy example.
+  \a \ljudge{\#}It should return letters at the start just as before.
+  \a \ljudge{\%}Also testing some unusual judgements.
+\xe
+\end{samepage}
+
+Just for testing: a single example with a judgement (which resulted in
+an error in earlier versions).
 
 \begin{verbatim}
 ::: ex
@@ -434,7 +455,7 @@ Just for testing: a simple example with a judgement
 \end{verbatim}
 
 \begin{samepage}
-\ex<ex:8> 
+\ex<ex:9> 
   
   \judge{*} This traditionally signals ungrammaticality.
 \xe
@@ -465,7 +486,7 @@ character \texttt{U+00A0}).
 \end{verbatim}
 
 \begin{samepage}
-\ex[*=]<ex:9> 
+\ex[*=]<ex:10> 
   \begingl
   \glpreamble Dutch (Germanic)//
   \gla Deze zin is in het nederlands. //
@@ -508,7 +529,7 @@ An attempt is made to format interlinear examples when the option
 \end{verbatim}
 
 \begin{samepage}
-\ex[*=]<ex:10> 
+\ex[*=]<ex:11> 
   \begingl
   \glpreamble Dutch (Germanic)//
   \gla \emph{Deze} \emph{zin} \emph{is} \emph{in} \emph{het}
@@ -563,7 +584,7 @@ b.
 \end{verbatim}
 
 \begin{samepage}
-\pex[*=:–)]<ex:11> Completely superfluous preamble, but it works
+\pex[*=:–)]<ex:12> Completely superfluous preamble, but it works
 \ldots{}\\
   \a Mixing single line examples with interlinear examples.
   \a This is of course highly unusal. Just for this example, let's add
@@ -584,26 +605,6 @@ some extra material in this example.
 header. //
   \glft `This second sentence does not have a header.'//
   \endgl
-\xe
-\end{samepage}
-
-For the lazy writers among us, it is also possible to use a simple
-bullet list instead of a labelled list. Note that the listed elements
-will still be formatted as a labelled list.
-
-\begin{verbatim}
-:::ex
-- This is a lazy example.
-- ^# It should return letters at the start just as before.
-- ^% Also testing some unusual judgements.
-:::
-\end{verbatim}
-
-\begin{samepage}
-\pex[*=\#]<ex:12> 
-  \a This is a lazy example.
-  \a \ljudge{\#}It should return letters at the start just as before.
-  \a \ljudge{\%}Also testing some unusual judgements.
 \xe
 \end{samepage}
 

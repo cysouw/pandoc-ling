@@ -17,11 +17,11 @@ In the field of linguistics there is an outspoken tradition to format example se
 
 Any such conversion between text-formats naturally never works perfectly: every text-format has specific features that are not transferable to other formats. A central goal of Pandoc (at least in my interpretation) is to define a set of shared concepts for text-structure (a 'common denominator' if you will, but surely not 'least'!) that can then be mapped to other formats. In many ways, Pandoc tries (again) to define a set of logical concepts for text structure ('semantic markup'), which can then be formatted by your favourite typesetter. As long as you stay inside the realm of this 'common denominator' (in practice that means Pandoc's extended version of Markdown/CommonMark), conversion works reasonably well (think 90%-plus). 
 
-Building on John Gruber's [Markdown philosophy](https://daringfireball.net/projects/markdown/syntax), there is a strong urge here to learn to restrain oneself while writing, and try to restrict the number of layout-possibilities to a minimum. In this sense, with `pandoc-ling` I propose a Markdown-structure for linguistic examples that is simple, easy to type, easy to read, and portable through the Pandoc universe by way of an extension mechanism of Pandoc, called a 'Pandoc Lua Filter'. This extension will not magically allow you to write every linguistic example thinkable, but my guess is that in practice the present proposal covers the majority of situations in linguistic publications (think 90%-plus). As an example (and test case) I have included automatic conversions into various formats in this repository (chech them in the directory `tests` out to get an idea of the strengths and weaknesses of the current implementation).
+Building on John Gruber's [Markdown philosophy](https://daringfireball.net/projects/markdown/syntax), there is a strong urge here to learn to restrain oneself while writing, and try to restrict the number of layout-possibilities to a minimum. In this sense, with `pandoc-ling` I propose a Markdown-structure for linguistic examples that is simple, easy to type, easy to read, and portable through the Pandoc universe by way of an extension mechanism of Pandoc, called a 'Pandoc Lua Filter'. This extension will not magically allow you to write every linguistic example thinkable, but my guess is that in practice the present proposal covers the majority of situations in linguistic publications (think 90%-plus). As an example (and test case) I have included automatic conversions into various formats in this repository (chech them out in the directory `tests` to get an idea of the strengths and weaknesses of the current implementation).
 
 # The basic structure of a linguistic example
 
-Basically, a linguistic examples consists of 6 possible building blocks, of which only the number and at least one example line are necessary. The space between the building blocks is kept as minimal as possible without becoming cramped. When (optional) building blocks are not included, then the other blocks shift left and up (only exception: a preamble without labels is not shifted left completely, but left-aligned with the example, not with the judgement).
+Basically, a linguistic example consists of 6 possible building blocks, of which only the number and at least one example line are necessary. The space between the building blocks is kept as minimal as possible without becoming cramped. When (optional) building blocks are not included, then the other blocks shift left and up (only exception: a preamble without labels is not shifted left completely, but left-aligned with the example, not with the judgement).
 
 - **Number**: Running tally of all examples in the work, possibly restarting at chapters or other major headings. Typically between round brackets, possibly with a chapter number added before in long works, e.g. example (7.26). Aligned top-left, typically left-aligned to main text margin.
 - **Preamble**: Optional information about the content/kind of example. Aligned top-left: to the top with the number, to the left with the (optional) label. When there is no label, then preamble is aligned with the example, not with the judgment.
@@ -127,7 +127,17 @@ that should go over various lines in the output.
 :::
 ```
 
-Just for testing: a simple example with a judgement
+For the lazy writers among us, it is also possible to use a simple bullet list instead of a labelled list. Note that the listed elements will still be formatted as a labelled list.
+
+```
+:::ex
+- This is a lazy example.
+- ^# It should return letters at the start just as before.
+- ^% Also testing some unusual judgements.
+:::
+```
+
+Just for testing: a single example with a judgement (which resulted in an error in earlier versions).
 
 ```
 ::: ex
@@ -192,16 +202,6 @@ b.
 | Deze tweede zin heeft geen header.
 | DEM second sentence have.3SG.PRES no header.
 | This second sentence does not have a header.
-:::
-```
-
-For the lazy writers among us, it is also possible to use a simple bullet list instead of a labelled list. Note that the listed elements will still be formatted as a labelled list.
-
-```
-:::ex
-- This is a lazy example.
-- ^# It should return letters at the start just as before.
-- ^% Also testing some unusual judgements.
 :::
 ```
 

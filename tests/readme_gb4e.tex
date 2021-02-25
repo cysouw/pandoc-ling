@@ -144,15 +144,15 @@ extension will not magically allow you to write every linguistic example
 thinkable, but my guess is that in practice the present proposal covers
 the majority of situations in linguistic publications (think 90\%-plus).
 As an example (and test case) I have included automatic conversions into
-various formats in this repository (chech them in the directory
-\texttt{tests} out to get an idea of the strengths and weaknesses of the
+various formats in this repository (chech them out in the directory
+\texttt{tests} to get an idea of the strengths and weaknesses of the
 current implementation).
 
 \hypertarget{the-basic-structure-of-a-linguistic-example}{%
 \section{The basic structure of a linguistic
 example}\label{the-basic-structure-of-a-linguistic-example}}
 
-Basically, a linguistic examples consists of 6 possible building blocks,
+Basically, a linguistic example consists of 6 possible building blocks,
 of which only the number and at least one example line are necessary.
 The space between the building blocks is kept as minimal as possible
 without becoming cramped. When (optional) building blocks are not
@@ -440,7 +440,32 @@ over various lines in the output. }
 \end{exe}
 \end{samepage}
 
-Just for testing: a simple example with a judgement
+For the lazy writers among us, it is also possible to use a simple
+bullet list instead of a labelled list. Note that the listed elements
+will still be formatted as a labelled list.
+
+\begin{verbatim}
+:::ex
+- This is a lazy example.
+- ^# It should return letters at the start just as before.
+- ^% Also testing some unusual judgements.
+:::
+\end{verbatim}
+
+\begin{samepage}
+\begin{exe} \judgewidth{\#}
+  \ex 
+  \begin{xlist}
+  \ex [] { This is a lazy example. }
+  \ex [\#] { It should return letters at the start just as before. }
+  \ex [\%] { Also testing some unusual judgements. }
+  \end{xlist}
+  \label{ex:4.8}
+\end{exe}
+\end{samepage}
+
+Just for testing: a single example with a judgement (which resulted in
+an error in earlier versions).
 
 \begin{verbatim}
 ::: ex
@@ -451,7 +476,7 @@ Just for testing: a simple example with a judgement
 \begin{samepage}
 \begin{exe} \judgewidth{*}
   \ex [*] { This traditionally signals ungrammaticality. }
-  \label{ex:4.8}
+  \label{ex:4.9}
 \end{exe}
 \end{samepage}
 
@@ -486,7 +511,7 @@ character \texttt{U+00A0}).
   \gll Deze zin is in het nederlands. \\
        DEM sentence AUX in DET dutch. \\
   \glt This sentence is dutch. }
-  \label{ex:4.9}
+  \label{ex:4.10}
 \end{exe}
 \end{samepage}
 
@@ -530,7 +555,7 @@ An attempt is made to format interlinear examples when the option
 \emph{nederlands.} \\
        \textsc{dem} sentence \textsc{aux} in \textsc{det} dutch. \\
   \glt `This sentence is dutch.' }
-  \label{ex:4.10}
+  \label{ex:4.11}
 \end{exe}
 \end{samepage}
 
@@ -596,30 +621,6 @@ add some extra material in this example. }
        \textsc{dem} second sentence have.\textsc{3sg}.\textsc{pres} no
 header. \\
   \glt `This second sentence does not have a header.' }
-  \end{xlist}
-  \label{ex:4.11}
-\end{exe}
-\end{samepage}
-
-For the lazy writers among us, it is also possible to use a simple
-bullet list instead of a labelled list. Note that the listed elements
-will still be formatted as a labelled list.
-
-\begin{verbatim}
-:::ex
-- This is a lazy example.
-- ^# It should return letters at the start just as before.
-- ^% Also testing some unusual judgements.
-:::
-\end{verbatim}
-
-\begin{samepage}
-\begin{exe} \judgewidth{\#}
-  \ex 
-  \begin{xlist}
-  \ex [] { This is a lazy example. }
-  \ex [\#] { It should return letters at the start just as before. }
-  \ex [\%] { Also testing some unusual judgements. }
   \end{xlist}
   \label{ex:4.12}
 \end{exe}

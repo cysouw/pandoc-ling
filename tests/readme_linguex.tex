@@ -145,15 +145,15 @@ extension will not magically allow you to write every linguistic example
 thinkable, but my guess is that in practice the present proposal covers
 the majority of situations in linguistic publications (think 90\%-plus).
 As an example (and test case) I have included automatic conversions into
-various formats in this repository (chech them in the directory
-\texttt{tests} out to get an idea of the strengths and weaknesses of the
+various formats in this repository (chech them out in the directory
+\texttt{tests} to get an idea of the strengths and weaknesses of the
 current implementation).
 
 \hypertarget{the-basic-structure-of-a-linguistic-example}{%
 \section{The basic structure of a linguistic
 example}\label{the-basic-structure-of-a-linguistic-example}}
 
-Basically, a linguistic examples consists of 6 possible building blocks,
+Basically, a linguistic example consists of 6 possible building blocks,
 of which only the number and at least one example line are necessary.
 The space between the building blocks is kept as minimal as possible
 without becoming cramped. When (optional) building blocks are not
@@ -430,7 +430,29 @@ various lines in the output.
 
 \end{samepage}
 
-Just for testing: a simple example with a judgement
+For the lazy writers among us, it is also possible to use a simple
+bullet list instead of a labelled list. Note that the listed elements
+will still be formatted as a labelled list.
+
+\begin{verbatim}
+:::ex
+- This is a lazy example.
+- ^# It should return letters at the start just as before.
+- ^% Also testing some unusual judgements.
+:::
+\end{verbatim}
+
+\begin{samepage}
+
+\ex. \label{ex:4.8} 
+  \a. This is a lazy example.
+  \b. \#It should return letters at the start just as before.
+  \b. \%Also testing some unusual judgements.
+
+\end{samepage}
+
+Just for testing: a single example with a judgement (which resulted in
+an error in earlier versions).
 
 \begin{verbatim}
 ::: ex
@@ -440,7 +462,7 @@ Just for testing: a simple example with a judgement
 
 \begin{samepage}
 
-\ex. \label{ex:4.8} 
+\ex. \label{ex:4.9} 
   *This traditionally signals ungrammaticality.
 
 \end{samepage}
@@ -471,7 +493,7 @@ character \texttt{U+00A0}).
 
 \begin{samepage}
 
-\ex. \label{ex:4.9} 
+\ex. \label{ex:4.10} 
   Dutch (Germanic)
   \gll Deze zin is in het nederlands. \\
        DEM sentence AUX in DET dutch. \\
@@ -513,7 +535,7 @@ An attempt is made to format interlinear examples when the option
 
 \begin{samepage}
 
-\ex. \label{ex:4.10} 
+\ex. \label{ex:4.11} 
   Dutch (Germanic)
   \gll \emph{Deze} \emph{zin} \emph{is} \emph{in} \emph{het}
 \emph{nederlands.} \\
@@ -567,7 +589,7 @@ b.
 
 \begin{samepage}
 
-\ex. \label{ex:4.11} Completely superfluous preamble, but it works
+\ex. \label{ex:4.12} Completely superfluous preamble, but it works
 \ldots{}
   \a. Mixing single line examples with interlinear examples.
   \b. This is of course highly unusal. Just for this example, let's add
@@ -583,27 +605,6 @@ some extra material in this example.
        \textsc{dem} second sentence have.\textsc{3sg}.\textsc{pres} no
 header. \\
   \glt `This second sentence does not have a header.'
-
-\end{samepage}
-
-For the lazy writers among us, it is also possible to use a simple
-bullet list instead of a labelled list. Note that the listed elements
-will still be formatted as a labelled list.
-
-\begin{verbatim}
-:::ex
-- This is a lazy example.
-- ^# It should return letters at the start just as before.
-- ^% Also testing some unusual judgements.
-:::
-\end{verbatim}
-
-\begin{samepage}
-
-\ex. \label{ex:4.12} 
-  \a. This is a lazy example.
-  \b. \#It should return letters at the start just as before.
-  \b. \%Also testing some unusual judgements.
 
 \end{samepage}
 
