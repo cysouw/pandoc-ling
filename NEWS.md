@@ -1,5 +1,9 @@
 # pandoc-ling 1.5
 
+## bugs
+
+- handling of `header-includes` improved: additional user-provided statements are just passed through.
+
 # pandoc-ling 1.4
 
 - adding option to use bullet lists for example entry. Will still be transformed into labelled list.

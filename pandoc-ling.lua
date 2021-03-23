@@ -77,11 +77,7 @@ end
 ------------------------------------------
 
 function addFormatting (meta)
-  local tmp = meta['header-includes'] or pandoc.MetaList{meta['header-includes']}
-  
-  local function add (s)
-    tmp[#tmp+1] = pandoc.MetaBlocks(pandoc.RawBlock("tex", s))
-  end
+  local tmp = pandoc.MetaList{meta['header-includes']} or meta['header-includes']
 
   if FORMAT:match "html" then
     -- add specific CSS for layout of examples
@@ -123,6 +119,10 @@ function addFormatting (meta)
       ]]
     tmp[#tmp+1] = pandoc.MetaBlocks(pandoc.RawBlock("html", css))
     meta['header-includes'] = tmp
+  end
+  
+  local function add (s)
+    tmp[#tmp+1] = pandoc.MetaBlocks(pandoc.RawBlock("tex", s))
   end
   
   if FORMAT:match "latex" or FORMAT:match "beamer" then
