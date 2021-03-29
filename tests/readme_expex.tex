@@ -101,9 +101,8 @@ tl;dr
   Export to (almost) any format of your wishes for final polishing.
 \item
   As an example, check out this readme in
-  \href{https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html}{HTML}
-  or
-  \href{https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme_gb4e.pdf}{Latex}.
+  \href{https://cysouw.github.io/readme.html}{HTML} or
+  \href{https://cysouw.github.io/readme_gb4e.pdf}{Latex}.
 \end{itemize}
 
 \hypertarget{rationale}{%
@@ -275,7 +274,7 @@ This is the most basic structure of a linguistic example.
 \end{verbatim}
 
 \begin{samepage}
-\ex<ex:1> 
+\ex<ex1> 
   This is the most basic structure of a linguistic example.
 \xe
 \end{samepage}
@@ -320,7 +319,7 @@ This is an example with a preamble.
 \end{verbatim}
 
 \begin{samepage}
-\ex<ex:3> Preamble\\
+\ex<ex3> Preamble\\
   This is an example with a preamble.
 \xe
 \end{samepage}
@@ -343,7 +342,7 @@ Subsequent lines are again treated as one sequential paragraph.
 \end{verbatim}
 
 \begin{samepage}
-\pex[*=]<ex:4> 
+\pex[*=]<ex4> 
   \a This is the first example.
   \a This is the second.
   \a The actual letters are not important, \texttt{pandoc-ling} will put
@@ -366,7 +365,7 @@ c. three
 \end{verbatim}
 
 \begin{samepage}
-\pex[*=]<ex:5> Any nice description here\\
+\pex[*=]<ex5> Any nice description here\\
   \a one example sentence.
   \a two
   \a three
@@ -392,7 +391,7 @@ d. However, such long sequences sometimes lead to undesirable effects in the lay
 \end{verbatim}
 
 \begin{samepage}
-\pex[*=whynot?]<ex:6> Throwing in a preamble for good measure\\
+\pex[*=whynot?]<ex6> Throwing in a preamble for good measure\\
   \a \ljudge{*}This traditionally signals ungrammaticality.
   \a \ljudge{?}Question-marks indicate questionable grammaticality.
   \a \ljudge{\textsuperscript{whynot?}}But in principle any sequence can
@@ -417,7 +416,7 @@ that should go over various lines in the output.
 \end{verbatim}
 
 \begin{samepage}
-\ex<ex:7> Here is a special case with a preamble\\
+\ex<ex7> Here is a special case with a preamble\\
   
   \judge{\textsuperscript{???}} With a singly questionably example. Note
 the alignment! Especially with this very long example that should go
@@ -438,7 +437,7 @@ will still be formatted as a labelled list.
 \end{verbatim}
 
 \begin{samepage}
-\pex[*=\#]<ex:8> 
+\pex[*=\#]<ex8> 
   \a This is a lazy example.
   \a \ljudge{\#}It should return letters at the start just as before.
   \a \ljudge{\%}Also testing some unusual judgements.
@@ -455,7 +454,7 @@ an error in earlier versions).
 \end{verbatim}
 
 \begin{samepage}
-\ex<ex:9> 
+\ex<ex9> 
   
   \judge{*} This traditionally signals ungrammaticality.
 \xe
@@ -486,7 +485,7 @@ character \texttt{U+00A0}).
 \end{verbatim}
 
 \begin{samepage}
-\ex[*=]<ex:10> 
+\ex[*=]<ex10> 
   \begingl
   \glpreamble Dutch (Germanic)//
   \gla Deze zin is in het nederlands. //
@@ -529,7 +528,7 @@ An attempt is made to format interlinear examples when the option
 \end{verbatim}
 
 \begin{samepage}
-\ex[*=]<ex:11> 
+\ex[*=]<ex11> 
   \begingl
   \glpreamble Dutch (Germanic)//
   \gla \emph{Deze} \emph{zin} \emph{is} \emph{in} \emph{het}
@@ -584,7 +583,7 @@ b.
 \end{verbatim}
 
 \begin{samepage}
-\pex[*=:–)]<ex:12> Completely superfluous preamble, but it works
+\pex[*=:–)]<ex12> Completely superfluous preamble, but it works
 \ldots{}\\
   \a Mixing single line examples with interlinear examples.
   \a This is of course highly unusal. Just for this example, let's add
@@ -640,46 +639,44 @@ doubling the first letters to \texttt{nnext} or \texttt{llast} reference
 to the next/last-but-one can be made. Actually, the number of starting
 letters can be repeated at will in \texttt{pandoc-ling}, so something
 like \texttt{{[}@llllllllast{]}} will also work. It will be formatted as
-(\getref{ex:6}) after the processing of \texttt{pandoc-ling}. Needless
-to say that in such a situation an explicit identifier would be a better
+(\getref{ex6}) after the processing of \texttt{pandoc-ling}. Needless to
+say that in such a situation an explicit identifier would be a better
 choice.
 
 Referring to sub-examples can be done by manually adding a suffix into
 the cross reference, simply separated from the identifier by a space.
 For example, \texttt{{[}@lllast~c{]}} will refer to the third
 sub-example of the last-but-two example. Formatted this will look like
-this: (\getref{ex:11}\,c), smile! However, note that the ``c'' has to be
+this: (\getref{ex11}\,c), smile! However, note that the ``c'' has to be
 manually determined. It is simply a literal suffix that will be copied
 into the cross-reference. Something like \texttt{{[}@last\ hA1l0{]}}
 will work also, leading to (\getref{test}\,hA1l0) when formatted (which
 is of course nonsensical).
 
 For exports that include attributes (like html), the examples have an
-explicit id of the form \texttt{ex:NUMBER} in which \texttt{NUMBER} is
+explicit id of the form \texttt{exNUMBER} in which \texttt{NUMBER} is
 the actual number as given in the formatted output. This means that it
 is possible to refer to an example on any web-page by using the
 hash-mechanism to refer to a part of the web-page. For example
-\texttt{\#ex:4.7} at can be used to refer to the seventh example in the
+\texttt{\#ex4.7} at can be used to refer to the seventh example in the
 html-output of this readme (try
-\href{https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html\#ex:4.7}{this
-link}). The id in this example has a chapter number `4' because in the
-html conversion I have set the option \texttt{addChapterNumber} to
-\texttt{true}. (Note: when numbers restart the count in each chapter
-with the option \texttt{restartAtChapter}, then the id is of the form
-\texttt{ex:CHAPTER.NUMBER}. This is necessary to resolve clashing ids,
-as the same number might then be used in different chapters.)
+\href{https://cysouw.github.io/readme.html\#ex4.7}{this link}). The id
+in this example has a chapter number `4' because in the html conversion
+I have set the option \texttt{addChapterNumber} to \texttt{true}. (Note:
+when numbers restart the count in each chapter with the option
+\texttt{restartAtChapter}, then the id is of the form
+\texttt{exCHAPTER.NUMBER}. This is necessary to resolve clashing ids, as
+the same number might then be used in different chapters.)
 
 I propose to use these ids also to refer to examples in citations when
-writing scholarly papers, e.g.~(Cysouw 2012: \#ex:7), independent of
+writing scholarly papers, e.g.~(Cysouw 2021: \#ex7), independent of
 whether the links actually resolve. In principle, such citations could
 easily be resolved when online publications are properly prepared. The
 same proposal could also work for other parts of research papers, for
-example using tags like \texttt{\#sec,\ \#fig,\ \#tab,\ \#eq}. To refer
-to paragraphs (which should replace page numbers in a future of adaptive
-design), I propose to use no tag, but directly add the number to the
-hash (see the Pandoc filter
-\href{https://github.com/cysouw/count-para}{count-para} for a practical
-mechanism to add such numbering).
+example using tags like \texttt{\#sec,\ \#fig,\ \#tab,\ \#eq} (see the
+Pandoc filter
+\href{https://github.com/cysouw/count-para}{\texttt{crossref-adapt{]}(https://github.com/cysouw/crossref-adapt)).\ To\ refer\ to\ paragraphs\ (which\ should\ replace\ page\ numbers\ in\ a\ future\ of\ adaptive\ design),\ I\ propose\ to\ use\ no\ tag,\ but\ directly\ add\ the\ number\ to\ the\ hash\ (see\ the\ Pandoc\ filter\ {[}}count-para`}
+for a practical mechanism to add such numbering).
 
 \hypertarget{options-of-pandoc-ling}{%
 \subsection{\texorpdfstring{Options of
@@ -724,7 +721,7 @@ methods to provide metadata (see the link above).
     be set by the Pandoc option \texttt{top-level-division}.
   \item
     The id of each example will now be of the form
-    \texttt{ex:CHAPTER.NUMBER} to resolve any clashes when the same
+    \texttt{exCHAPTER.NUMBER} to resolve any clashes when the same
     number appears in different chapter.
   \item
     Depending on your Latex setup, an explicit entry
@@ -776,7 +773,7 @@ $$\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}$$
 \end{verbatim}
 
 \begin{samepage}
-\ex<ex:14> 
+\ex<ex14> 
   \[\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}\]\\
   
 \xe
@@ -867,9 +864,9 @@ naming of the classes is quite transparent, using the form
 \texttt{linguistic-example-STRUCTURE}.
 
 The whole table is encapsulated in a \texttt{div} with class \texttt{ex}
-and an id of the form \texttt{ex:NUMBER}. This means that an example can
+and an id of the form \texttt{exNUMBER}. This means that an example can
 be directly referred to in web-links by using the hash-mechanism. For
-example, adding \texttt{\#ex:3} to the end of a link will immediately
+example, adding \texttt{\#ex3} to the end of a link will immediately
 jump to this example in a browser.
 
 The current implementation is completely independent from the

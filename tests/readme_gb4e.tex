@@ -99,9 +99,8 @@ tl;dr
   Export to (almost) any format of your wishes for final polishing.
 \item
   As an example, check out this readme in
-  \href{https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html}{HTML}
-  or
-  \href{https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme_gb4e.pdf}{Latex}.
+  \href{https://cysouw.github.io/readme.html}{HTML} or
+  \href{https://cysouw.github.io/readme_gb4e.pdf}{Latex}.
 \end{itemize}
 
 \hypertarget{rationale}{%
@@ -275,7 +274,7 @@ This is the most basic structure of a linguistic example.
 \begin{samepage}
 \begin{exe} \judgewidth{}
   \ex [] { This is the most basic structure of a linguistic example. }
-  \label{ex:4.1}
+  \label{ex4.1}
 \end{exe}
 \end{samepage}
 
@@ -323,7 +322,7 @@ This is an example with a preamble.
 \begin{exe} \judgewidth{}
   \ex Preamble
   \sn [] { This is an example with a preamble. }
-  \label{ex:4.3}
+  \label{ex4.3}
 \end{exe}
 \end{samepage}
 
@@ -355,7 +354,7 @@ will put them in order. }
   \ex [] { Empty lines are allowed between labelled lines Subsequent
 lines are again treated as one sequential paragraph. }
   \end{xlist}
-  \label{ex:4.4}
+  \label{ex4.4}
 \end{exe}
 \end{samepage}
 
@@ -379,7 +378,7 @@ c. three
   \ex [] { two }
   \ex [] { three }
   \end{xlist}
-  \label{ex:4.5}
+  \label{ex4.5}
 \end{exe}
 \end{samepage}
 
@@ -412,7 +411,7 @@ used (here even in superscript). }
   \ex [] { However, such long sequences sometimes lead to undesirable
 effects in the layout. }
   \end{xlist}
-  \label{ex:4.6}
+  \label{ex4.6}
 \end{exe}
 \end{samepage}
 
@@ -436,7 +435,7 @@ that should go over various lines in the output.
   \sn [\textsuperscript{???}] { With a singly questionably example. Note
 the alignment! Especially with this very long example that should go
 over various lines in the output. }
-  \label{ex:4.7}
+  \label{ex4.7}
 \end{exe}
 \end{samepage}
 
@@ -460,7 +459,7 @@ will still be formatted as a labelled list.
   \ex [\#] { It should return letters at the start just as before. }
   \ex [\%] { Also testing some unusual judgements. }
   \end{xlist}
-  \label{ex:4.8}
+  \label{ex4.8}
 \end{exe}
 \end{samepage}
 
@@ -476,7 +475,7 @@ an error in earlier versions).
 \begin{samepage}
 \begin{exe} \judgewidth{*}
   \ex [*] { This traditionally signals ungrammaticality. }
-  \label{ex:4.9}
+  \label{ex4.9}
 \end{exe}
 \end{samepage}
 
@@ -511,7 +510,7 @@ character \texttt{U+00A0}).
   \gll Deze zin is in het nederlands. \\
        DEM sentence AUX in DET dutch. \\
   \glt This sentence is dutch. }
-  \label{ex:4.10}
+  \label{ex4.10}
 \end{exe}
 \end{samepage}
 
@@ -555,7 +554,7 @@ An attempt is made to format interlinear examples when the option
 \emph{nederlands.} \\
        \textsc{dem} sentence \textsc{aux} in \textsc{det} dutch. \\
   \glt `This sentence is dutch.' }
-  \label{ex:4.11}
+  \label{ex4.11}
 \end{exe}
 \end{samepage}
 
@@ -622,7 +621,7 @@ add some extra material in this example. }
 header. \\
   \glt `This second sentence does not have a header.' }
   \end{xlist}
-  \label{ex:4.12}
+  \label{ex4.12}
 \end{exe}
 \end{samepage}
 
@@ -659,7 +658,7 @@ the first letters to \texttt{nnext} or \texttt{llast} reference to the
 next/last-but-one can be made. Actually, the number of starting letters
 can be repeated at will in \texttt{pandoc-ling}, so something like
 \texttt{{[}@llllllllast{]}} will also work. It will be formatted as
-(\ref{ex:4.6}) after the processing of \texttt{pandoc-ling}. Needless to
+(\ref{ex4.6}) after the processing of \texttt{pandoc-ling}. Needless to
 say that in such a situation an explicit identifier would be a better
 choice.
 
@@ -667,38 +666,36 @@ Referring to sub-examples can be done by manually adding a suffix into
 the cross reference, simply separated from the identifier by a space.
 For example, \texttt{{[}@lllast~c{]}} will refer to the third
 sub-example of the last-but-two example. Formatted this will look like
-this: (\ref{ex:4.11}\,c), smile! However, note that the ``c'' has to be
+this: (\ref{ex4.11}\,c), smile! However, note that the ``c'' has to be
 manually determined. It is simply a literal suffix that will be copied
 into the cross-reference. Something like \texttt{{[}@last\ hA1l0{]}}
 will work also, leading to (\ref{test}\,hA1l0) when formatted (which is
 of course nonsensical).
 
 For exports that include attributes (like html), the examples have an
-explicit id of the form \texttt{ex:NUMBER} in which \texttt{NUMBER} is
+explicit id of the form \texttt{exNUMBER} in which \texttt{NUMBER} is
 the actual number as given in the formatted output. This means that it
 is possible to refer to an example on any web-page by using the
 hash-mechanism to refer to a part of the web-page. For example
-\texttt{\#ex:4.7} at can be used to refer to the seventh example in the
+\texttt{\#ex4.7} at can be used to refer to the seventh example in the
 html-output of this readme (try
-\href{https://gitcdn.link/repo/cysouw/pandoc-ling/main/tests/readme.html\#ex:4.7}{this
-link}). The id in this example has a chapter number `4' because in the
-html conversion I have set the option \texttt{addChapterNumber} to
-\texttt{true}. (Note: when numbers restart the count in each chapter
-with the option \texttt{restartAtChapter}, then the id is of the form
-\texttt{ex:CHAPTER.NUMBER}. This is necessary to resolve clashing ids,
-as the same number might then be used in different chapters.)
+\href{https://cysouw.github.io/readme.html\#ex4.7}{this link}). The id
+in this example has a chapter number `4' because in the html conversion
+I have set the option \texttt{addChapterNumber} to \texttt{true}. (Note:
+when numbers restart the count in each chapter with the option
+\texttt{restartAtChapter}, then the id is of the form
+\texttt{exCHAPTER.NUMBER}. This is necessary to resolve clashing ids, as
+the same number might then be used in different chapters.)
 
 I propose to use these ids also to refer to examples in citations when
-writing scholarly papers, e.g.~(Cysouw 2012: \#ex:7), independent of
+writing scholarly papers, e.g.~(Cysouw 2021: \#ex7), independent of
 whether the links actually resolve. In principle, such citations could
 easily be resolved when online publications are properly prepared. The
 same proposal could also work for other parts of research papers, for
-example using tags like \texttt{\#sec,\ \#fig,\ \#tab,\ \#eq}. To refer
-to paragraphs (which should replace page numbers in a future of adaptive
-design), I propose to use no tag, but directly add the number to the
-hash (see the Pandoc filter
-\href{https://github.com/cysouw/count-para}{count-para} for a practical
-mechanism to add such numbering).
+example using tags like \texttt{\#sec,\ \#fig,\ \#tab,\ \#eq} (see the
+Pandoc filter
+\href{https://github.com/cysouw/count-para}{\texttt{crossref-adapt{]}(https://github.com/cysouw/crossref-adapt)).\ To\ refer\ to\ paragraphs\ (which\ should\ replace\ page\ numbers\ in\ a\ future\ of\ adaptive\ design),\ I\ propose\ to\ use\ no\ tag,\ but\ directly\ add\ the\ number\ to\ the\ hash\ (see\ the\ Pandoc\ filter\ {[}}count-para`}
+for a practical mechanism to add such numbering).
 
 \hypertarget{options-of-pandoc-ling}{%
 \subsection{\texorpdfstring{Options of
@@ -743,7 +740,7 @@ methods to provide metadata (see the link above).
     be set by the Pandoc option \texttt{top-level-division}.
   \item
     The id of each example will now be of the form
-    \texttt{ex:CHAPTER.NUMBER} to resolve any clashes when the same
+    \texttt{exCHAPTER.NUMBER} to resolve any clashes when the same
     number appears in different chapter.
   \item
     Depending on your Latex setup, an explicit entry
@@ -798,7 +795,7 @@ $$\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}$$
 \begin{exe} \judgewidth{}
   \ex [] { \[\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}\]\\
    }
-  \label{ex:4.14}
+  \label{ex4.14}
 \end{exe}
 \end{samepage}
 
@@ -887,9 +884,9 @@ naming of the classes is quite transparent, using the form
 \texttt{linguistic-example-STRUCTURE}.
 
 The whole table is encapsulated in a \texttt{div} with class \texttt{ex}
-and an id of the form \texttt{ex:NUMBER}. This means that an example can
+and an id of the form \texttt{exNUMBER}. This means that an example can
 be directly referred to in web-links by using the hash-mechanism. For
-example, adding \texttt{\#ex:3} to the end of a link will immediately
+example, adding \texttt{\#ex3} to the end of a link will immediately
 jump to this example in a browser.
 
 The current implementation is completely independent from the

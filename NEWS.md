@@ -1,10 +1,16 @@
 # pandoc-ling 1.5
 
+## changes
+
+- removing the colon from the internal ID to harmonize the cross-document referencing
+
 ## bugs
 
 - handling of `header-includes` improved: additional user-provided statements are just passed through.
 
 # pandoc-ling 1.4
+
+## changes
 
 - adding option to use bullet lists for example entry. Will still be transformed into labelled list.
 
