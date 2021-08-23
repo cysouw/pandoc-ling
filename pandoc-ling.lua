@@ -760,12 +760,13 @@ function pandocMakeList (parsedDiv, from, to, forceJudge)
   local labels = {}
   for i=from,to do 
     local label = pandoc.Str(string.char(96+i)..".")
-    table.insert(rowContent[i], 1, { pandoc.Plain(label) })
+    table.insert(rowContent[i - from + 1], 1, { pandoc.Plain(label) })
   end
     nCols = nCols + 1
     judgeCol = judgeCol + 1
   -- add preamble
   local preamble = parsedDiv.preamble
+  if from ~= 1 then preamble = nil end
   if preamble ~= nil then
     table.insert(rowContent, 1, {{ preamble }} )
     nRows = nRows + 1
@@ -809,7 +810,8 @@ function pandocMakeMixedList (parsedDiv)
 
   -- mix of interlinear and (groups of) single examples
   -- returns a list of tables
-  local result = {}
+  local result        = {}
+  local isInterlinear = {} -- whether result at index i is an interlinear example
   local resultCount = 1
   local from = 1
 
@@ -820,14 +822,15 @@ function pandocMakeMixedList (parsedDiv)
   for i=1,#judgements do
     judgeSize = math.max(judgeSize, utf8.len(judgements[i]))
   end
-  --if judgeSize > 0 then 
+  -- if judgeSize > 0 then 
     forceJudge = true
-  --end
+  -- end
 
   for i=1,#parsedDiv.kind do
     if parsedDiv.kind[i] == "interlinear" then
       local label = i
-      result[resultCount] = pandocMakeInterlinear(parsedDiv, label, forceJudge)
+      result[resultCount]        = pandocMakeInterlinear(parsedDiv, label, forceJudge)
+      isInterlinear[resultCount] = true
       resultCount = resultCount + 1
     elseif parsedDiv.kind[i] == "single" then
       if i==1 or parsedDiv.kind[i-1] ~= "single" then
@@ -835,7 +838,8 @@ function pandocMakeMixedList (parsedDiv)
       end
       if parsedDiv.kind[i+1] ~= "single" then
         local to = i
-        result[resultCount] = pandocMakeList(parsedDiv, from, to, forceJudge)
+        result[resultCount]        = pandocMakeList(parsedDiv, from, to, forceJudge)
+        isInterlinear[resultCount] = false
         resultCount = resultCount + 1
       end
     end
@@ -853,9 +857,18 @@ function pandocMakeMixedList (parsedDiv)
       pandoc.Plain(spaceForNumber)
     -- For even better alignment, add column-width to judgement column
     -- note: this is probably not portable outside html
-    if forceJudge then
-      result[i].bodies[1].body[2][2][3].attr = 
-        pandoc.Attr(nil, { "linguistic-judgement" }, { width = spaceForJudge.."px"} )
+    if forceJudge  then
+      if isInterlinear[i] then
+        result[i].bodies[1].body[2][2][3].attr = 
+          pandoc.Attr(nil, { "linguistic-judgement" }, { width = spaceForJudge.."px"} )
+      else
+        local row = 1
+        if i == 1 and parsedDiv.preamble ~= nil then
+          row = 2
+        end
+        result[i].bodies[1].body[row][2][3].attr = 
+          pandoc.Attr(nil, { "linguistic-judgement" }, { width = spaceForJudge.."px"} )
+      end
     end
   end
   return result
