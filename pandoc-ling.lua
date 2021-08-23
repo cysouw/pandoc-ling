@@ -832,7 +832,8 @@ function pandocMakeMixedList (parsedDiv)
     elseif parsedDiv.kind[i] == "single" then
       if i==1 or parsedDiv.kind[i-1] ~= "single" then
         from = i
-      elseif parsedDiv.kind[i+1] ~= "single" then
+      end
+      if parsedDiv.kind[i+1] ~= "single" then
         local to = i
         result[resultCount] = pandocMakeList(parsedDiv, from, to, forceJudge)
         resultCount = resultCount + 1
