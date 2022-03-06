@@ -982,7 +982,7 @@ function texMakeExpex (parsedDiv)
       judgeMax = judgements[i]
     end
   end
-  local judgeOffset = "[*="..string.gsub(pandoc.utils.stringify(judgeMax), "([#$%&_{}~^])", "\\%1").."]"
+  local judgeOffset = "[*="..string.gsub(pandoc.utils.stringify(judgeMax), "([#$%%&_{}~^])", "\\%1").."]"
 
   for i=1,#kind do
     if judgements[i] == nil then 
@@ -1177,7 +1177,7 @@ function texMakeGb4e (parsedDiv)
       judgeMax = judgements[i]
     end
   end
-  local judgeOffset = "\\judgewidth{"..string.gsub(pandoc.utils.stringify(judgeMax), "([#$%&_{}~^])", "\\%1").."}"
+  local judgeOffset = "\\judgewidth{"..string.gsub(pandoc.utils.stringify(judgeMax), "([#$%%&_{}~^])", "\\%1").."}"
 
   for i=1,#kind do
     if judgements[i] == nil then 
@@ -1278,7 +1278,7 @@ function texMakeLangsci (parsedDiv)
       judgeMax = judgements[i]
     end
   end
-  local judgeOffset = "\\judgewidth{"..string.gsub(pandoc.utils.stringify(judgeMax), "([#$%&_{}~^])", "\\%1").."}"
+  local judgeOffset = "\\judgewidth{"..string.gsub(pandoc.utils.stringify(judgeMax), "([#$%%&_{}~^])", "\\%1").."}"
 
   for i=1,#kind do
     if judgements[i] == nil then
