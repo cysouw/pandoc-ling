@@ -1,3 +1,5 @@
+# pandoc-ling 1.6
+
 # pandoc-ling 1.5
 
 ## changes
@@ -7,6 +9,7 @@
 ## bugs
 
 - handling of `header-includes` improved: additional user-provided statements are just passed through.
+- various internal changes to match the updated functioning of lua inside pandoc 2.12 and newer.
 
 # pandoc-ling 1.4
 
