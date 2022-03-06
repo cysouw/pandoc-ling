@@ -636,7 +636,7 @@ example has an explicit identifier (like \texttt{\#test} in the next
 example), then a reference can be made to this example with
 \texttt{{[}@test{]}}, leading to (\ref{test}) when formatted (note that
 the formatting does not work on the github website. Please check the
-`tests' subdirectory).
+`docs' subdirectory).
 
 \begin{verbatim}
 ::: {#test .ex}
@@ -666,7 +666,7 @@ Referring to sub-examples can be done by manually adding a suffix into
 the cross reference, simply separated from the identifier by a space.
 For example, \texttt{{[}@lllast~c{]}} will refer to the third
 sub-example of the last-but-two example. Formatted this will look like
-this: (\ref{ex4.11}\,c), smile! However, note that the ``c'' has to be
+this: (\ref{ex4.12}\,c), smile! However, note that the ``c'' has to be
 manually determined. It is simply a literal suffix that will be copied
 into the cross-reference. Something like \texttt{{[}@last\ hA1l0{]}}
 will work also, leading to (\ref{test}\,hA1l0) when formatted (which is
@@ -694,8 +694,12 @@ easily be resolved when online publications are properly prepared. The
 same proposal could also work for other parts of research papers, for
 example using tags like \texttt{\#sec,\ \#fig,\ \#tab,\ \#eq} (see the
 Pandoc filter
-\href{https://github.com/cysouw/count-para}{\texttt{crossref-adapt{]}(https://github.com/cysouw/crossref-adapt)).\ To\ refer\ to\ paragraphs\ (which\ should\ replace\ page\ numbers\ in\ a\ future\ of\ adaptive\ design),\ I\ propose\ to\ use\ no\ tag,\ but\ directly\ add\ the\ number\ to\ the\ hash\ (see\ the\ Pandoc\ filter\ {[}}count-para`}
-for a practical mechanism to add such numbering).
+\href{https://github.com/cysouw/crossref-adapt}{\texttt{crossref-adapt}}).
+To refer to paragraphs (which should replace page numbers in a future of
+adaptive design), I propose to use no tag, but directly add the number
+to the hash (see the Pandoc filter
+\href{https://github.com/cysouw/count-para}{\texttt{count-para}} for a
+practical mechanism to add such numbering).
 
 \hypertarget{options-of-pandoc-ling}{%
 \subsection{\texorpdfstring{Options of

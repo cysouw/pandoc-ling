@@ -13,8 +13,8 @@
 
 for format in html docx epub
 do
-	pandoc ../readme.md -t markdown -L processVerbatim.lua -s | \
-	pandoc -t $format -o readme.$format -L ../pandoc-ling.lua -s -N --toc --mathml -F pandoc-crossref
+	pandoc ../readme.md -t markdown -L processVerbatim.lua -s --wrap=preserve | \
+	pandoc -t $format -o readme.$format -L ../pandoc-ling.lua -s -N --toc --mathml -F pandoc-crossref --wrap=preserve
 done
 
 # various latex variants, both tex and pdf

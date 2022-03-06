@@ -22,7 +22,7 @@
       padding-top: 50px;
       padding-bottom: 50px;
       hyphens: auto;
-      word-wrap: break-word;
+      overflow-wrap: break-word;
       text-rendering: optimizeLegibility;
       font-kerning: normal;
     }
@@ -30,6 +30,9 @@
       body {
         font-size: 0.9em;
         padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
       }
     }
     @media print {
@@ -93,6 +96,7 @@
     pre code {
       padding: 0;
       overflow: visible;
+      overflow-wrap: normal;
     }
     .sourceCode {
      background-color: transparent;
@@ -134,6 +138,12 @@
     #TOC li {
       list-style: none;
     }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
     #TOC a:not(:hover) {
       text-decoration: none;
     }
@@ -144,9 +154,6 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
   </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
   <!-- CSS added by lua-filter 'pandoc-ling' -->
   <style>
   .linguistic-example { 
@@ -178,6 +185,9 @@
   }
   </style>
         
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <header id="title-block-header">
@@ -236,7 +246,8 @@
 </ul></li>
 </ul>
 <figure>
-<img src="figure/ExampleStructure.png" alt="The structure of a linguistic example." /><figcaption aria-hidden="true">The structure of a linguistic example.</figcaption>
+<img src="figure/ExampleStructure.png" alt="The structure of a linguistic example." />
+<figcaption aria-hidden="true">The structure of a linguistic example.</figcaption>
 </figure>
 <p>There are of course much more possibilities to extend the structure of a linguistic examples, like third or fourth subdivisions of labels (often using small roman numerals as a third level) or multiple glossing lines in the interlinear example. Also, the content of the header is sometimes found right-aligned to the right of the interlinear example (language into to the top, reference to the bottom). All such options are currently not supported by <code>pandoc-ling</code>.</p>
 <p>Under the hood, this structure is prepared by <code>pandoc-ling</code> as a table. Tables are reasonably well transcoded to different document formats. Specific layout considerations mostly have to be set manually. Alignment of the text should work in most exports. Some <code>CSS</code> styling is proposed by <code>pandoc-ling</code>, but can of course be overruled. For latex (and beamer) special output is prepared using various available latex packages (see options, below).</p>
@@ -247,13 +258,13 @@
 <pre><code>::: ex
 This is the most basic structure of a linguistic example. 
 :::</code></pre>
+
 <div id="ex4.1">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.1)</td>
-<td style="text-align: left;" class="linguistic-example-content">This is the most basic structure of a linguistic example.</td>
+<td class="linguistic-example-content" style="text-align: left;">This is the most basic structure of a linguistic example.</td>
 </tr>
 </tbody>
 </table>
@@ -267,13 +278,16 @@ All these lines are simply treated as one paragraph.
 They will become one example with one number.
 
 :::</code></pre>
+
 <div id="ex4.2">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.2)</td>
-<td style="text-align: left;" class="linguistic-example-content">This is a multi-line example. But that does not mean anything for the result All these lines are simply treated as one paragraph. They will become one example with one number.</td>
+<td class="linguistic-example-content" style="text-align: left;">This is a multi-line example.
+But that does not mean anything for the result
+All these lines are simply treated as one paragraph.
+They will become one example with one number.</td>
 </tr>
 </tbody>
 </table>
@@ -284,17 +298,17 @@ Preamble
 
 This is an example with a preamble.
 :::</code></pre>
+
 <div id="ex4.3">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.3)</td>
-<td style="text-align: left;" class="linguistic-example-preamble">Preamble</td>
+<td class="linguistic-example-preamble" style="text-align: left;">Preamble</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-content">This is an example with a preamble.</td>
+<td class="linguistic-example-content" style="text-align: left;">This is an example with a preamble.</td>
 </tr>
 </tbody>
 </table>
@@ -308,29 +322,30 @@ a. The actual letters are not important, `pandoc-ling` will put them in order.
 e. Empty lines are allowed between labelled lines
 Subsequent lines are again treated as one sequential paragraph.
 :::</code></pre>
+
 <div id="ex4.4">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.4)</td>
-<td style="text-align: left;" class="linguistic-example-label">a.</td>
-<td style="text-align: left;" class="linguistic-example-content">This is the first example.</td>
+<td class="linguistic-example-label" style="text-align: left;">a.</td>
+<td class="linguistic-example-content" style="text-align: left;">This is the first example.</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">b.</td>
-<td style="text-align: left;" class="linguistic-example-content">This is the second.</td>
+<td class="linguistic-example-label" style="text-align: left;">b.</td>
+<td class="linguistic-example-content" style="text-align: left;">This is the second.</td>
 </tr>
 <tr class="odd">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">c.</td>
-<td style="text-align: left;" class="linguistic-example-content">The actual letters are not important, <code>pandoc-ling</code> will put them in order.</td>
+<td class="linguistic-example-label" style="text-align: left;">c.</td>
+<td class="linguistic-example-content" style="text-align: left;">The actual letters are not important, <code>pandoc-ling</code> will put them in order.</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">d.</td>
-<td style="text-align: left;" class="linguistic-example-content">Empty lines are allowed between labelled lines Subsequent lines are again treated as one sequential paragraph.</td>
+<td class="linguistic-example-label" style="text-align: left;">d.</td>
+<td class="linguistic-example-content" style="text-align: left;">Empty lines are allowed between labelled lines
+Subsequent lines are again treated as one sequential paragraph.</td>
 </tr>
 </tbody>
 </table>
@@ -343,28 +358,28 @@ a. one example sentence.
 b. two
 c. three
 :::</code></pre>
+
 <div id="ex4.5">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.5)</td>
-<td style="text-align: left;" colspan="2" class="linguistic-example-preamble">Any nice description here</td>
+<td colspan="2" class="linguistic-example-preamble" style="text-align: left;">Any nice description here</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">a.</td>
-<td style="text-align: left;" class="linguistic-example-content">one example sentence.</td>
+<td class="linguistic-example-label" style="text-align: left;">a.</td>
+<td class="linguistic-example-content" style="text-align: left;">one example sentence.</td>
 </tr>
 <tr class="odd">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">b.</td>
-<td style="text-align: left;" class="linguistic-example-content">two</td>
+<td class="linguistic-example-label" style="text-align: left;">b.</td>
+<td class="linguistic-example-content" style="text-align: left;">two</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">c.</td>
-<td style="text-align: left;" class="linguistic-example-content">three</td>
+<td class="linguistic-example-label" style="text-align: left;">c.</td>
+<td class="linguistic-example-content" style="text-align: left;">three</td>
 </tr>
 </tbody>
 </table>
@@ -378,37 +393,37 @@ b. ^? Question-marks indicate questionable grammaticality.
 c. ^^whynot?^ But in principle any sequence can be used (here even in superscript).
 d. However, such long sequences sometimes lead to undesirable effects in the layout.
 :::</code></pre>
+
 <div id="ex4.6">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.6)</td>
-<td style="text-align: left;" colspan="3" class="linguistic-example-preamble">Throwing in a preamble for good measure</td>
+<td colspan="3" class="linguistic-example-preamble" style="text-align: left;">Throwing in a preamble for good measure</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">a.</td>
-<td style="text-align: right;" class="linguistic-example-judgement">*</td>
-<td style="text-align: left;" class="linguistic-example-content">This traditionally signals ungrammaticality.</td>
+<td class="linguistic-example-label" style="text-align: left;">a.</td>
+<td class="linguistic-example-judgement" style="text-align: right;">*</td>
+<td class="linguistic-example-content" style="text-align: left;">This traditionally signals ungrammaticality.</td>
 </tr>
 <tr class="odd">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">b.</td>
-<td style="text-align: right;" class="linguistic-example-judgement">?</td>
-<td style="text-align: left;" class="linguistic-example-content">Question-marks indicate questionable grammaticality.</td>
+<td class="linguistic-example-label" style="text-align: left;">b.</td>
+<td class="linguistic-example-judgement" style="text-align: right;">?</td>
+<td class="linguistic-example-content" style="text-align: left;">Question-marks indicate questionable grammaticality.</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">c.</td>
-<td style="text-align: right;" class="linguistic-example-judgement"><sup>whynot?</sup></td>
-<td style="text-align: left;" class="linguistic-example-content">But in principle any sequence can be used (here even in superscript).</td>
+<td class="linguistic-example-label" style="text-align: left;">c.</td>
+<td class="linguistic-example-judgement" style="text-align: right;"><sup>whynot?</sup></td>
+<td class="linguistic-example-content" style="text-align: left;">But in principle any sequence can be used (here even in superscript).</td>
 </tr>
 <tr class="odd">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">d.</td>
-<td style="text-align: right;" class="linguistic-example-judgement"></td>
-<td style="text-align: left;" class="linguistic-example-content">However, such long sequences sometimes lead to undesirable effects in the layout.</td>
+<td class="linguistic-example-label" style="text-align: left;">d.</td>
+<td class="linguistic-example-judgement" style="text-align: right;"></td>
+<td class="linguistic-example-content" style="text-align: left;">However, such long sequences sometimes lead to undesirable effects in the layout.</td>
 </tr>
 </tbody>
 </table>
@@ -421,19 +436,21 @@ Here is a special case with a preamble
 Note the alignment! Especially with this very long example
 that should go over various lines in the output.
 :::</code></pre>
+
 <div id="ex4.7">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.7)</td>
 <td style="text-align: right;"></td>
-<td style="text-align: left;" class="linguistic-example-preamble">Here is a special case with a preamble</td>
+<td class="linguistic-example-preamble" style="text-align: left;">Here is a special case with a preamble</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: right;" class="linguistic-example-judgement"><sup>???</sup></td>
-<td style="text-align: left;" class="linguistic-example-content">With a singly questionably example. Note the alignment! Especially with this very long example that should go over various lines in the output.</td>
+<td class="linguistic-example-judgement" style="text-align: right;"><sup>???</sup></td>
+<td class="linguistic-example-content" style="text-align: left;">With a singly questionably example.
+Note the alignment! Especially with this very long example
+that should go over various lines in the output.</td>
 </tr>
 </tbody>
 </table>
@@ -444,27 +461,27 @@ that should go over various lines in the output.
 - ^# It should return letters at the start just as before.
 - ^% Also testing some unusual judgements.
 :::</code></pre>
+
 <div id="ex4.8">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.8)</td>
-<td style="text-align: left;" class="linguistic-example-label">a.</td>
-<td style="text-align: right;" class="linguistic-example-judgement"></td>
-<td style="text-align: left;" class="linguistic-example-content">This is a lazy example.</td>
+<td class="linguistic-example-label" style="text-align: left;">a.</td>
+<td class="linguistic-example-judgement" style="text-align: right;"></td>
+<td class="linguistic-example-content" style="text-align: left;">This is a lazy example.</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">b.</td>
-<td style="text-align: right;" class="linguistic-example-judgement">#</td>
-<td style="text-align: left;" class="linguistic-example-content">It should return letters at the start just as before.</td>
+<td class="linguistic-example-label" style="text-align: left;">b.</td>
+<td class="linguistic-example-judgement" style="text-align: right;">#</td>
+<td class="linguistic-example-content" style="text-align: left;">It should return letters at the start just as before.</td>
 </tr>
 <tr class="odd">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">c.</td>
-<td style="text-align: right;" class="linguistic-example-judgement">%</td>
-<td style="text-align: left;" class="linguistic-example-content">Also testing some unusual judgements.</td>
+<td class="linguistic-example-label" style="text-align: left;">c.</td>
+<td class="linguistic-example-judgement" style="text-align: right;">%</td>
+<td class="linguistic-example-content" style="text-align: left;">Also testing some unusual judgements.</td>
 </tr>
 </tbody>
 </table>
@@ -473,14 +490,14 @@ that should go over various lines in the output.
 <pre><code>::: ex
 ^* This traditionally signals ungrammaticality.
 :::</code></pre>
+
 <div id="ex4.9">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.9)</td>
-<td style="text-align: right;" class="linguistic-example-judgement">*</td>
-<td style="text-align: left;" class="linguistic-example-content">This traditionally signals ungrammaticality.</td>
+<td class="linguistic-example-judgement" style="text-align: right;">*</td>
+<td class="linguistic-example-content" style="text-align: left;">This traditionally signals ungrammaticality.</td>
 </tr>
 </tbody>
 </table>
@@ -493,35 +510,35 @@ that should go over various lines in the output.
 | DEM sentence AUX in DET dutch.
 | This sentence is dutch.
 :::</code></pre>
+
 <div id="ex4.10">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.10)</td>
-<td style="text-align: left;" colspan="6" class="linguistic-example-header linguistic-example-content">Dutch (Germanic)</td>
+<td colspan="6" class="linguistic-example-header linguistic-example-content" style="text-align: left;">Dutch (Germanic)</td>
 </tr>
 <tr class="even">
 <td></td>
 <td style="text-align: left;">Deze</td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content">zin</td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content">is</td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content">in</td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content">het</td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content">nederlands.</td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;">zin</td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;">is</td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;">in</td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;">het</td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;">nederlands.</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td style="text-align: left;">DEM</td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">sentence</td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">AUX</td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">in</td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">DET</td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">dutch.</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">sentence</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">AUX</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">in</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">DET</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">dutch.</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: left;" colspan="6" class="linguistic-example-translation linguistic-example-content">This sentence is dutch.</td>
+<td colspan="6" class="linguistic-example-translation linguistic-example-content" style="text-align: left;">This sentence is dutch.</td>
 </tr>
 </tbody>
 </table>
@@ -540,35 +557,35 @@ that should go over various lines in the output.
 | DEM sentence AUX in DET dutch.
 | This sentence is dutch.
 :::</code></pre>
+
 <div id="ex4.11">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.11)</td>
-<td style="text-align: left;" colspan="6" class="linguistic-example-header linguistic-example-content">Dutch (Germanic)</td>
+<td colspan="6" class="linguistic-example-header linguistic-example-content" style="text-align: left;">Dutch (Germanic)</td>
 </tr>
 <tr class="even">
 <td></td>
 <td style="text-align: left;"><em>Deze</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>zin</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>is</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>in</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>het</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>nederlands.</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>zin</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>is</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>in</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>het</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>nederlands.</em></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td style="text-align: left;"><span class="smallcaps">dem</span></td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">sentence</td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content"><span class="smallcaps">aux</span></td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">in</td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content"><span class="smallcaps">det</span></td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">dutch.</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">sentence</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;"><span class="smallcaps">aux</span></td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">in</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;"><span class="smallcaps">det</span></td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">dutch.</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: left;" colspan="6" class="linguistic-example-translation linguistic-example-content">‘This sentence is dutch.’</td>
+<td colspan="6" class="linguistic-example-translation linguistic-example-content" style="text-align: left;">‘This sentence is dutch.’</td>
 </tr>
 </tbody>
 </table>
@@ -602,119 +619,118 @@ b.
 | DEM second sentence have.3SG.PRES no header.
 | This second sentence does not have a header.
 :::</code></pre>
+
 <div id="ex4.12">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.12)</td>
-<td style="text-align: left;" colspan="3" class="linguistic-example-preamble">Completely superfluous preamble, but it works …</td>
+<td colspan="3" class="linguistic-example-preamble" style="text-align: left;">Completely superfluous preamble, but it works …</td>
 </tr>
 <tr class="even">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">a.</td>
-<td style="text-align: right;" class="linguistic-judgement" width="15px"></td>
-<td style="text-align: left;" class="linguistic-example-content">Mixing single line examples with interlinear examples.</td>
+<td class="linguistic-example-label" style="text-align: left;">a.</td>
+<td style="text-align: right;"></td>
+<td class="linguistic-example-content" style="text-align: left;">Mixing single line examples with interlinear examples.</td>
 </tr>
 <tr class="odd">
 <td></td>
-<td style="text-align: left;" class="linguistic-example-label">b.</td>
-<td style="text-align: right;" class="linguistic-example-judgement"></td>
-<td style="text-align: left;" class="linguistic-example-content">This is of course highly unusal. Just for this example, let’s add some extra material in this example.</td>
+<td class="linguistic-example-label" style="text-align: left;">b.</td>
+<td class="linguistic-example-judgement" style="text-align: right;"></td>
+<td class="linguistic-example-content" style="text-align: left;">This is of course highly unusal.
+Just for this example, let’s add some extra material in this example.</td>
 </tr>
 </tbody>
 </table>
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td>          </td>
-<td style="text-align: left;" class="linguistic-example-label">c.</td>
+<td class="linguistic-example-label" style="text-align: left;">c.</td>
 <td style="text-align: right;"></td>
-<td style="text-align: left;" colspan="5" class="linguistic-example-header linguistic-example-content">Dutch (Germanic) Note the grammaticality judgement!</td>
+<td colspan="5" class="linguistic-example-header linguistic-example-content" style="text-align: left;">Dutch (Germanic) Note the grammaticality judgement!</td>
 </tr>
 <tr class="even">
 <td></td>
 <td style="text-align: left;"></td>
-<td style="text-align: right;" class="linguistic-judgement" width="15px"><sup>:–)</sup></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>Deze</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>zin</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>is</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>(dit is test)</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>nederlands.</em></td>
+<td style="text-align: right;"><sup>:–)</sup></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>Deze</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>zin</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>is</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>(dit is test)</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>nederlands.</em></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td style="text-align: left;"></td>
 <td style="text-align: right;"></td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content"><span class="smallcaps">dem</span></td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">sentence</td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content"><span class="smallcaps">aux</span></td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">   </td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">dutch.</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;"><span class="smallcaps">dem</span></td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">sentence</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;"><span class="smallcaps">aux</span></td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">   </td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">dutch.</td>
 </tr>
 <tr class="even">
 <td></td>
 <td style="text-align: left;"></td>
 <td style="text-align: right;"></td>
-<td style="text-align: left;" colspan="5" class="linguistic-example-translation linguistic-example-content">‘This sentence is dutch.’</td>
+<td colspan="5" class="linguistic-example-translation linguistic-example-content" style="text-align: left;">‘This sentence is dutch.’</td>
 </tr>
 </tbody>
 </table>
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td>          </td>
-<td style="text-align: left;" class="linguistic-example-label">d.</td>
-<td style="text-align: right;" class="linguistic-example-judgement"></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>Deze</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>tweede</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>zin</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>heeft</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>geen</em></td>
-<td style="text-align: left;" class="linguistic-example-source linguistic-example-content"><em>header.</em></td>
+<td class="linguistic-example-label" style="text-align: left;">d.</td>
+<td class="linguistic-example-judgement" style="text-align: right;"></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>Deze</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>tweede</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>zin</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>heeft</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>geen</em></td>
+<td class="linguistic-example-source linguistic-example-content" style="text-align: left;"><em>header.</em></td>
 </tr>
 <tr class="even">
 <td></td>
 <td style="text-align: left;"></td>
-<td style="text-align: right;" class="linguistic-judgement" width="15px"></td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content"><span class="smallcaps">dem</span></td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">second</td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">sentence</td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">have.<span class="smallcaps">3sg</span>.<span class="smallcaps">pres</span></td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">no</td>
-<td style="text-align: left;" class="linguistic-example-gloss linguistic-example-content">header.</td>
+<td style="text-align: right;"></td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;"><span class="smallcaps">dem</span></td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">second</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">sentence</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">have.<span class="smallcaps">3sg</span>.<span class="smallcaps">pres</span></td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">no</td>
+<td class="linguistic-example-gloss linguistic-example-content" style="text-align: left;">header.</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td style="text-align: left;"></td>
 <td style="text-align: right;"></td>
-<td style="text-align: left;" colspan="6" class="linguistic-example-translation linguistic-example-content">‘This second sentence does not have a header.’</td>
+<td colspan="6" class="linguistic-example-translation linguistic-example-content" style="text-align: left;">‘This second sentence does not have a header.’</td>
 </tr>
 </tbody>
 </table>
 </div>
 <h2 data-number="4.3" id="cross-referencing-examples"><span class="header-section-number">4.3</span> Cross-referencing examples</h2>
-<p>The examples are automatically numbered by <code>pandoc-ling</code>. Cross-references to examples inside a document can be made by using the <code>[@ID]</code> format (used by Pandoc for citations). When an example has an explicit identifier (like <code>#test</code> in the next example), then a reference can be made to this example with <code>[@test]</code>, leading to <a href="#test">(4.13)</a> when formatted (note that the formatting does not work on the github website. Please check the ‘tests’ subdirectory).</p>
+<p>The examples are automatically numbered by <code>pandoc-ling</code>. Cross-references to examples inside a document can be made by using the <code>[@ID]</code> format (used by Pandoc for citations). When an example has an explicit identifier (like <code>#test</code> in the next example), then a reference can be made to this example with <code>[@test]</code>, leading to <a href="#test">(4.13)</a> when formatted (note that the formatting does not work on the github website. Please check the ‘docs’ subdirectory).</p>
 <pre><code>::: {#test .ex}
 This is a test
 :::</code></pre>
+
 <div id="ex4.13">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: top;">(4.13)</td>
-<td style="text-align: left;" class="linguistic-example-content">This is a test</td>
+<td class="linguistic-example-content" style="text-align: left;">This is a test</td>
 </tr>
 </tbody>
 </table>
 </div>
 <p>Inspired by the <code>linguex</code>-approach, you can also use the keywords <code>next</code> or <code>last</code> to refer to the next or the last example, e.g. <code>[@last]</code> will be formatted as <a href="#test">(4.13)</a>. By doubling the first letters to <code>nnext</code> or <code>llast</code> reference to the next/last-but-one can be made. Actually, the number of starting letters can be repeated at will in <code>pandoc-ling</code>, so something like <code>[@llllllllast]</code> will also work. It will be formatted as <a href="#ex4.6">(4.6)</a> after the processing of <code>pandoc-ling</code>. Needless to say that in such a situation an explicit identifier would be a better choice.</p>
-<p>Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, <code>[@lllast c]</code> will refer to the third sub-example of the last-but-two example. Formatted this will look like this: <a href="#ex4.11">(4.11 c)</a>, smile! However, note that the “c” has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like <code>[@last hA1l0]</code> will work also, leading to <a href="#test">(4.13 hA1l0)</a> when formatted (which is of course nonsensical).</p>
+<p>Referring to sub-examples can be done by manually adding a suffix into the cross reference, simply separated from the identifier by a space. For example, <code>[@lllast c]</code> will refer to the third sub-example of the last-but-two example. Formatted this will look like this: <a href="#ex4.12">(4.12 c)</a>, smile! However, note that the “c” has to be manually determined. It is simply a literal suffix that will be copied into the cross-reference. Something like <code>[@last hA1l0]</code> will work also, leading to <a href="#test">(4.13 hA1l0)</a> when formatted (which is of course nonsensical).</p>
 <p>For exports that include attributes (like html), the examples have an explicit id of the form <code>exNUMBER</code> in which <code>NUMBER</code> is the actual number as given in the formatted output. This means that it is possible to refer to an example on any web-page by using the hash-mechanism to refer to a part of the web-page. For example <code>#ex4.7</code> at can be used to refer to the seventh example in the html-output of this readme (try <a href="https://cysouw.github.io/pandoc-ling/readme.html#ex4.7">this link</a>). The id in this example has a chapter number ‘4’ because in the html conversion I have set the option <code>addChapterNumber</code> to <code>true</code>. (Note: when numbers restart the count in each chapter with the option <code>restartAtChapter</code>, then the id is of the form <code>exCHAPTER.NUMBER</code>. This is necessary to resolve clashing ids, as the same number might then be used in different chapters.)</p>
-<p>I propose to use these ids also to refer to examples in citations when writing scholarly papers, e.g. (Cysouw 2021: #ex7), independent of whether the links actually resolve. In principle, such citations could easily be resolved when online publications are properly prepared. The same proposal could also work for other parts of research papers, for example using tags like <code>#sec, #fig, #tab, #eq</code> (see the Pandoc filter <a href="https://github.com/cysouw/count-para"><code>crossref-adapt](https://github.com/cysouw/crossref-adapt)). To refer to paragraphs (which should replace page numbers in a future of adaptive design), I propose to use no tag, but directly add the number to the hash (see the Pandoc filter [</code>count-para`</a> for a practical mechanism to add such numbering).</p>
+<p>I propose to use these ids also to refer to examples in citations when writing scholarly papers, e.g. (Cysouw 2021: #ex7), independent of whether the links actually resolve. In principle, such citations could easily be resolved when online publications are properly prepared. The same proposal could also work for other parts of research papers, for example using tags like <code>#sec, #fig, #tab, #eq</code> (see the Pandoc filter <a href="https://github.com/cysouw/crossref-adapt"><code>crossref-adapt</code></a>). To refer to paragraphs (which should replace page numbers in a future of adaptive design), I propose to use no tag, but directly add the number to the hash (see the Pandoc filter <a href="https://github.com/cysouw/count-para"><code>count-para</code></a> for a practical mechanism to add such numbering).</p>
 <h2 data-number="4.4" id="options-of-pandoc-ling"><span class="header-section-number">4.4</span> Options of <code>pandoc-ling</code></h2>
 <h3 data-number="4.4.1" id="global-options"><span class="header-section-number">4.4.1</span> Global options</h3>
 <p>The following global options are available with <code>pandoc-ling</code>. These can be added to the <a href="https://pandoc.org/MANUAL.html#metadata-blocks">Pandoc metadata</a>. An example of such metadata can be found at the bottom of this <code>readme</code> in the form of a YAML-block. Pandoc allows for various methods to provide metadata (see the link above).</p>
@@ -736,13 +752,13 @@ This is a test
 <pre><code>::: {.ex noFormat=true}
 $$\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}$$
 :::</code></pre>
+
 <div id="ex4.14">
 <table class="linguistic-example">
-<caption></caption>
 <tbody>
 <tr class="odd">
 <td class="linguistic-example-number" style="vertical-align: middle;">(4.14)</td>
-<td style="text-align: left;" class="linguistic-example-content"><div class="ex" data-noFormat="true">
+<td class="linguistic-example-content" style="text-align: left;"><div class="ex" data-noFormat="true">
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mo>=</mo><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>−</mo><mi>n</mi></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}</annotation></semantics></math></p>
 </div></td>
 </tr>
