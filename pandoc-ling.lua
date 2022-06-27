@@ -37,6 +37,7 @@ local rev_indexRef = {} -- "reversed" indexRef, i.e. key/value: refID/exID = ord
 ------------------------------------
 
 local formatGloss = false -- format interlinear examples
+local samePage = true
 local xrefSuffixSep = " " -- &nbsp; separator to be inserted after number in example references
 local restartAtChapter = false -- restart numbering at highest header without adding local chapternumbers
 local addChapterNumber = false -- add chapternumbers to counting and restart at highest header
@@ -48,6 +49,9 @@ local documentclass = "article"
 function getUserSettings (meta)
   if meta.formatGloss ~= nil then
     formatGloss = meta.formatGloss
+  end
+  if meta.samePage ~= nil then
+    samePage = meta.samePage
   end
   if meta.noFormat ~= nil then
     noFormat = meta.noFormat
@@ -242,6 +246,11 @@ function processDiv (div)
       formatGloss = div.attributes.formatGloss
     end
 
+    local saveGlobalsamePage = samePage
+    if div.attributes.samePage ~= nil then
+      samePage = div.attributes.samePage
+    end
+
     local saveGlobalnoFormat = noFormat
     if div.attributes.noFormat ~= nil then
       noFormat = div.attributes.noFormat
@@ -269,6 +278,7 @@ function processDiv (div)
 
     -- return to global setting
     formatGloss = saveGlobalformatGloss
+    samePage = saveGlobalsamePage
     noFormat = saveGlobalnoFormat
 
     return { tmpCite, example }
@@ -1021,7 +1031,11 @@ function texMakeExpex (parsedDiv)
   else
     texFront("\\pex"..judgeOffset.."<"..ID.."> ", preamble)
   end
-  texFront("\\begin{samepage}\n", preamble)
+  if samePage == true then
+    texFront("\\begin{samepage}\n", preamble)
+  else  
+    texFront(preamble)
+  end
 
   for i=1,#kind do
     if kind[i] == "single" then
@@ -1074,7 +1088,11 @@ function texMakeExpex (parsedDiv)
 
     end
   end
-  texEnd("\n\\xe\n\\end{samepage}", preamble)
+  if samePage == true then
+    texEnd("\n\\xe\n\\end{samepage}", preamble)
+  else
+    texEnd("\n\\xe", preamble)
+  end
   return pandoc.Plain(preamble)
 end
 
@@ -1109,7 +1127,11 @@ function texMakeLinguex (parsedDiv)
   end
 
   -- build Latex code starting with preamble and adding rest to it
-  texFront("\\begin{samepage}\n\n\\ex. \\label{"..ID.."} ", preamble)
+  if samePage == true then
+    texFront("\\begin{samepage}\n\n\\ex. \\label{"..ID.."} ", preamble)
+  else
+    texFront("\n\\ex. \\label{"..ID.."} ", preamble)
+  end
 
   for i=1,#kind do
     if kind[i] == "single" then
@@ -1162,7 +1184,11 @@ function texMakeLinguex (parsedDiv)
 
     end
   end
-  texEnd("\n\n\\end{samepage}", preamble)
+  if samePage == true then
+    texEnd("\n\n\\end{samepage}", preamble)
+  else
+    texEnd("\n", preamble)
+  end
   return pandoc.Plain(preamble)
 end
 
@@ -1204,7 +1230,11 @@ function texMakeGb4e (parsedDiv)
   end
 
   -- build Latex code starting with preamble and adding rest to it
+  if samePage == true then
     texFront("\\begin{samepage}\n\\begin{exe} "..judgeOffset.."\n  \\ex ", preamble)
+  else
+    texFront("\\begin{exe} "..judgeOffset.."\n  \\ex ", preamble)
+  end
 
   for i=1,#kind do
     if kind[i] == "single" then
@@ -1263,7 +1293,11 @@ function texMakeGb4e (parsedDiv)
     end
   end
   if #kind > 1 then texEnd("\n  \\end{xlist}", preamble) end
-  texEnd("\n  \\label{"..ID.."}\n\\end{exe}\n\\end{samepage}", preamble)
+  if samePage == true then
+    texEnd("\n  \\label{"..ID.."}\n\\end{exe}\n\\end{samepage}", preamble)
+  else
+    texEnd("\n  \\label{"..ID.."}\n\\end{exe}", preamble)
+  end
   return pandoc.Plain(preamble)
 end
 
@@ -1321,7 +1355,11 @@ function texMakeLangsci (parsedDiv)
   else
     texFront("\\ea "..judgeOffset.." \\label{"..ID.."} ", preamble)
   end
-  texFront("\\begin{samepage}\n", preamble)
+  if samePage == true then
+    texFront("\\begin{samepage}\n", preamble)
+  else
+    texFront(preamble)
+  end
 
   for i=1,#kind do
     if kind[i] == "single" then
@@ -1386,7 +1424,11 @@ function texMakeLangsci (parsedDiv)
     end
   end
   if #kind > 1 then texEnd("\n  \\z", preamble) end
-  texEnd("\n\\z\n\\end{samepage}", preamble)
+  if samePage == true then
+    texEnd("\n\\z\n\\end{samepage}", preamble)
+  else
+    texEnd("\n\\z", preamble)
+  end
   return pandoc.Plain(preamble)
 end
 
