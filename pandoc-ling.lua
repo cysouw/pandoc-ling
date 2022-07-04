@@ -405,15 +405,25 @@ end
 ----------------------------------------
 -- helper functions to parse interlinear
 ----------------------------------------
-
+--[[
+  function splitSource (line)
+    local splitSource = splitPara(line)
+    if formatGloss then
+      -- remove format and make emph throughout
+      for i=1,#splitSource do 
+        local string = pandoc.utils.stringify(splitSource[i])
+        splitSource[i] = pandoc.Plain(pandoc.Emph(string))
+      end
+    end
+    -- list of Plain
+    return splitSource
+  end
+--]]
+  
 function splitSource (line)
   local splitSource = splitPara(line)
   if formatGloss then
     -- remove format and make emph throughout
-    for i=1,#splitSource do 
-      local string = pandoc.utils.stringify(splitSource[i])
-      splitSource[i] = pandoc.Plain(pandoc.Emph(string))
-    end
   end
   -- list of Plain
   return splitSource
