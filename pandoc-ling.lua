@@ -444,7 +444,7 @@ end
 function formatGlossLine (s)
   -- turn uppercase in gloss into small caps
   local split = {}
-  for lower,upper in string.gmatch(s, "(.-)([%u%d][%u%d]+)") do
+  for lower,upper in string.gmatch(s, "(.-)([%u%d]+)") do
     if lower ~= "" then
       lower = pandoc.Str(lower)
       table.insert(split, lower)
@@ -452,7 +452,7 @@ function formatGlossLine (s)
     upper = pandoc.SmallCaps(pandoc.text.lower(upper))
     table.insert(split, upper)
   end
-  for leftover in string.gmatch(s, "[%u%d][%u%d]+(.-[^%u%s])$") do
+  for leftover in string.gmatch(s, "[%u%d]+(.-[^%u%s])$") do
     leftover = pandoc.Str(leftover)
     table.insert(split, leftover)
   end
