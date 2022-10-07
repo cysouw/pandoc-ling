@@ -184,7 +184,7 @@ The results of such formatting will not always work, but it seems to be quite ro
 - The formatting of the interlinear is harmonised.
 
 ```
-::: {.ex formatGloss=true}
+::: {.ex formatGloss=true samePage=false}
 Completely superfluous preamble, but it works ...
 
 a. Mixing single line examples with interlinear examples.
@@ -230,6 +230,7 @@ I propose to use these ids also to refer to examples in citations when writing s
 The following global options are available with `pandoc-ling`. These can be added to the [Pandoc metadata](https://pandoc.org/MANUAL.html#metadata-blocks). An example of such metadata can be found at the bottom of this `readme` in the form of a YAML-block. Pandoc allows for various methods to provide metadata (see the link above).
 
 - **`formatGloss`** (boolean, default `false`): should all interlinear examples be consistently formatted? If you use this option, you can simply use capital letters for abbreviations in the gloss, and they will be changed to small caps. The source line is set to italics, and the translations is put into single quotes.
+-  **`samePage`** (boolean, default `true`, only for Latex): should examples be kept together on the same page? Can also be overriden for individual examples by adding `{.ex samePage=false}` at the start of an example (cf. below on `local options`).
 - **`xrefSuffixSep`** (string, defaults to no-break-space): When cross references have a suffix, how should the separator be formatted? The defaults 'no-break-space' is a safe options. I personally like a 'narrow no-break space' better (Unicode `U+202F`), but this symbol does not work with all fonts, and might thus lead to errors. For Latex typesetting, all space-like symbols are converted to a Latex thin space `\,`. 
 - **`restartAtChapter`** (boolean, default `false`): should the counting restart for each chapter? 
   * Actually, when `true` this setting will restart the counting at the highest heading level, which for various output formats can be set by the Pandoc option `top-level-division`. 

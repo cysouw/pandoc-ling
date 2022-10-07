@@ -580,7 +580,7 @@ quite robust in my testing. The next example brings everything together:
 \end{itemize}
 
 \begin{verbatim}
-::: {.ex formatGloss=true}
+::: {.ex formatGloss=true samePage=false}
 Completely superfluous preamble, but it works ...
 
 a. Mixing single line examples with interlinear examples.
@@ -601,7 +601,6 @@ b.
 :::
 \end{verbatim}
 
-\begin{samepage}
 \begin{exe} \judgewidth{:–)}
   \ex Completely superfluous preamble, but it works \ldots{}
   \begin{xlist}
@@ -623,7 +622,6 @@ header. \\
   \end{xlist}
   \label{ex4.12}
 \end{exe}
-\end{samepage}
 
 \hypertarget{cross-referencing-examples}{%
 \subsection{Cross-referencing
@@ -723,6 +721,12 @@ methods to provide metadata (see the link above).
   this option, you can simply use capital letters for abbreviations in
   the gloss, and they will be changed to small caps. The source line is
   set to italics, and the translations is put into single quotes.
+\item
+  \textbf{\texttt{samePage}} (boolean, default \texttt{true}, only for
+  Latex): should examples be kept together on the same page? Can also be
+  overriden for individual examples by adding
+  \texttt{\{.ex\ samePage=false\}} at the start of an example (cf.~below
+  on \texttt{local\ options}).
 \item
   \textbf{\texttt{xrefSuffixSep}} (string, defaults to no-break-space):
   When cross references have a suffix, how should the separator be
