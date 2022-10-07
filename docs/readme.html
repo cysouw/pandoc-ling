@@ -600,7 +600,7 @@ that should go over various lines in the output.</td>
 <li>The formatting of the interlinear is harmonised.</li>
 </ul>
 <!-- -->
-<pre><code>::: {.ex formatGloss=true}
+<pre><code>::: {.ex formatGloss=true samePage=false}
 Completely superfluous preamble, but it works ...
 
 a. Mixing single line examples with interlinear examples.
@@ -736,6 +736,7 @@ This is a test
 <p>The following global options are available with <code>pandoc-ling</code>. These can be added to the <a href="https://pandoc.org/MANUAL.html#metadata-blocks">Pandoc metadata</a>. An example of such metadata can be found at the bottom of this <code>readme</code> in the form of a YAML-block. Pandoc allows for various methods to provide metadata (see the link above).</p>
 <ul>
 <li><strong><code>formatGloss</code></strong> (boolean, default <code>false</code>): should all interlinear examples be consistently formatted? If you use this option, you can simply use capital letters for abbreviations in the gloss, and they will be changed to small caps. The source line is set to italics, and the translations is put into single quotes.</li>
+<li><strong><code>samePage</code></strong> (boolean, default <code>true</code>, only for Latex): should examples be kept together on the same page? Can also be overriden for individual examples by adding <code>{.ex samePage=false}</code> at the start of an example (cf. below on <code>local options</code>).</li>
 <li><strong><code>xrefSuffixSep</code></strong> (string, defaults to no-break-space): When cross references have a suffix, how should the separator be formatted? The defaults ‘no-break-space’ is a safe options. I personally like a ‘narrow no-break space’ better (Unicode <code>U+202F</code>), but this symbol does not work with all fonts, and might thus lead to errors. For Latex typesetting, all space-like symbols are converted to a Latex thin space <code>\,</code>.</li>
 <li><strong><code>restartAtChapter</code></strong> (boolean, default <code>false</code>): should the counting restart for each chapter?
 <ul>

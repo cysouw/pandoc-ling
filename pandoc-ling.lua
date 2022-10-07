@@ -37,8 +37,8 @@ local rev_indexRef = {} -- "reversed" indexRef, i.e. key/value: refID/exID = ord
 ------------------------------------
 
 local formatGloss = false -- format interlinear examples
-local samePage = true
-local xrefSuffixSep = " " -- &nbsp; separator to be inserted after number in example references
+local samePage = true -- keep example on one page in Latex
+local xrefSuffixSep = " " -- &nbsp; separator to be inserted after number in example references
 local restartAtChapter = false -- restart numbering at highest header without adding local chapternumbers
 local addChapterNumber = false -- add chapternumbers to counting and restart at highest header
 local latexPackage = "linguex"
@@ -467,7 +467,7 @@ function formatGlossLine (s)
     table.insert(split, leftover)
   end
   if #split == 0 then
-    if s == "~" then s = "   " end -- sequence "space-nobreakspace-space"
+    if s == "~" then s = "   " end -- sequence "space-nobreakspace-space"
     table.insert(split, pandoc.Str(s))
   end
   -- result is list of inlines
@@ -844,7 +844,7 @@ function pandocMakeMixedList (parsedDiv)
   end
 
   -- rough approximations to align multiple tables
-  local spaceForNumber = string.rep(" ", 2*(string.len(parsedDiv.number)+1))
+  local spaceForNumber = string.rep(" ", 2*(string.len(parsedDiv.number)+1))
   local spaceForJudge = tostring(15 + 5*judgeSize)
   
   for i=1,#result do
@@ -1034,7 +1034,7 @@ function texMakeExpex (parsedDiv)
   if samePage == true then
     texFront("\\begin{samepage}\n", preamble)
   else  
-    texFront(preamble)
+    texFront("", preamble)
   end
 
   for i=1,#kind do
@@ -1358,7 +1358,7 @@ function texMakeLangsci (parsedDiv)
   if samePage == true then
     texFront("\\begin{samepage}\n", preamble)
   else
-    texFront(preamble)
+    texFront("", preamble)
   end
 
   for i=1,#kind do
@@ -1530,7 +1530,7 @@ function makeCrossrefs (cite)
     if FORMAT:match "latex" then
       if xrefSuffixSep == ""  or -- empty
         xrefSuffixSep == " " or -- space
-        xrefSuffixSep == " "    -- non-breaking space
+        xrefSuffixSep == " "    -- non-breaking space
       then
         xrefSuffixSep = "\\," -- set to thin space
       end
