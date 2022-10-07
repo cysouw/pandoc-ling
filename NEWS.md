@@ -1,4 +1,12 @@
-# pandoc-ling 1.6
+# pandoc-ling 1.6 (upcoming)
+
+## changes
+
+- adding option `samePage` to determine whether examples are kept together on a page in Latex typesetting (#pr14, thanks to CLRafaelR)
+
+## bugs
+
+- allow for one-letter elements in glossing (#pr13, thanks to CLRafaelR)
 
 # pandoc-ling 1.5
 
