@@ -1,4 +1,6 @@
-# pandoc-ling 1.6 (upcoming)
+# pandoc-ling 1.7 (upcoming)
+
+# pandoc-ling 1.6
 
 ## changes
 

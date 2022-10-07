@@ -1,7 +1,7 @@
 --[[
 pandoc-linguex: make interlinear glossing with pandoc
 
-Version 1.5
+Version 1.6
 Copyright © 2021, 2022 Michael Cysouw <cysouw@mac.com>
 
 Permission to use, copy, modify, and/or distribute this software for any

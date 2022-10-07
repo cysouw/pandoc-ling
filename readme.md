@@ -168,9 +168,9 @@ An attempt is made to format interlinear examples when the option `formatGloss=t
 ```
 ::: {.ex formatGloss=true}
 | Dutch (Germanic)
-| Deze zin is in het nederlands.
-| DEM sentence AUX in DET dutch.
-| This sentence is dutch.
+| Is deze zin in het nederlands ?
+| AUX DEM sentence in DET dutch Q
+| Is this sentence dutch?
 :::
 ```
 
