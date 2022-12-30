@@ -1528,8 +1528,7 @@ function makeCrossrefs (cite)
 
     -- prevent Latex error when user sets xrefSuffixSep to space or nothing
     if FORMAT:match "latex" then
-      if xrefSuffixSep == ""  or -- empty
-        xrefSuffixSep == " " or -- space
+      if xrefSuffixSep == " " or -- space
         xrefSuffixSep == " "    -- non-breaking space
       then
         xrefSuffixSep = "\\," -- set to thin space

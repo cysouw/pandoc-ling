@@ -1,5 +1,9 @@
 # pandoc-ling 1.7 (upcoming)
 
+## changes
+
+- allow for no space between number and suffix in latex export
+
 # pandoc-ling 1.6
 
 ## changes
