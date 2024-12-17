@@ -1,8 +1,11 @@
-# pandoc-ling 1.7 (upcoming)
+# pandoc-ling 1.8 (upcoming)
+
+# pandoc-ling 1.7
 
 ## changes
 
 - allow for no space between number and suffix in latex export
+- bugfix latex-linguex (thx speechchemistry)
 
 # pandoc-ling 1.6
 
