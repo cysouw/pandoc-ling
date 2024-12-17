@@ -205,6 +205,17 @@ b.
 :::
 ```
 
+Just for testing: a single interlinear example without header (which resulted in a latex-linguex error in earlier versions).
+
+```
+::: {.ex formatGloss=true}
+|
+| Dit is een lui voorbeeld
+| DEM COP DET lazy example
+| This is a lazy example.
+:::
+```
+
 ## Cross-referencing examples
 
 The examples are automatically numbered by `pandoc-ling`. Cross-references to examples inside a document can be made by using the `[@ID]` format (used by Pandoc for citations). When an example has an explicit identifier (like `#test` in the next example), then a reference can be made to this example with `[@test]`, leading to [@test] when formatted (note that the formatting does not work on the github website. Please check the 'docs' subdirectory).

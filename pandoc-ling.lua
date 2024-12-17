@@ -1167,8 +1167,8 @@ function texMakeLinguex (parsedDiv)
         texFront("\n  \\a. ", header)
       elseif #kind > 1 and i > 1 then
         texFront("\n  \\b. ", header)
-      else
-        texFront("\n  ", header)
+      --else
+      --  texFront("", header)
       end
 
       preamble:extend(header)

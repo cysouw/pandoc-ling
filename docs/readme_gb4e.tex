@@ -1,20 +1,24 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
 ]{article}
+\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
+\setcounter{secnumdepth}{5}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -32,41 +36,38 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Using pandoc-ling},
-  pdfauthor={Michael Cysouw},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
 \usepackage{gb4e}
 \noautomath
 \usepackage{chngcntr}
 \counterwithin{xnumi}{section}
 \counterwithin{exx}{section}
 \exewidth{(9.123)}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Using pandoc-ling},
+  pdfauthor={Michael Cysouw},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{Using pandoc-ling}
 \author{Michael Cysouw}
@@ -79,8 +80,7 @@
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
-\hypertarget{pandoc-ling}{%
-\section{pandoc-ling}\label{pandoc-ling}}
+\section{pandoc-ling}\label{pandoc-ling}
 
 \emph{Michael Cysouw}
 \textless{}\href{mailto:cysouw@mac.com}{\nolinkurl{cysouw@mac.com}}\textgreater{}
@@ -103,8 +103,7 @@ tl;dr
   \href{https://cysouw.github.io/pandoc-ling/readme_gb4e.pdf}{Latex}.
 \end{itemize}
 
-\hypertarget{rationale}{%
-\section{Rationale}\label{rationale}}
+\section{Rationale}\label{rationale}
 
 In the field of linguistics there is an outspoken tradition to format
 example sentences in research papers in a very specific way. In the
@@ -147,9 +146,8 @@ various formats in this repository (chech them out in the directory
 \texttt{tests} to get an idea of the strengths and weaknesses of the
 current implementation).
 
-\hypertarget{the-basic-structure-of-a-linguistic-example}{%
 \section{The basic structure of a linguistic
-example}\label{the-basic-structure-of-a-linguistic-example}}
+example}\label{the-basic-structure-of-a-linguistic-example}
 
 Basically, a linguistic example consists of 6 possible building blocks,
 of which only the number and at least one example line are necessary.
@@ -222,7 +220,7 @@ with the example, not with the judgement).
 
 \begin{figure}
 \centering
-\includegraphics{figure/ExampleStructure.png}
+\pandocbounded{\includegraphics[keepaspectratio]{figure/ExampleStructure.png}}
 \caption{The structure of a linguistic example.}
 \end{figure}
 
@@ -242,13 +240,11 @@ styling is proposed by \texttt{pandoc-ling}, but can of course be
 overruled. For latex (and beamer) special output is prepared using
 various available latex packages (see options, below).
 
-\hypertarget{introducing-pandoc-ling}{%
 \section{\texorpdfstring{Introducing
-\texttt{pandoc-ling}}{Introducing pandoc-ling}}\label{introducing-pandoc-ling}}
+\texttt{pandoc-ling}}{Introducing pandoc-ling}}\label{introducing-pandoc-ling}
 
-\hypertarget{editing-linguistic-examples}{%
 \subsection{Editing linguistic
-examples}\label{editing-linguistic-examples}}
+examples}\label{editing-linguistic-examples}
 
 To include a linguistic example in Markdown \texttt{pandoc-ling} uses
 the \texttt{div} structure, which is indicated in Pandoc-Markdown by
@@ -479,8 +475,7 @@ an error in earlier versions).
 \end{exe}
 \end{samepage}
 
-\hypertarget{interlinear-examples}{%
-\subsection{Interlinear examples}\label{interlinear-examples}}
+\subsection{Interlinear examples}\label{interlinear-examples}
 
 For interlinear examples with aligned source and gloss, the structure of
 a \texttt{lineblock} is used, starting the lines with a vertical line
@@ -624,9 +619,30 @@ header. \\
   \label{ex4.12}
 \end{exe}
 
-\hypertarget{cross-referencing-examples}{%
+Just for testing: a single interlinear example without header (which
+resulted in a latex-linguex error in earlier versions).
+
+\begin{verbatim}
+::: {.ex formatGloss=true}
+|
+| Dit is een lui voorbeeld
+| DEM COP DET lazy example
+| This is a lazy example.
+:::
+\end{verbatim}
+
+\begin{samepage}
+\begin{exe} \judgewidth{}
+  \ex [] { 
+  \gll \emph{Dit} \emph{is} \emph{een} \emph{lui} \emph{voorbeeld} \\
+       \textsc{dem} \textsc{cop} \textsc{det} lazy example \\
+  \glt `This is a lazy example.' }
+  \label{ex4.13}
+\end{exe}
+\end{samepage}
+
 \subsection{Cross-referencing
-examples}\label{cross-referencing-examples}}
+examples}\label{cross-referencing-examples}
 
 The examples are automatically numbered by \texttt{pandoc-ling}.
 Cross-references to examples inside a document can be made by using the
@@ -657,7 +673,7 @@ the first letters to \texttt{nnext} or \texttt{llast} reference to the
 next/last-but-one can be made. Actually, the number of starting letters
 can be repeated at will in \texttt{pandoc-ling}, so something like
 \texttt{{[}@llllllllast{]}} will also work. It will be formatted as
-(\ref{ex4.6}) after the processing of \texttt{pandoc-ling}. Needless to
+(\ref{ex4.7}) after the processing of \texttt{pandoc-ling}. Needless to
 say that in such a situation an explicit identifier would be a better
 choice.
 
@@ -665,7 +681,7 @@ Referring to sub-examples can be done by manually adding a suffix into
 the cross reference, simply separated from the identifier by a space.
 For example, \texttt{{[}@lllast~c{]}} will refer to the third
 sub-example of the last-but-two example. Formatted this will look like
-this: (\ref{ex4.12}\,c), smile! However, note that the ``c'' has to be
+this: (\ref{ex4.13}\,c), smile! However, note that the ``c'' has to be
 manually determined. It is simply a literal suffix that will be copied
 into the cross-reference. Something like \texttt{{[}@last\ hA1l0{]}}
 will work also, leading to (\ref{test}\,hA1l0) when formatted (which is
@@ -700,12 +716,10 @@ to the hash (see the Pandoc filter
 \href{https://github.com/cysouw/count-para}{\texttt{count-para}} for a
 practical mechanism to add such numbering).
 
-\hypertarget{options-of-pandoc-ling}{%
 \subsection{\texorpdfstring{Options of
-\texttt{pandoc-ling}}{Options of pandoc-ling}}\label{options-of-pandoc-ling}}
+\texttt{pandoc-ling}}{Options of pandoc-ling}}\label{options-of-pandoc-ling}
 
-\hypertarget{global-options}{%
-\subsubsection{Global options}\label{global-options}}
+\subsubsection{Global options}\label{global-options}
 
 The following global options are available with \texttt{pandoc-ling}.
 These can be added to the
@@ -776,8 +790,7 @@ methods to provide metadata (see the link above).
   \texttt{gb4e} package. All others have artefacts or errors.
 \end{itemize}
 
-\hypertarget{local-options}{%
-\subsubsection{Local options}\label{local-options}}
+\subsubsection{Local options}\label{local-options}
 
 Local options are options that can be set for each individual example.
 The \texttt{formatGloss} option can be used to have an individual
@@ -804,13 +817,12 @@ $$\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}$$
 \begin{exe} \judgewidth{}
   \ex [] { \[\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}\]\\
    }
-  \label{ex4.14}
+  \label{ex4.15}
 \end{exe}
 \end{samepage}
 
-\hypertarget{issues-with-pandoc-ling}{%
 \subsection{\texorpdfstring{Issues with
-\texttt{pandoc-ling}}{Issues with pandoc-ling}}\label{issues-with-pandoc-ling}}
+\texttt{pandoc-ling}}{Issues with pandoc-ling}}\label{issues-with-pandoc-ling}
 
 \begin{itemize}
 \tightlist
@@ -860,9 +872,8 @@ $$\sum_{i=1}^{n}{i}=\frac{n^2-n}{2}$$
   \texttt{latexPackage:\ gb4e}.
 \end{itemize}
 
-\hypertarget{a-note-on-latex-conversion}{%
 \subsection{A note on Latex
-conversion}\label{a-note-on-latex-conversion}}
+conversion}\label{a-note-on-latex-conversion}
 
 Originally, I decided to write this filter as a two-pronged conversion,
 making a markdown version myself, but using a mapping to one of the many
@@ -879,8 +890,7 @@ it would be better to first define the `common denominator' more clearly
 basis I have then made attempts to map them to the various latex
 packages.
 
-\hypertarget{a-note-on-implementation}{%
-\subsection{A note on implementation}\label{a-note-on-implementation}}
+\subsection{A note on implementation}\label{a-note-on-implementation}
 
 The basic structure of the examples are transformed into Pandoc tables.
 Tables are reasonably safe for converting in other formats. Care has
