@@ -674,7 +674,9 @@ function pandocMakeInterlinear (parsedDiv, label, forceJudge)
   end
   -- add preamble
   local preamble = parsedDiv.preamble
-  if label ~= nil then preamble = nil end
+  if label ~= nil and label > 1 then
+    preamble = nil -- Only remove for subexamples, but keep it for the first one
+  end
   if preamble ~= nil then
     table.insert(rowContent, 1, {{ preamble }} )
     nRows = nRows + 1
@@ -701,7 +703,11 @@ function pandocMakeInterlinear (parsedDiv, label, forceJudge)
   -- set class of label
   if label ~= nil then
     ls = 1
-    example.bodies[1].body[1].cells[2+ps].attr = {class = "linguistic-example-label"}
+    if preamble ~= nil then
+      example.bodies[1].body[2].cells[1+ps].attr = {class = "linguistic-example-label"}
+    else
+      example.bodies[1].body[1].cells[2+ps].attr = {class = "linguistic-example-label"}
+    end
   end
   -- set class of header and extend cell
   if headerPresent then
@@ -817,8 +823,9 @@ function pandocMakeMixedList (parsedDiv)
   local judgements = parsedDiv.judgements
   local judgeSize = 0
   local forceJudge = false 
-  for i=1,#judgements do
-    judgeSize = math.max(judgeSize, utf8.len(judgements[i]))
+  for _, judgement in pairs(judgements) do
+    local text = pandoc.utils.stringify(judgement)
+    judgeSize = math.max(judgeSize, utf8.len(text))
   end
   -- if judgeSize > 0 then 
     forceJudge = true
@@ -851,8 +858,11 @@ function pandocMakeMixedList (parsedDiv)
     -- For better alignment with example number
     -- add invisibles in first column 
     -- not a very elegant solution, but portable across formats
-    result[i].bodies[1].body[1].cells[1].contents[1] = 
-      pandoc.Plain(spaceForNumber)
+    if isInterlinear[1] and i == 1 then
+      result[i].bodies[1].body[2].cells[1].contents[1] = pandoc.Plain(spaceForNumber)
+    else
+      result[i].bodies[1].body[1].cells[1].contents[1] = pandoc.Plain(spaceForNumber)
+    end
     -- For even better alignment, add column-width to judgement column
     -- note: this is probably not portable outside html
     if forceJudge  then
