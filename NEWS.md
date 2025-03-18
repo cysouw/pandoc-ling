@@ -1,5 +1,7 @@
 # pandoc-ling 1.8 (upcoming)
 
+- bugfix for preambles with interlinear examples (thx to fmatter)
+
 # pandoc-ling 1.7
 
 ## changes
