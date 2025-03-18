@@ -187,10 +187,6 @@ The results of such formatting will not always work, but it seems to be quite ro
 ::: {.ex formatGloss=true samePage=false}
 Completely superfluous preamble, but it works ...
 
-a. Mixing single line examples with interlinear examples.
-a. This is of course highly unusal.
-Just for this example, let's add some extra material in this example.
-
 a.
 | Dutch (Germanic) Note the grammaticality judgement!
 | ^^:–)^ Deze zin is (dit\ is&nbsp;test) nederlands.
@@ -198,10 +194,14 @@ a.
 | This sentence is dutch.
 
 b.
-|
+| 
 | Deze tweede zin heeft geen header.
 | DEM second sentence have.3SG.PRES no header.
 | This second sentence does not have a header.
+
+a. Mixing single line examples with interlinear examples.
+a. This is of course highly unusal.
+Just for this example, let's add some extra material in this example.
 :::
 ```
 
