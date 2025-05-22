@@ -1,6 +1,7 @@
 # pandoc-ling 1.8 (upcoming)
 
-- bugfix for preambles with interlinear examples (thx to fmatter)
+- bugfix for preambles with interlinear examples (thx to fmatter #21)
+- bugfix for capitalisation of glossing (thx to bulbulistan #22)
 
 # pandoc-ling 1.7
 
