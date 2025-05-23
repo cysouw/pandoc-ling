@@ -462,7 +462,7 @@ function formatGlossLine (s)
     upper = pandoc.SmallCaps(pandoc.text.lower(upper))
     table.insert(split, upper)
   end
-  for leftover in string.gmatch(s, "[%u%d]+([‑%-][^‑%-]-[^%u%s]+)$") do
+  for leftover in string.gmatch(s, "[%u%d]+([‑%-][^‑%-]-%l+)$") do
     leftover = pandoc.Str(leftover)
     table.insert(split, leftover)
   end
