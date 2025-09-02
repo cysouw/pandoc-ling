@@ -222,7 +222,7 @@ with the example, not with the judgement).
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{figure/ExampleStructure.png}}
+\pandocbounded{\includegraphics[keepaspectratio,alt={The structure of a linguistic example.}]{figure/ExampleStructure.png}}
 \caption{The structure of a linguistic example.}
 \end{figure}
 
@@ -607,8 +607,8 @@ resulted in a latex-linguex error in earlier versions).
 \begin{verbatim}
 ::: {.ex formatGloss=true}
 |
-| Dit is een lui voorbeeld
-| DEM COP DET lazy example
+| Dit is een lui voorbeeld=je
+| DEM COP DET lazy example=DIM
 | This is a lazy example.
 :::
 \end{verbatim}
@@ -616,8 +616,9 @@ resulted in a latex-linguex error in earlier versions).
 \begin{samepage}
 \ex[*=]<ex13> 
   \begingl
-  \gla \emph{Dit} \emph{is} \emph{een} \emph{lui} \emph{voorbeeld} //
-  \glb \textsc{dem} \textsc{cop} \textsc{det} lazy example //
+  \gla \emph{Dit} \emph{is} \emph{een} \emph{lui} \emph{voorbeeld=je} //
+  \glb \textsc{dem} \textsc{cop} \textsc{det} lazy example=\textsc{dim}
+//
   \glft `This is a lazy example.'//
   \endgl
 \xe

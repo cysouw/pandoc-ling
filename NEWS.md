@@ -2,6 +2,7 @@
 
 - bugfix for preambles with interlinear examples (thx to fmatter #21)
 - bugfix for capitalisation of glossing (thx to bulbulistan #22)
+- bugfix for other separators in glossing (thx to bulbulistan and 7o7omootsqwn #27)
 
 # pandoc-ling 1.7
 

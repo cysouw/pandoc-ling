@@ -210,8 +210,8 @@ Just for testing: a single interlinear example without header (which resulted in
 ```
 ::: {.ex formatGloss=true}
 |
-| Dit is een lui voorbeeld
-| DEM COP DET lazy example
+| Dit is een lui voorbeeld=je
+| DEM COP DET lazy example=DIM
 | This is a lazy example.
 :::
 ```
