@@ -388,7 +388,13 @@ function parseInterlinear (block)
   local judgement, source = splitJudgement( block[2] )
 
   -- header
-  interlinear["header"] = pandoc.Plain( block[1] )
+  local header = block[1]
+  for i=1,#header do
+    if header[i].text == "\\" then
+      header[i] = pandoc.LineBreak()
+    end
+  end
+  interlinear["header"] = pandoc.Plain(header)
   -- source
   interlinear["source"] = splitSource(source)
   -- gloss

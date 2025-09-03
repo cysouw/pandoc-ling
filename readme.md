@@ -205,11 +205,13 @@ Just for this example, let's add some extra material in this example.
 :::
 ```
 
-Just for testing: a single interlinear example without header (which resulted in a latex-linguex error in earlier versions).
+Also, as a quick workaround for showing multiple source lines without alignment with the glossing (e.g. for phonetic or orthographic representations of the example), it is possible to use the header of interlinear example. For a line break in the header, use the double backslash `\\`, either inline or at the end of a line. When you type a header using multiple lines (as shown below), then subsequent lines have to start with space. For now, this only works in the header line.
 
 ```
-::: {.ex formatGloss=true}
-|
+::: ex
+| Example with an multiline header \\
+  *can be used for orthographic representations*, \\
+  or phonetic transcription, \\ or for whatever you like
 | Dit is een lui voorbeeld=je
 | DEM COP DET lazy example=DIM
 | This is a lazy example.

@@ -1,5 +1,8 @@
-# pandoc-ling 1.8 (upcoming)
+# pandoc-ling 1.9 (upcoming)
 
+# pandoc-ling 1.8
+
+- allow for multiline headers (using `\\` as linebreak)
 - bugfix for preambles with interlinear examples (thx to fmatter #21)
 - bugfix for capitalisation of glossing (thx to bulbulistan #22)
 - bugfix to keep header and preamble always with rest, also without samePage (#23)
