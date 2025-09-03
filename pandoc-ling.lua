@@ -1007,7 +1007,7 @@ function texMakeExpex (parsedDiv)
     preamble = pandoc.List() 
   else 
     preamble = preamble.content
-    texEnd("\\\\", preamble)
+    texEnd("\\\\*", preamble)
   end
 
   local judgeMax = ""
@@ -1122,7 +1122,7 @@ function texMakeLinguex (parsedDiv)
   else 
     preamble = preamble.content
     if #kind == 1 and kind[1] == "single" then
-      texEnd("\\\\", preamble)
+      texEnd("\\\\*", preamble)
     end
   end
 
@@ -1377,7 +1377,7 @@ function texMakeLangsci (parsedDiv)
       line = texSquashMulti(parsedDiv.examples[i])
       
       if #kind == 1 and nopreamble ~= true then
-        texEnd("\\\\", preamble)
+        texEnd("\\\\*", preamble)
       end
 
       if #kind > 1 and i == 1 then 
@@ -1409,7 +1409,7 @@ function texMakeLangsci (parsedDiv)
         header = pandoc.List()
       else 
         texFront("\n       ", header)
-        texEnd("\\\\", header)
+        texEnd("\\\\*", header)
       end
 
       if #kind > 1 and i == 1 then 
