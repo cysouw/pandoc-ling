@@ -45,10 +45,17 @@ local latexPackage = "linguex"
 local topDivision = "section"
 local noFormat = false
 local documentclass = "article"
+local abbreviations = {} -- default abbreviations
 
 function getUserSettings (meta)
   if meta.formatGloss ~= nil then
     formatGloss = meta.formatGloss
+  end
+  -- Load user provided glossing abbreviations, overriding any default abbreviations
+  if meta.pandocLingAbbreviations ~= nil then
+    for k, v in pairs(meta.pandocLingAbbreviations) do
+      abbreviations[k] = pandoc.utils.stringify(v)
+    end
   end
   if meta.samePage ~= nil then
     samePage = meta.samePage
@@ -457,6 +464,15 @@ end
 -- helper functions for (lists of) inlines
 ------------------------------------------
 
+local abbreviationFormatter = {
+  html = function(gloss, full)
+    return pandoc.RawInline("html", string.format(
+      '<abbr title="%s">%s</abbr>',
+      full,
+      pandoc.text.lower(gloss)))
+  end,
+}
+
 function formatGlossLine (s)
   -- turn uppercase in gloss into small caps
   local split = {}
@@ -465,7 +481,11 @@ function formatGlossLine (s)
       lower = pandoc.Str(lower)
       table.insert(split, lower)
     end
-    upper = pandoc.SmallCaps(pandoc.text.lower(upper))
+    if abbreviations[upper] ~= nil and abbreviationFormatter[FORMAT] ~= nil then
+      upper = pandoc.SmallCaps(abbreviationFormatter[FORMAT](upper, abbreviations[upper]))
+    else
+      upper = pandoc.SmallCaps(pandoc.text.lower(upper))
+    end
     table.insert(split, upper)
   end
   for leftover in string.gmatch(s, "[%u%d]+([‑%-:=<>~][^‑%-:=<>~]-%l+)$") do
